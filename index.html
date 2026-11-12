@@ -107,16 +107,17 @@ async function load(){
  }catch(e){}
  return{rows:FALLBACK,live:false}}
 function init(raw){
+['f1','f2','f3','f4'].forEach(i=>document.getElementById(i).innerHTML='');
 const MES=['Enero','Febrero','Marzo','Abril','Mayo','Junio','Julio','Agosto','Septiembre','Octubre','Noviembre','Diciembre'];
 const D=raw.map(r=>({cod:r[0],lid:r[1],inv:r[2],est:r[3],tur:r[4],cod12:r[5],lid12:r[6],f:r[7]}));
-D.forEach(r=>{const p=r.f.split('/');r.mes=MES[+p[1]-1];r.anio=p[2];r.red=r.cod.startsWith('C18')?'Hombres':r.cod.startsWith('C28')?'Mujeres':'Otros'});
+D.forEach(r=>{r.tur=r.tur||'Sin turno';r.cod12=r.cod12||r.cod||'—';r.lid12=r.lid12||'—';r.est=r.est||'Sin reportar';const p=r.f.split('/');r.mes=MES[+p[1]-1];r.anio=p[2];r.red=r.cod.startsWith('C18')?'Hombres':r.cod.startsWith('C28')?'Mujeres':'Otros'});
 const pct=(a,b)=>b?a/b*100:0,fmt=v=>v.toFixed(1)+'%';
 const cnt=(a,e)=>a.filter(r=>r.est.trim().toLowerCase()===e).length;
 const dk=s=>+s.split('/').reverse().join('');
 function ar(p){const r=Math.round(p*10)/10;
  if(r>80)return['▲','#16a34a'];if(r>40)return['▲','#f97316'];if(r>10)return['▶','#eab308'];return['▼','#d90000']}
 const efHTML=p=>{const[a,c]=ar(p);return `<span class="ar" style="color:${c}">${a} ${fmt(p)}</span>`};
-const ord=t=>{const m=t.match(/(\d+):\d+\s*(AM|PM)/i);let h=+m[1]%12;if(m[2].toUpperCase()=='PM')h+=12;return h};
+const ord=t=>{const m=String(t).match(/(\d+):\d+\s*(a|p)/i);if(!m)return 99;let h=+m[1]%12;if(m[2].toLowerCase()=='p')h+=12;return h};
 const uq=(k,f)=>[...new Set(D.map(r=>r[k]))].sort(f);
 const turnos=uq('tur',(a,b)=>ord(a)-ord(b));
 const OPT={mes:uq('mes',(a,b)=>MES.indexOf(a)-MES.indexOf(b)),sem:uq('f',(a,b)=>dk(a)-dk(b)),anio:uq('anio'),tur:turnos,cod:uq('cod'),red:['Hombres','Mujeres'].filter(x=>D.some(r=>r.red===x))};
@@ -177,8 +178,10 @@ document.querySelectorAll('#nav button').forEach(b=>b.onclick=()=>{
  b.classList.add('on');document.getElementById(b.dataset.v).classList.add('on')});
 
 load().then(({rows,live})=>{
- init(rows);
- document.getElementById('foot').textContent=live?'Datos en vivo desde Google Sheets · consultado '+new Date().toLocaleString('es-PE',{day:'2-digit',month:'2-digit',year:'numeric',hour:'2-digit',minute:'2-digit'}):'No se pudo conectar con la hoja. Mostrando datos de respaldo.';
+ const foot=document.getElementById('foot'),fmt=()=>new Date().toLocaleString('es-PE',{day:'2-digit',month:'2-digit',year:'numeric',hour:'2-digit',minute:'2-digit'});
+ try{init(rows);foot.textContent=live?'Datos en vivo desde Google Sheets · consultado '+fmt():'No se pudo conectar con la hoja. Mostrando datos de respaldo.'}
+ catch(e){try{init(FALLBACK);foot.textContent='Los datos de la hoja tienen un formato inesperado ('+e.message+'). Mostrando datos de respaldo.'}
+  catch(e2){document.getElementById('load').textContent='Error al cargar: '+e2.message}}
  document.getElementById('main').classList.remove('loading');
 });
 </script></body></html>
