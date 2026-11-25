@@ -1159,8 +1159,16 @@ body.vc #fxb,body.vc #fxp{display:none!important}
 #cnx .cxclr{display:block;width:100%;margin:8px 0 0;border:0;background:#f1f1f1;border-radius:10px;padding:8px;font:inherit;font-size:12px;font-weight:700;color:#000;cursor:pointer}
 #cnx .pl button em{min-width:16px;text-align:center}
 #cnx .pl .sd{display:inline-block;width:8px;height:8px;border-radius:50%;margin-right:7px;padding:0!important}
-#cnx .pl button{justify-content:flex-start!important;gap:6px!important}
-#cnx .pl button em{width:16px!important;min-width:0!important;padding:0!important;flex:none;text-align:center;background:none!important;font-size:12px!important}
+#cnx .pl button.iv{justify-content:flex-start!important;gap:6px!important}
+#cnx .pl button.iv em{width:16px!important;min-width:0!important;padding:0!important;flex:none;text-align:center;background:none!important;font-size:12px!important}
+#alc .pl button:not(.iv),#cnx .pl button:not(.iv){gap:14px!important}
+#alc .pl button em,#cnx .pl button:not(.iv) em{min-width:54px}
+#alc .tipx{position:absolute;left:0;right:0;z-index:30;background:#fff;border-radius:14px;box-shadow:0 10px 30px rgba(0,0,0,.28);padding:10px 12px;max-height:230px;overflow-y:auto;font-family:Montserrat,sans-serif;color:#000}
+#alc .tipx .tt{text-align:left;font-size:12.5px;font-weight:700;margin-bottom:6px}
+#alc .tipx .ti2{padding:6px 0;border-top:1px solid #eee}
+#alc .tipx .n1{font-size:12.5px;font-weight:600}
+#alc .tipx .n2{font-size:11.5px;color:#555;margin-top:1px}
+#alc .lw>span{cursor:pointer}
 </style></head><body class="gate">
 <div id="gate"><img id="gimg" alt="Logo"><h1>Alcance y Conexión</h1><p class="gs">Red García Montoya</p>
 <div class="gq">Ingresar como</div>
@@ -1200,7 +1208,7 @@ const thead=(cols,st)=>'<thead><tr>'+cols.map(c=>`<th class="sh ${c.cls||''}" da
 const srt=(rows,st,cols)=>{const c=cols.find(x=>x.k==st.k);if(!c)return rows;const s=st.d=='desc'?-1:1,v=c.v||(r=>r[c.k]);return[...rows].sort((a,b)=>{const x=v(a),y=v(b);return s*(c.t=='n'?x-y:c.t=='c'?(String(x).toUpperCase()<String(y).toUpperCase()?-1:String(x).toUpperCase()>String(y).toUpperCase()?1:0):String(x).localeCompare(String(y),'es',{numeric:true,sensitivity:'base'}))})};
 const bindSort=(tb,st,cols,fn)=>tb.addEventListener('click',e=>{const th=e.target.closest('th[data-k]');if(!th)return;const k=th.dataset.k,c=cols.find(x=>x.k==k);if(st.k==k)st.d=st.d=='desc'?'asc':'desc';else{st.k=k;st.d=c.t=='n'?'desc':'asc'}fn()});
 let D,TO;const cnt=(a,i)=>a.filter(r=>r.est==EST[i]).length;
-function prep(raw){return raw.map(r=>{const o={cod:String(r[0]),lid:r[1],inv:r[2],est:canon(r[3]),tur:String(r[4]||''),c12:r[5]||r[0],l12:r[6]||'—',f:String(r[7]).trim(),dist:String(r[8]||'').trim(),edad:String(r[9]||'').trim(),tp:String(r[10]||'').split('-')[0].trim()};
+function prep(raw){const K={};raw.forEach(r=>{if(r[5]&&String(r[5]).trim()){const k=String(r[5]).trim();if(!K[k])K[k]=(r[6]&&String(r[6]).trim())||''}});const KS=Object.keys(K).sort((a,b)=>b.length-a.length);return raw.map(r=>{let c12=r[5]&&String(r[5]).trim(),l12=r[6],k12=!!c12;if(!c12){const cd=String(r[0]).trim(),m=KS.find(k=>cd.indexOf(k)==0);if(m){c12=m;l12=K[m]||l12;k12=true}else c12=r[0]}const o={cod:String(r[0]),lid:r[1],inv:r[2],est:canon(r[3]),tur:String(r[4]||''),c12:c12,k12:k12,l12:l12||'—',f:String(r[7]).trim(),dist:String(r[8]||'').trim(),edad:String(r[9]||'').trim(),tp:String(r[10]||'').split('-')[0].trim()};
  const[d,m,y]=o.f.split('/').map(Number),w=new Date(y,m-1,d).getDay();o.mes=MES[m-1];o.anio=String(y);o.dk=y*10000+m*100+d;
  const tn=o.tur.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'');
  o.serv=w==0?'Familiar':w==6?'Next':tn.startsWith('sab')?'Next':tn.startsWith('dom')?'Familiar':'Otro';
@@ -1622,7 +1630,7 @@ function mcal(y,m){var off=(new Date(y,m-1,1).getDay()+6)%7,dim=new Date(y,m,0).
 function cal(){var y=ST.cy,m=ST.cm;
  return '<div class="kw"><button class="kv" data-c="-1" aria-label="Mes anterior">‹</button><button class="kv r" data-c="1" aria-label="Mes siguiente">›</button></div><div class="k2">'+mcal(y,m)+'</div>'}
 function panel(){if(ST.open=='cal')return '<div class="qb">'+quick().map(function(q){return '<button data-q="'+q[0]+'" class="'+(q[2]?'on':'')+'">'+q[1]+'</button>'}).join('')+'</div>'+cal();
- if(ST.open=='per'){var q=(ST.q||'').toLowerCase(),seen={},l=[];D.forEach(function(r){if(!seen[r.c12]){seen[r.c12]=1;l.push({c:r.c12,n:r.l12})}});
+ if(ST.open=='per'){var q=(ST.q||'').toLowerCase(),seen={},l=[];D.forEach(function(r){if(r.k12&&!seen[r.c12]){seen[r.c12]=1;l.push({c:r.c12,n:r.l12})}});
   l=l.filter(function(o){return !q||o.c.toLowerCase().indexOf(q)==0||o.n.toLowerCase().indexOf(q)>=0}).sort(function(a,b){var pa=a.c.slice(0,3),pb=b.c.slice(0,3);return pa!=pb?(pa<pb?1:-1):(a.c.length-b.c.length||(a.c<b.c?-1:1))}).slice(0,40);
   return '<label>Buscar líder</label><input id="alq" autocomplete="off" placeholder="Nombre o código" value="'+(ST.q||'')+'"><div class="pl">'+(l.map(function(o){return '<button data-l="'+o.c+'" data-n="'+o.n.replace(/"/g,'')+'"><em>'+o.c+'</em><span>'+o.n+'</span></button>'}).join('')||'<div class="ln">Sin coincidencias</div>')+'</div>'}
  return ''}
@@ -1652,8 +1660,8 @@ function render(){var host=document.getElementById('alc');if(!host||typeof D=='u
  var sig=ST.mode+'|'+ST.a+'|'+ST.b+'|'+ST.lid;if(ST.wkA!=sig){ST.wk=-1;ST.wkA=sig}if(ST.lid)ST.tur.clear();
  var open=ST.open,base=rows(true),tl=tlist();ST.tur.forEach(function(t){if(tl.indexOf(t)<0)ST.tur.delete(t)});
  var all=rows(false),total=all.length,m={};
- all.forEach(function(r){var o=m[r.c12]||(m[r.c12]={c:r.c12,n:r.l12,g:0});o.g++});
- var L=Object.keys(m).map(function(k){return m[k]}).sort(function(a,b){return b.g-a.g||(a.n<b.n?-1:1)}),mx=L.length?L[0].g:1;
+ all.forEach(function(r){var o=m[r.c12]||(m[r.c12]={c:r.c12,n:r.l12,g:0,r:[]});o.g++;o.r.push(r)});
+ ST._m=m;var L=Object.keys(m).map(function(k){return m[k]}).sort(function(a,b){return b.g-a.g||(a.n<b.n?-1:1)}),mx=L.length?L[0].g:1;
  var cnt={};base.forEach(function(r){cnt[r.tl]=(cnt[r.tl]||0)+1});var cm=Math.max(1,Math.max.apply(null,tl.map(function(t){return cnt[t]||0})));
  var h='<div class="ah"><button class="at" data-o="cal"><i></i><span>'+label()+'</span></button><div class="ai"><button class="ab'+(open=='per'||ST.lid?' on':'')+'" data-o="per" aria-label="Líder">'+PER+'</button></div></div>';
  h+='<div class="pp" id="alp" '+(open?'':'hidden')+'>'+panel()+'</div>';
@@ -1663,12 +1671,19 @@ function render(){var host=document.getElementById('alc');if(!host||typeof D=='u
  cm=Math.max(1,Math.max.apply(null,X.map(function(o){return o.r.length})));
  h+='<div class="ak'+(yrm?' yr':'')+'"><div class="al"><small>Invitados</small><b>'+total+'</b></div><div class="gr'+(X.length>8?' dn':'')+'">'+X.map(function(o,ix){var v=o.r.length,hh=Math.round(v/cm*BH),inside=hh>=20,sel=mo?ST.wk==o.key:(o.k&&ST.tur.has(o.k));return '<button class="cb'+(mo?' rd':'')+(sel?' on':'')+'"'+(o.k?' data-t="'+o.k+'"':(mo?' data-w="'+o.key+'"':''))+'><i style="height:'+hh+'px"><b class="'+(inside?'':'up')+'">'+(yrm&&!v?'':v)+'</b></i><u>'+o.l+'</u></button>'}).join('')+'</div></div>';
  h+='<div class="lt">Líderes</div><div class="ls">';
- h+=L.length?L.map(function(o,i){return '<div class="lr"><div class="lw"><i>'+(i+1)+'</i><span>'+o.n+'<em>'+o.c+'</em></span><b>'+o.g+'</b></div><div class="lb" style="width:calc((100% - 28px - 70px) * '+(o.g/mx)+')"></div></div>'}).join(''):'<div class="ln">Sin resultados para esta selección</div>';
+ h+=L.length?L.map(function(o,i){return '<div class="lr" data-c="'+o.c+'"><div class="lw"><i>'+(i+1)+'</i><span>'+o.n+'<em>'+o.c+'</em></span><b>'+o.g+'</b></div><div class="lb" style="width:calc((100% - 28px - 70px) * '+(o.g/mx)+')"></div></div>'}).join(''):'<div class="ln">Sin resultados para esta selección</div>';
  h+='</div>';
  host.innerHTML=h;fit();snap(host);
  var inp=host.querySelector('#alq');if(inp&&ST._f){inp.focus();inp.setSelectionRange(inp.value.length,inp.value.length)}}
 function wire(){var host=document.getElementById('alc');
- host.addEventListener('click',function(e){e.stopPropagation();var t=e.target.closest('button');if(!t){if(!e.target.closest('.pp')&&ST.open){ST.open='';render()}return}
+ host.addEventListener('scroll',function(){var o=host.querySelector('.tipx');if(o)o.remove()},true);
+ host.addEventListener('click',function(e){e.stopPropagation();if(e.target.closest('.tipx'))return;var old=host.querySelector('.tipx'),sp=e.target.closest('.lw>span');
+  if(sp){var row=sp.closest('.lr'),c=row.dataset.c,g=ST._m&&ST._m[c];if(old){old.remove();if(old.dataset.c==c)return}if(!g)return;
+   var tp=document.createElement('div');tp.className='tipx';tp.dataset.c=c;
+   tp.innerHTML='<div class="tt">'+g.n+' · '+g.r.length+'</div>'+g.r.slice().sort(function(a,b){return b.dk-a.dk}).map(function(r){return '<div class="ti2"><div class="n1">'+r.inv+'</div><div class="n2">Invitó: '+r.lid+' · '+(r.dist||'—')+'</div></div>'}).join('');
+   host.appendChild(tp);var hr=host.getBoundingClientRect(),rr=row.getBoundingClientRect(),th=tp.offsetHeight,nv=document.getElementById('fnav'),lim=innerHeight-(nv?nv.offsetHeight:0)-8;
+   var top=rr.bottom-hr.top+2;if(rr.bottom+th>lim)top=Math.max(40,rr.top-hr.top-th-2);tp.style.top=top+'px';return}
+  if(old)old.remove();var t=e.target.closest('button');if(!t){if(!e.target.closest('.pp')&&ST.open){ST.open='';render()}return}
   var d=t.dataset;
   if(d.o=='per'&&ST.lid){ST.lid='';ST.lname='';ST.open='';ST.q='';ST.tur.clear();ST.wk=-1;init();render()}
   else if(d.o){ST.open=ST.open==d.o?'':d.o;ST.q='';if(ST.open=='cal'){ST.cy=Math.floor(ST.a/10000);ST.cm=Math.floor(ST.a/100)%100}render()}
@@ -1685,7 +1700,7 @@ function wire(){var host=document.getElementById('alc');
   else if(d.l){ST.lid=d.l;ST.lname=d.n;ST.open='';render()}
   else if(d.x){ST.lid='';ST.lname='';render()}});
  host.addEventListener('input',function(e){if(e.target.id=='alq'){ST.q=e.target.value;var p=host.querySelector('#alp');p.innerHTML=panel();var i=host.querySelector('#alq');i.focus();i.setSelectionRange(i.value.length,i.value.length)}});
- document.addEventListener('click',function(){if(ST.open){ST.open='';render()}});
+ document.addEventListener('click',function(){var tq=document.querySelector('#alc .tipx');if(tq)tq.remove();if(ST.open){ST.open='';render()}});
  addEventListener('resize',function(){fit();snap(document.getElementById('alc'))})}
 var t0=setInterval(function(){if(typeof D=='undefined'||!D||typeof PANELS=='undefined')return;clearInterval(t0);init();wire();PANELS.push({fix:function(){},cb:render});render()},200);
 var sec=document.getElementById('vac');if(sec)new MutationObserver(function(){document.body.classList.toggle('va',sec.classList.contains('on'));if(sec.classList.contains('on'))setTimeout(render,30)}).observe(sec,{attributes:true,attributeFilter:['class']});
@@ -1719,8 +1734,8 @@ function cal(){var y=ST.cy,m=ST.cm;
  return '<div class="kw"><button class="kv" data-c="-1" aria-label="Mes anterior">‹</button><button class="kv r" data-c="1" aria-label="Mes siguiente">›</button></div><div class="k2">'+mcal(y,m)+'</div>'}
 function panel(){
  if(ST.open=='inv'){var q=nz(ST.q||''),l=q?rows(true).filter(function(r){return nz(r.inv).indexOf(q)>=0}).slice(0,40):[],col={'Conectado':'#1fa24a','No conectado':'#f28c28','No contesta':'#f6c928','Sin reportar':'#ed0102'};
-  return '<label>Buscar invitado</label><input id="cxq" autocomplete="off" placeholder="Escribe un nombre" value="'+(ST.q||'').replace(/"/g,'&quot;')+'">'+(ST.sx.size?'<button class="cxclr" data-iv="*">Quitar selección ('+ST.sx.size+')</button>':'')+'<div class="pl">'+(l.length?l.map(function(r){var k=r.inv+'|'+r.cod+'|'+r.dk,on=ST.sx.has(k);return '<button data-iv="'+k.replace(/"/g,'&quot;')+'"><em>'+(on?'✓':'')+'</em><span><s class="sd" style="background:'+(col[r.est]||'#999')+'"></s>'+r.inv+'</span></button>'}).join(''):'<div class="ln">'+(q?'Sin coincidencias':'Escribe para buscar')+'</div>')+'</div>'}if(ST.open=='cal')return '<div class="qb">'+quick().map(function(q){return '<button data-q="'+q[0]+'" class="'+(q[2]?'on':'')+'">'+q[1]+'</button>'}).join('')+'</div>'+cal();
- if(ST.open=='per'){var q=(ST.q||'').toLowerCase(),seen={},l=[];D.forEach(function(r){if(!seen[r.c12]){seen[r.c12]=1;l.push({c:r.c12,n:r.l12})}});
+  return '<label>Buscar invitado</label><input id="cxq" autocomplete="off" placeholder="Escribe un nombre" value="'+(ST.q||'').replace(/"/g,'&quot;')+'">'+(ST.sx.size?'<button class="cxclr" data-iv="*">Quitar selección ('+ST.sx.size+')</button>':'')+'<div class="pl">'+(l.length?l.map(function(r){var k=r.inv+'|'+r.cod+'|'+r.dk,on=ST.sx.has(k);return '<button class="iv" data-iv="'+k.replace(/"/g,'&quot;')+'"><em>'+(on?'✓':'')+'</em><span><s class="sd" style="background:'+(col[r.est]||'#999')+'"></s>'+r.inv+'</span></button>'}).join(''):'<div class="ln">'+(q?'Sin coincidencias':'Escribe para buscar')+'</div>')+'</div>'}if(ST.open=='cal')return '<div class="qb">'+quick().map(function(q){return '<button data-q="'+q[0]+'" class="'+(q[2]?'on':'')+'">'+q[1]+'</button>'}).join('')+'</div>'+cal();
+ if(ST.open=='per'){var q=(ST.q||'').toLowerCase(),seen={},l=[];D.forEach(function(r){if(r.k12&&!seen[r.c12]){seen[r.c12]=1;l.push({c:r.c12,n:r.l12})}});
   l=l.filter(function(o){return !q||o.c.toLowerCase().indexOf(q)==0||o.n.toLowerCase().indexOf(q)>=0}).sort(function(a,b){var pa=a.c.slice(0,3),pb=b.c.slice(0,3);return pa!=pb?(pa<pb?1:-1):(a.c.length-b.c.length||(a.c<b.c?-1:1))}).slice(0,40);
   return '<label>Buscar líder</label><input id="cxq" autocomplete="off" placeholder="Nombre o código" value="'+(ST.q||'')+'"><div class="pl">'+(l.map(function(o){return '<button data-l="'+o.c+'" data-n="'+o.n.replace(/"/g,'')+'"><em>'+o.c+'</em><span>'+o.n+'</span></button>'}).join('')||'<div class="ln">Sin coincidencias</div>')+'</div>'}
  return ''}
