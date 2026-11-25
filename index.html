@@ -875,7 +875,7 @@ body.va #fxb,body.va #fxp{display:none!important}
 #alc .cb.on i{background:var(--c-nav,#ed0102)}
 #alc .cb.on i b:not(.up){color:#fff}
 #alc .lt{flex:none;padding:18px 0 10px;font-size:15px;font-weight:800;color:#000;background:#fff;position:relative;z-index:2}
-#alc .ls{flex:none;overflow-y:scroll;overflow-x:hidden;-webkit-overflow-scrolling:touch}
+#alc .ls{flex:none;overflow-y:auto;overflow-x:hidden;-webkit-overflow-scrolling:touch}
 #alc .lr{margin-bottom:12px}
 #alc .lw{display:grid;grid-template-columns:22px 1fr auto;padding-right:6px;gap:6px;align-items:center;font-size:13px;color:#000;font-family:Montserrat,sans-serif}
 #alc .lw i{font-style:normal;font-weight:700;font-family:Inter,sans-serif}
@@ -919,6 +919,13 @@ body.va #fxb,body.va #fxp{display:none!important}
 #alc .kg button.in.st.en{border-radius:14px}
 #alc .kg button.td::after{content:'';position:absolute;left:50%;bottom:3px;width:12px;height:3px;margin-left:-6px;background:#000;border-radius:2px}
 #alc .kg button.in.td::after{background:#fff}
+#alc .gr::after{background:#c4c4c4!important}
+#alc .al{justify-content:flex-end!important}
+#alc .al b{margin:0 0 15px!important}
+#fnav button.on::before{display:none!important}
+#fnav button.on{background:#fff!important;color:var(--c-nav,#ed0102)!important;border-radius:18px!important;margin:7px 4px!important;padding:0!important;justify-content:center}
+#fnav button.on svg{fill:var(--c-nav,#ed0102)!important;stroke:var(--c-nav,#ed0102)!important}
+#fnav button.on svg .d{fill:none!important;stroke:#fff!important}
 </style></head><body class="gate">
 <div id="gate"><img id="gimg" alt="Logo"><h1>Alcance y Conexión</h1><p class="gs">Red García Montoya</p>
 <div class="gq">Ingresar como</div>
@@ -1036,7 +1043,7 @@ function V1(){const P=Filt('f1',{rows:[['anio','mes','red']]},r);
   $('res').innerHTML=[['Ganados',g],['Conectados',c],['No conectado',cnt(x,1)],['No contesta',cnt(x,2)]].map(a=>`<div class="kc"><small>${a[0]}</small><b>${a[1]}</b></div>`).join('')+`<div class="dn"><div class="donut"><svg viewBox="0 0 120 120"><circle cx="60" cy="60" r="50" fill="none" stroke="#e4e4e4" stroke-width="10"/><circle cx="60" cy="60" r="50" fill="none" stroke="${col}" stroke-width="10" pathLength="100" stroke-dasharray="${e} ${100-e}" transform="rotate(-90 60 60)"/></svg><div class="dc"><span style="color:${col}">${fp(e)}</span><small>Efectividad</small></div></div></div>`;}
  r()}
 
-function VI(){const mm=m=>m.slice(0,3),CL=['#16a34a','#ff8a00','#f2c200','#b80000'],TL2=[['8AM','8am'],['10AM','10am'],['12PM','12pm'],['6PM','6pm'],['NEXT','Next']],HK={'8AM':'Domingo 8am','10AM':'Domingo 10am','12PM':'Domingo 12pm','6PM':'Domingo 6pm','NEXT':'Sábado 6pm'},TT=[0,['Resumen de','Alcance','Conexión'],['Indicadores de','Alcance','Conexión'],['Ranking de','Alcance','Conexión'],['Indicadores por distrito'],['Ganadores del mes'],['Conector del mes'],['Destacados'],['Resumen de','Alcance','Conexión'],['Rendimiento','','']];
+function VI(){const mm=m=>m.slice(0,3),CL=['#16a34a','#ff8a00','#f2c200','#b80000'],TL2=[['8AM','8am'],['10AM','10am'],['12PM','12pm'],['6PM','6pm'],['NEXT','Next']],HK={'8AM':'Dom 8AM','10AM':'Dom 10AM','12PM':'Dom 12PM','6PM':'Dom 6PM','NEXT':'Sáb 6PM'},TT=[0,['Resumen de','Alcance','Conexión'],['Indicadores de','Alcance','Conexión'],['Ranking de','Alcance','Conexión'],['Indicadores por distrito'],['Ganadores del mes'],['Conector del mes'],['Destacados'],['Resumen de','Alcance','Conexión'],['Rendimiento','','']];
  const B=[0,1,2,3,4,5,6,7,8,9].map(k=>({g:'me',an:new Set(),me:new Set(),se:new Set(),red:'',hor:'',lid:'',tp:new Set(),open:'',gr:'',mode:'a',rv:'g',ord:'f',cy:0,cm:'',nolid:k==3||k>4}));
  const ym=[...new Set(D.map(r=>r.anio*100+MES.indexOf(r.mes)))].sort((a,b)=>a-b),pv=ym[ym.length-2]||ym[ym.length-1]||0;B.forEach(S=>{S.cy=String(Math.floor(pv/100));S.cm=MES[pv%100]||''});
  const lmx=ym[ym.length-1],dfl=k=>{const n=new Date();return (k==3||k==8||k==9)?[String(n.getFullYear()),MES[n.getMonth()]]:lmx?[String(Math.floor(lmx/100)),MES[lmx%100]]:null};[3,5,6,7,8].forEach(k=>{const d=dfl(k);if(d){B[k].an.add(d[0]);B[k].me.add(d[1])}});{const d=dfl(9);B[9].g='se';if(d){B[9].an.add(d[0]);B[9].se.add(d[1])}}B[8].nx=false;B[8].exs=new Set();B[8].etk='';
@@ -1078,7 +1085,7 @@ function VI(){const mm=m=>m.slice(0,3),CL=['#16a34a','#ff8a00','#f2c200','#b8000
  C[6]=()=>{const m={};sel(B[6]).forEach(r=>{const o=m[K(r.c12)]??={g:0,c:0};o.g++;if(r.est==EST[0])o.c++});return rkw(tiers(Object.entries(m).map(([c,o])=>({c,v:Math.round(o.c/o.g*1000)/10})).filter(x=>x.v>0).sort((a,b)=>b.v-a.v)),v=>v+'%')};
  C[8]=()=>{const S=B[8],y=+[...S.an][0]||new Date().getFullYear(),mi=S.me.size?MES.indexOf([...S.me][0]):-1,yr=mi<0,py=yr?y-1:(mi>0?y:y-1),pmi=mi>0?mi-1:11,
   xf=S.xf||{},per=(Y,M)=>sel({...S,hor:xf.hor||'',lid:xf.lid||'',red:xf.red||'',an:new Set([String(Y)]),me:new Set(M<0?[]:[MES[M]]),g:'me'}),R=per(y,mi),Q=per(py,yr?-1:pmi),
-  lab=yr?'año '+y:MES[mi].toLowerCase()+' '+y,TU=[['8AM','Domingo 08:00 AM'],['10AM','Domingo 10:00 AM'],['12PM','Domingo 12:00 PM'],['6PM','Domingo 06:00 PM'],['NEXT','Sábado 06:00 PM']],
+  lab=yr?'año '+y:MES[mi].toLowerCase()+' '+y,TU=[['8AM','Dom 8AM'],['10AM','Dom 10AM'],['12PM','Dom 12PM'],['6PM','Dom 6PM'],['NEXT','Sáb 6PM']],
   stt=rs=>{const g=rs.length,c=rs.filter(r=>r.est==EST[0]).length;return{g,e:g?c/g*100:0,rp:rs.filter(r=>r.est!=EST[3]).length}},
   AW=u=>`<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">${u?'<path d="M3 17l6-6 4 4 8-8"/><path d="M15 7h6v6"/>':'<path d="M3 7l6 6 4-4 8 8"/><path d="M15 17h6v-6"/>'}</svg>`,
   dl=v=>v==null?'<div class="dlt"><span>—</span></div>':`<div class="dlt ${v>=0?'gu':'gd'}">${AW(v>=0)}<span>${v>=0?'+':'−'}${Math.abs(v).toFixed(1)}%</span></div>`,
@@ -1377,8 +1384,8 @@ function mcal(y,m){var off=(new Date(y,m-1,1).getDay()+6)%7,dim=new Date(y,m,0).
  for(var i=0;i<off;i++)h+='<span></span>';
  for(var d=1;d<=dim;d++){var k=mk(y,m,d),c='';if(k>=ST.a&&k<=ST.b){c='in';if(k==ST.a)c+=' st';if(k==ST.b)c+=' en'}if(k==today)c+=' td';h+='<button data-d="'+k+'" class="'+c+'">'+d+'</button>'}
  return h+'</div></div>'}
-function cal(){var y=ST.cy,m=ST.cm,py=m==1?y-1:y,pm=m==1?12:m-1;
- return '<div class="kw"><button class="kv" data-c="-1" aria-label="Mes anterior">‹</button><button class="kv r" data-c="1" aria-label="Mes siguiente">›</button></div><div class="k2">'+mcal(py,pm)+mcal(y,m)+'</div>'}
+function cal(){var y=ST.cy,m=ST.cm;
+ return '<div class="kw"><button class="kv" data-c="-1" aria-label="Mes anterior">‹</button><button class="kv r" data-c="1" aria-label="Mes siguiente">›</button></div><div class="k2">'+mcal(y,m)+'</div>'}
 function panel(){if(ST.open=='cal')return '<div class="qb">'+quick().map(function(q){return '<button data-q="'+q[0]+'" class="'+(q[2]?'on':'')+'">'+q[1]+'</button>'}).join('')+'</div>'+cal();
  if(ST.open=='per'){var q=(ST.q||'').toLowerCase(),seen={},l=[];D.forEach(function(r){if(!seen[r.c12]){seen[r.c12]=1;l.push({c:r.c12,n:r.l12})}});
   l=l.filter(function(o){return !q||o.c.toLowerCase().indexOf(q)==0||o.n.toLowerCase().indexOf(q)>=0}).sort(function(a,b){return a.n<b.n?-1:1}).slice(0,40);
