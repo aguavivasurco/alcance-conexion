@@ -1141,6 +1141,12 @@ body.vc #fxb,body.vc #fxp{display:none!important}
 #cnx .cxk.ln .al{padding-bottom:0!important}
 #cnx .cxk.ln .al b{margin-bottom:-5px!important}
 #alc .cb u,#cnx .cb u,#alc .cb u *,#cnx .cb u *,#cnx .cxx span,#cnx .cxx span *{font-family:Inter,sans-serif!important;vertical-align:baseline}
+#cnx .cxk .cxf{grid-column:1!important}
+#cnx .cxt{grid-template-columns:26px 1fr!important}
+#cnx .cxt span{font-size:13px}
+#cnx .cxt em{font-size:10.5px!important;padding:2px 8px!important}
+#cnx .cxt em,#cnx .cxt em *{font-size:10.5px!important;font-family:Montserrat,sans-serif!important;font-weight:600!important}
+#alc .lw span,#cnx .lw span{line-height:1.7!important}
 </style></head><body class="gate">
 <div id="gate"><img id="gimg" alt="Logo"><h1>Alcance y Conexión</h1><p class="gs">Red García Montoya</p>
 <div class="gq">Ingresar como</div>
@@ -1734,7 +1740,7 @@ function render(){var host=document.getElementById('cnx');if(!host||typeof D=='u
   +'<div class="al"><small>Total</small><b>'+tv+'</b></div></div>';
  var lst=base.filter(function(r){return all2||r.est==cur[0]}).sort(function(a,b){return b.dk-a.dk||(a.inv<b.inv?-1:1)});
  h+='<div class="lt">Invitados</div><div class="ls">';
- h+=lst.length?lst.map(function(r,i){return '<div class="lr"><div class="lw cxt"><i>'+(i+1)+'</i><span>'+r.inv+'</span><b>'+r.lid+'</b></div></div>'}).join(''):'<div class="ln">Sin resultados para esta selección</div>';
+ h+=lst.length?lst.map(function(r,i){return '<div class="lr"><div class="lw cxt"><i>'+(i+1)+'</i><span>'+r.inv+'<em>'+r.cod+' - '+r.lid+'</em></span></div></div>'}).join(''):'<div class="ln">Sin resultados para esta selección</div>';
  h+='</div>';
  host.innerHTML=h;fit();snap(host);
  var inp=host.querySelector('#cxq');if(inp&&ST._f){inp.focus();inp.setSelectionRange(inp.value.length,inp.value.length)}}
