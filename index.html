@@ -716,6 +716,27 @@ body.gate{overflow:hidden}
 #vin .nxa{top:50%}
 #vin .nxa[data-nx="-1"]:not(.solo){top:calc(50% - 26px)}
 #vin .nxa[data-nx="1"]:not(.solo){top:calc(50% + 26px)}
+
+/* ===== tarjetas anchas (Red / Next): Alc. y Efect. centrados en su mitad; título del gráfico centrado ===== */
+#vin .tcd.one .tcd-g{grid-template-columns:1fr 1fr}
+#vin .tcd.one .tcd-g>div,#vin .tcd.one .tcd-g>button{text-align:center;display:flex;flex-direction:column;align-items:center}
+#vin .tcd.one .tcd-g small{justify-content:center}
+#vin .tcd.one .dlt{justify-content:center}
+#vin .bgc{text-align:center;padding-left:22px}
+
+/* ===== Ajustes finales Inicio ===== */
+#cfgb,#cfg{display:none!important}
+#vin .rbx text[fill="#6e6e6e"]{fill:#000;font-weight:500}
+#vin .rbx rect[fill="#ececec"],body.dk #vin .rbx rect[fill="#ececec"]{fill:var(--c-card,#f5feff)}
+#vin .rbx text[fill="#fff"]{font-weight:700}
+#vin .rbx polyline,#vin .rbx.cm polyline{stroke:#000}
+#vin .rbx circle,#vin .rbx.cm circle{fill:#000}
+#vin .ib2.er3{color:#000!important}
+/* barra inferior roja, como el encabezado */
+#fnav,body.dk #fnav{background:var(--c-nav,#ed0102);border-top:0;box-shadow:0 -2px 12px rgba(0,0,0,.14)}
+#fnav button{color:rgba(255,255,255,.74)}
+#fnav button.on{color:#fff}
+#fnav button.on::before{background:#fff}
 </style></head><body class="gate">
 <div id="gate"><img id="gimg" alt="Logo"><h1>Alcance y Conexión</h1><p class="gs">Red García Montoya</p>
 <div class="gq">Ingresar como</div>
@@ -1048,7 +1069,7 @@ const mq=matchMedia('(max-width:700px)'),mode=()=>root.classList.toggle('m',mq.m
  EL=[['m','Mes (Octubre 2026)','--s-m',10,22,'--k-m','#ffffff'],['v','Texto "vs. mes ant."','--s-v',8,16,'--k-v','#6b6b6b'],['c','Título de tarjeta (horario)','--st',9,18,'--c-pillt','#6b6b6b'],['l','Etiqueta (Alc. / Efect.)','--sl',8,16,'--k-l','#111111'],['n','Número','--sn',14,36,'--k-n','#111111'],['d','Porcentaje / variación','--sd',8,16,null,null],['f','Etiqueta del filtro (Red…)','--s-f',8,16,'--k-f','#6b6b6b'],['g','Texto del gráfico (8AM, Oct…)',null,0,0,'--k-g','#111111']],
  CARD=[['--cp','Alto interior de tarjeta',2,16],['--cg','Separación entre tarjetas',2,18],['--cr','Redondeo de tarjeta',4,24]],
  DEF={"--ff": "Manrope", "--c-hd": "#ed0102", "--c-hd2": "#ed0102", "--c-mb": "#ffffff", "--c-mt": "#ed0102", "--c-nav": "#ed0102", "--c-card": "#f5feff", "--c-pill": "#ff0000", "--c-pillt": "#ffffff", "--c-up": "#00a33c", "--c-dn": "#e5000f", "--c-bar": "#ed0102", "--c-barc": "#bdbdbd", "--sl": 10, "--sn": 20, "--st": 12.5, "--sd": 10, "--s-t": 17, "--cp": 2, "--cg": 4, "--cr": 8.5, "--ff-t": "", "--ff-c": "", "--ff-l": "Manrope", "--ff-n": "Inter", "--ff-d": "Inter", "--ff-s": "", "--ff-m": "Manrope", "--ff-v": "Manrope", "--ff-r": "", "--ff-f": "", "--ff-g": "", "--w-t": 700, "--w-c": 500, "--w-l": 500, "--w-n": 700, "--w-d": 400, "--w-s": 400, "--w-m": 800, "--w-v": 600, "--w-r": 700, "--w-f": 600, "--i-t": 0, "--i-c": 0, "--i-l": 0, "--i-n": 0, "--i-d": 0, "--i-s": 0, "--i-m": 0, "--i-v": 0, "--i-r": 0, "--i-f": 0, "--i-g": 0, "--s-s": 12, "--s-m": 15, "--s-v": 12, "--s-r": 17, "--s-f": 11, "--k-t": "", "--k-s": "", "--k-m": "#000000", "--k-v": "", "--k-l": "#6b6b6b", "--k-n": "", "--k-r": "", "--k-f": "", "--k-g": ""};
- let V={...DEF};const ld=()=>{let t='';try{t=localStorage.getItem('cfgInicio')||''}catch(e){}if(!t){const m=document.cookie.match(/(?:^|; )cfgInicio=([^;]*)/);if(m)try{t=decodeURIComponent(m[1])}catch(e){}}try{Object.assign(V,JSON.parse(t||'{}'))}catch(e){}},
+ let V={...DEF};const ld=()=>{return;let t='';try{t=localStorage.getItem('cfgInicio')||''}catch(e){}if(!t){const m=document.cookie.match(/(?:^|; )cfgInicio=([^;]*)/);if(m)try{t=decodeURIComponent(m[1])}catch(e){}}try{Object.assign(V,JSON.parse(t||'{}'))}catch(e){}},
  sv=()=>{const t=JSON.stringify(V);let ok=false;try{localStorage.setItem('cfgInicio',t);ok=true}catch(e){}try{document.cookie='cfgInicio='+encodeURIComponent(t)+';max-age=31536000;path=/;SameSite=Lax';ok=true}catch(e){}return ok};ld();
  const FB=',"Hanken Grotesk","Helvetica Neue",Arial,sans-serif',R=document.documentElement,PXK=['--sl','--sn','--st','--sd','--s-t','--s-s','--s-m','--s-v','--s-r','--s-f','--cp','--cg','--cr'],
  apply=()=>{for(const k in V){const v=V[k];if(k=='--ff')R.style.setProperty(k,v+FB);else if(k.startsWith('--k-'))v?R.style.setProperty(k,v):R.style.removeProperty(k);else if(k.startsWith('--ff-'))v?R.style.setProperty(k,v+FB):R.style.removeProperty(k);else if(k.startsWith('--i-'))R.style.setProperty(k,v?'italic':'normal');else if(PXK.includes(k))R.style.setProperty(k,v+'px');else R.style.setProperty(k,v)}sv();const ta=$('cfgt');if(ta&&document.activeElement!==ta)ta.value=JSON.stringify(V)},
