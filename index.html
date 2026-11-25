@@ -711,6 +711,11 @@ body.gate{overflow:hidden}
 #cfg .hx{width:94px;height:30px;border:1px solid #d6d6d6;border-radius:8px;padding:0 8px;font:600 13px Inter,monospace;color:#111;background:#fff;text-transform:uppercase}
 #cfg .hx.bad{border-color:#e5000f;background:#fff0f0}
 #cfg .row .cw{margin-left:auto}
+
+/* ===== Inicio: páginas de tarjetas (General / 4 turnos / Next) ===== */
+#vin .nxa{top:50%}
+#vin .nxa[data-nx="-1"]:not(.solo){top:calc(50% - 26px)}
+#vin .nxa[data-nx="1"]:not(.solo){top:calc(50% + 26px)}
 </style></head><body class="gate">
 <div id="gate"><img id="gimg" alt="Logo"><h1>Alcance y Conexión</h1><p class="gs">Red García Montoya</p>
 <div class="gq">Ingresar como</div>
@@ -876,11 +881,14 @@ function VI(){const mm=m=>m.slice(0,3),CL=['#16a34a','#ff8a00','#f2c200','#b8000
   dl=v=>v==null?'<div class="dlt"><span>—</span></div>':`<div class="dlt ${v>=0?'gu':'gd'}">${AW(v>=0)}<span>${v>=0?'+':'−'}${Math.abs(v).toFixed(1)}%</span></div>`,
   av=new Map(),add=(Y,m)=>{if(!av.has(Y))av.set(Y,new Set());av.get(Y).add(m)};D.forEach(r=>add(String(r.anio),MES.indexOf(r.mes)));{const n=new Date();add(String(n.getFullYear()),n.getMonth())}
   const pop=S.open=='mp'?`<div class="mpb"></div><div class="mpop">${[...av.keys()].sort().reverse().map(Y=>`<div class="mpy"><button data-mp="${Y}|y" class="${yr&&y==Y?'on':''}">Año ${Y}</button><div>${[...av.get(Y)].sort((p,q)=>p-q).map(m=>`<button data-mp="${Y}|${m}" class="${!yr&&y==Y&&mi==m?'on':''}">${MES[m].slice(0,3)}</button>`).join('')}</div></div>`).join('')}</div>`:'';
-  const cards=TU.filter(([tl])=>S.nx?tl=='NEXT':tl!='NEXT').map(([tl,nm],ix)=>{const c=stt(R.filter(r=>r.tl==tl)),p=stt(Q.filter(r=>r.tl==tl));
-   return `<div class="tcd${S.nx?' one':''}"><div class="tcd-h"><span>${nm}</span></div><div class="tcd-b"><div class="tcd-g"><div><small>Alc.</small><b>${c.g}</b>${dl(p.g?(c.g-p.g)/p.g*100:(c.g?100:0))}</div><button class="ef" data-et="${tl}"><small>Efect. <em class="${c.rp>=c.g?'ok':'pen'}">(${c.rp}/${c.g})</em></small><b>${Math.round(c.e)}%</b>${dl(c.e-p.e)}</button></div></div></div>`}).join('');
-  let etp='';if(S.open=='et'){const tl=S.etk,nm=(TU.find(t=>t[0]==tl)||[])[1],rr=R.filter(r=>r.tl==tl);
+  const pre=x=>r=>String(r.cod||'').toUpperCase().indexOf(x)==0,
+   FK={G0:['Red',()=>true],G18:['C18',pre('C18')],G28:['C28',pre('C28')]};TU.forEach(([tl,nm])=>{FK[tl]=[nm,r=>r.tl==tl]});
+  const pg=S.pg||0,LS=[[['G0','one'],['G18',''],['G28','']],[['8AM',''],['10AM',''],['12PM',''],['6PM','']],[['NEXT','one']]][pg];
+  const cards=LS.map(([tl,cl])=>{const nm=FK[tl][0],f=FK[tl][1],c=stt(R.filter(f)),p=stt(Q.filter(f));
+   return `<div class="tcd${cl?' '+cl:''}"><div class="tcd-h"><span>${nm}</span></div><div class="tcd-b"><div class="tcd-g"><div><small>Alc.</small><b>${c.g}</b>${dl(p.g?(c.g-p.g)/p.g*100:(c.g?100:0))}</div><button class="ef" data-et="${tl}"><small>Efect. <em class="${c.rp>=c.g?'ok':'pen'}">(${c.rp}/${c.g})</em></small><b>${Math.round(c.e)}%</b>${dl(c.e-p.e)}</button></div></div></div>`}).join('');
+  let etp='';if(S.open=='et'){const tl=S.etk,fk=FK[tl]||FK.G0,nm=fk[0],rr=R.filter(fk[1]);
    etp=`<div class="mpb"></div><div class="etp"><div class="etp-h">${nm} · Efectividad<small>${lab}</small></div>${EST.map((e,i)=>{const ls=rr.filter(r=>r.est==e),mp={};ls.forEach(r=>{const n=(r.l12&&r.l12!='—')?r.l12:(r.lid||r.cod);mp[n]=(mp[n]||0)+1});const op=S.exs.has(e);return `<div class="etr"><div class="etl"><i style="background:${EC[i]}"></i><span>${e}: <b>${ls.length}</b></span>${ls.length?`<button data-ex="${i}">${op?'−':'+'}</button>`:''}</div>${op?`<ul>${Object.entries(mp).sort((x,z)=>z[1]-x[1]).map(([n,q])=>`<li><span>${n}</span><b>${q}</b></li>`).join('')}</ul>`:''}</div>`}).join('')}</div>`}
-  return `<div class="mrow"><button class="tcd-m" data-mp="open"><i></i>${lab.charAt(0).toUpperCase()+lab.slice(1)}</button><span class="mr2"><small>vs. ${yr?'año':'mes'} ant.</small></span></div><div class="tgw"><div class="tgr">${cards}</div><button class="nxa" data-nx aria-label="${S.nx?'Volver a los turnos':'Ver Next'}">${S.nx?'◂':'▸'}</button></div>${pop}${etp}`};
+  return `<div class="mrow"><button class="tcd-m" data-mp="open"><i></i>${lab.charAt(0).toUpperCase()+lab.slice(1)}</button><span class="mr2"><small>vs. ${yr?'año':'mes'} ant.</small></span></div><div class="tgw"><div class="tgr">${cards}</div>${pg>0?`<button class="nxa${pg<2?'':' solo'}" data-nx="-1" aria-label="Anterior">◂</button>`:''}${pg<2?`<button class="nxa${pg>0?'':' solo'}" data-nx="1" aria-label="Siguiente">▸</button>`:''}</div>${pop}${etp}`};
  C[9]=()=>C[2](9);
  C[7]=()=>{const S=B[7],rs=sel(S),gm=R=>{const m={};R.forEach(r=>{const o=m[K(r.c12)]??={g:0,c:0,a:0,d:new Set()};o.g++;o.d.add(r.dk);if(r.est==EST[0])o.c++;if(/^(A1|AMG)/i.test(r.tp||''))o.a++});return m},cur=gm(rs),one=S.me.size==1&&S.an.size==1,pi=MES.indexOf([...S.me][0])-1,prev=one?gm(sel({...S,g:'me',an:new Set([String(pi<0?[...S.an][0]-1:[...S.an][0])]),me:new Set([MES[(pi+12)%12]])})):null;
   const am={};rs.filter(r=>/^AMG/i.test(r.tp||'')).forEach(r=>{const c=K(r.c12);am[c]=(am[c]||0)+1});const cm={};Object.entries(cur).forEach(([c,o])=>{const v=Math.round(o.c/o.g*1000)/10;if(v>0)cm[c]=v});
@@ -925,7 +933,7 @@ function VI(){const mm=m=>m.slice(0,3),CL=['#16a34a','#ff8a00','#f2c200','#b8000
    else if(d.tp){if(d.tp=='*')S.tp.clear();else S.tp.has(d.tp)?S.tp.delete(d.tp):S.tp.add(d.tp)}
    else if(d.md){S.mode=d.md;S.open='';if(k==8){B[9].mode=d.md;draw(9)}}else if(d.cy!==undefined)S.cy=String(d.cy);else if(d.cm!==undefined)S.cm=d.cm;
    else if(d.rv!==undefined){if(S.mode=='a')S.rv=S.rv=='g'?'l':'g'}
-   else if(d.nx!==undefined){S.nx=!S.nx;S.open=''}
+   else if(d.nx!==undefined){S.pg=Math.max(0,Math.min(2,(S.pg||0)+(+d.nx||1)));S.open=''}
    else if(d.et!==undefined){S.etk=d.et;S.open='et'}
    else if(d.ex!==undefined){const e=EST[+d.ex];S.exs.has(e)?S.exs.delete(e):S.exs.add(e);S.open='et'}
    else if(d.mp!==undefined){if(d.mp=='open')S.open='mp';else{const[Y,m]=d.mp.split('|');S.an=new Set([Y]);S.me=m=='y'?new Set():new Set([MES[+m]]);S.open=''}}
@@ -1039,8 +1047,7 @@ const mq=matchMedia('(max-width:700px)'),mode=()=>root.classList.toggle('m',mq.m
  COL=[['--c-hd2','Encabezado (igual al logo)'],['--c-mb','Fondo del mes'],['--c-mt','Triángulo del mes'],['--c-nav','Barra inferior (color activo)'],['--c-card','Fondo de tarjeta'],['--c-pill','Fondo del horario'],['--c-up','Variación positiva'],['--c-dn','Variación negativa'],['--c-bar','Barras (Alc)']],
  EL=[['m','Mes (Octubre 2026)','--s-m',10,22,'--k-m','#ffffff'],['v','Texto "vs. mes ant."','--s-v',8,16,'--k-v','#6b6b6b'],['c','Título de tarjeta (horario)','--st',9,18,'--c-pillt','#6b6b6b'],['l','Etiqueta (Alc. / Efect.)','--sl',8,16,'--k-l','#111111'],['n','Número','--sn',14,36,'--k-n','#111111'],['d','Porcentaje / variación','--sd',8,16,null,null],['f','Etiqueta del filtro (Red…)','--s-f',8,16,'--k-f','#6b6b6b'],['g','Texto del gráfico (8AM, Oct…)',null,0,0,'--k-g','#111111']],
  CARD=[['--cp','Alto interior de tarjeta',2,16],['--cg','Separación entre tarjetas',2,18],['--cr','Redondeo de tarjeta',4,24]],
- DEF={'--ff':'"Instrument Sans"','--c-hd':'#ed0102','--c-hd2':'#ed0101','--c-mb':'#000000','--c-mt':'#ffffff','--c-nav':'#ed0102','--c-card':'#fafafa','--c-pill':'#eeeeee','--c-pillt':'#6b6b6b','--c-up':'#00a33c','--c-dn':'#e5000f','--c-bar':'#ed0102','--c-barc':'#bdbdbd','--sl':11,'--sn':22,'--st':12,'--sd':11,'--s-t':17,'--cp':8,'--cg':8,'--cr':12,
-  '--ff-t':'','--ff-c':'','--ff-l':'','--ff-n':'','--ff-d':'','--ff-s':'','--ff-m':'','--ff-v':'','--ff-r':'','--ff-f':'','--ff-g':'','--w-t':700,'--w-c':400,'--w-l':600,'--w-n':700,'--w-d':800,'--w-s':400,'--w-m':700,'--w-v':600,'--w-r':700,'--w-f':600,'--i-t':0,'--i-c':0,'--i-l':0,'--i-n':0,'--i-d':0,'--i-s':0,'--i-m':0,'--i-v':0,'--i-r':0,'--i-f':0,'--i-g':0,'--s-s':12,'--s-m':14,'--s-v':10.5,'--s-r':17,'--s-f':11,'--k-t':'','--k-s':'','--k-m':'','--k-v':'','--k-l':'','--k-n':'','--k-r':'','--k-f':'','--k-g':''};
+ DEF={"--ff": "Manrope", "--c-hd": "#ed0102", "--c-hd2": "#ed0102", "--c-mb": "#ffffff", "--c-mt": "#ed0102", "--c-nav": "#ed0102", "--c-card": "#f5feff", "--c-pill": "#ff0000", "--c-pillt": "#ffffff", "--c-up": "#00a33c", "--c-dn": "#e5000f", "--c-bar": "#ed0102", "--c-barc": "#bdbdbd", "--sl": 10, "--sn": 20, "--st": 12.5, "--sd": 10, "--s-t": 17, "--cp": 2, "--cg": 4, "--cr": 8.5, "--ff-t": "", "--ff-c": "", "--ff-l": "Manrope", "--ff-n": "Inter", "--ff-d": "Inter", "--ff-s": "", "--ff-m": "Manrope", "--ff-v": "Manrope", "--ff-r": "", "--ff-f": "", "--ff-g": "", "--w-t": 700, "--w-c": 500, "--w-l": 500, "--w-n": 700, "--w-d": 400, "--w-s": 400, "--w-m": 800, "--w-v": 600, "--w-r": 700, "--w-f": 600, "--i-t": 0, "--i-c": 0, "--i-l": 0, "--i-n": 0, "--i-d": 0, "--i-s": 0, "--i-m": 0, "--i-v": 0, "--i-r": 0, "--i-f": 0, "--i-g": 0, "--s-s": 12, "--s-m": 15, "--s-v": 12, "--s-r": 17, "--s-f": 11, "--k-t": "", "--k-s": "", "--k-m": "#000000", "--k-v": "", "--k-l": "#6b6b6b", "--k-n": "", "--k-r": "", "--k-f": "", "--k-g": ""};
  let V={...DEF};const ld=()=>{let t='';try{t=localStorage.getItem('cfgInicio')||''}catch(e){}if(!t){const m=document.cookie.match(/(?:^|; )cfgInicio=([^;]*)/);if(m)try{t=decodeURIComponent(m[1])}catch(e){}}try{Object.assign(V,JSON.parse(t||'{}'))}catch(e){}},
  sv=()=>{const t=JSON.stringify(V);let ok=false;try{localStorage.setItem('cfgInicio',t);ok=true}catch(e){}try{document.cookie='cfgInicio='+encodeURIComponent(t)+';max-age=31536000;path=/;SameSite=Lax';ok=true}catch(e){}return ok};ld();
  const FB=',"Hanken Grotesk","Helvetica Neue",Arial,sans-serif',R=document.documentElement,PXK=['--sl','--sn','--st','--sd','--s-t','--s-s','--s-m','--s-v','--s-r','--s-f','--cp','--cg','--cr'],
