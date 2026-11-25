@@ -747,7 +747,7 @@ body.gate{overflow:hidden}
 #vin .legend,#vin .legend span,#vin .bgc span{color:#000!important}
 #vin .tcd{border:0!important}
 #vin .rbx rect[fill="#ececec"],body.dk #vin .rbx rect[fill="#ececec"]{stroke:none!important;stroke-width:0!important}
-#vin .rbx polyline,#vin .rbx.cm polyline{stroke-width:3!important;stroke-dasharray:none!important}
+#vin .rbx polyline,#vin .rbx.cm polyline{stroke-width:1.6!important;stroke-dasharray:5 4!important}
 </style></head><body class="gate">
 <div id="gate"><img id="gimg" alt="Logo"><h1>Alcance y Conexión</h1><p class="gs">Red García Montoya</p>
 <div class="gq">Ingresar como</div>
@@ -881,7 +881,7 @@ function VI(){const mm=m=>m.slice(0,3),CL=['#16a34a','#ff8a00','#f2c200','#b8000
  2(K=2){const S=B[K],a=S.mode=='a',g=S.g,m={},mt=metaOf(S),cmp=S.hor=='*';sel(S).forEach(r=>{const ti=TL2.findIndex(t=>t[0]==r.tl);if(cmp&&ti<0)return;const k=cmp?ti:g=='an'?+r.anio:g=='me'?r.anio*100+MES.indexOf(r.mes)+1:r.dk,o=m[k]??={k,r,g:0,c:0,ms:new Set()};o.g++;o.ms.add(r.mes);if(r.est==EST[0])o.c++});
   const L=Object.values(m).map(o=>{const meta=cmp?metaOf({...S,hor:TL2[o.k][0]})*o.ms.size:g=='an'?mt*o.ms.size:g=='me'?mt:mt/4;return{...o,p:a?(meta?o.g/meta*100:0):pct(o.c,o.g)}}).sort((x,y)=>S.ord=='g'?y.g-x.g:S.ord=='ga'?x.g-y.g:S.ord=='e'?y.p-x.p:S.ord=='ea'?x.p-y.p:x.k-y.k),n=L.length,W=($('ch'+K).clientWidth||320);
   if(!n)return '<p class="note">Sin datos para esta selección</p>';
-  const yrs=new Set(D.map(r=>r.anio)).size>1,sw=Math.max(K==9?50:62,W/n),bw=Math.min(40,sw-14),PH=K==9?(()=>{const c=document.getElementById('ch9'),n=document.getElementById('fnav');if(!c||!n)return 136;return Math.max(100,Math.min(520,Math.round(n.getBoundingClientRect().top-17+5-c.getBoundingClientRect().top-38)))})():120,BM=K==9?PH-54:60,mx=Math.max(...L.map(x=>x.g))||1,ps=L.map(x=>x.p),pa=Math.min(...ps),pz=Math.max(...ps),y=p=>52-(p-pa)/((pz-pa)||1)*22;let sep='',bars='',pts='',dots='',lab='',xl='';
+  const yrs=new Set(D.map(r=>r.anio)).size>1,sw=Math.max(K==9?50:62,W/n),bw=Math.min(40,sw-14),PH=K==9?(()=>{const c=document.getElementById('ch9'),n=document.getElementById('fnav');if(!c||!n)return 136;return Math.max(90,Math.min(150,Math.round(n.getBoundingClientRect().top-17+5-c.getBoundingClientRect().top-38-24)))})():120,BM=K==9?PH-54:60,mx=Math.max(...L.map(x=>x.g))||1,ps=L.map(x=>x.p),pa=Math.min(...ps),pz=Math.max(...ps),y=p=>52-(p-pa)/((pz-pa)||1)*22;let sep='',bars='',pts='',dots='',lab='',xl='';
   L.forEach((o,i)=>{const h=o.g/mx*BM,x=i*sw+sw/2,r=o.r,rr=Math.min(5,h),x0=x-bw/2,y0=PH-h,yy=ps.length>1?y(o.p):42;
    if(g=='se'&&S.ord=='f'&&i>0&&(L[i-1].r.mes!=r.mes||L[i-1].r.anio!=r.anio))sep+=`<line x1="${i*sw}" x2="${i*sw}" y1="${PH-8}" y2="${PH+36}" stroke="#bdbdbd" stroke-dasharray="3 3"/>`;
    bars+=`<path d="M${x0},${PH}V${y0+rr}Q${x0},${y0} ${x0+rr},${y0}H${x0+bw-rr}Q${x0+bw},${y0} ${x0+bw},${y0+rr}V${PH}Z" fill="#ed0102"/>`+(h>=14?`<text x="${x}" y="${PH-h/2+4}" text-anchor="middle" font-size="11" font-weight="700" fill="#fff">${o.g}</text>`:'');
