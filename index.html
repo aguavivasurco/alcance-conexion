@@ -1118,6 +1118,29 @@ body.vc #fxb,body.vc #fxp{display:none!important}
 #cnx .cxk .al b{margin:6px 0 0!important}
 #cnx .cxd{background:none!important;padding:0!important;font-size:15px!important;font-weight:800!important;gap:7px}
 #cnx .cxm{z-index:40}
+#cnx .cxk .cxf{z-index:5!important;grid-column:1/-1!important;display:flex;justify-content:center;margin:0 0 4px!important}
+#cnx .cxd{font-size:13px!important;font-weight:700!important}
+#cnx .cxm{left:50%!important;transform:translateX(-50%)}
+#cnx .cxk .gr,#cnx .cxk .cxp,#cnx .cxk .cxx{grid-column:1!important}
+#cnx .cxk .gr{grid-row:2!important}
+#cnx .cxk .al{grid-row:2/span 1!important;align-self:stretch!important;justify-content:space-between!important;padding:0 0 22px!important}
+#cnx .cxk.ln .al{grid-row:2!important;padding-bottom:3px!important}
+#cnx .cxk .al b{margin:0!important}
+#cnx .cxk .cxp{height:60px!important}
+#cnx .cxk .cxp svg{height:60px!important}
+#alc .gr::after,#cnx .gr::after{bottom:21px!important;z-index:0!important}
+#cnx .cxk .gr.nl::after{bottom:0!important}
+#cnx .cxt{grid-template-columns:26px 1fr auto!important}
+#cnx .cxt i{font-weight:400!important}
+#cnx .cxt b{font-family:Montserrat,sans-serif!important;font-weight:500!important;font-size:12px!important;max-width:42vw;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+#cnx .lr{border-bottom:1px solid #ececec;padding-bottom:10px;margin-bottom:10px!important}
+#cnx .cxt i,#cnx .cxt b{top:0!important;-webkit-text-stroke:0!important;letter-spacing:0!important;font-size:12.5px!important}
+#cnx .cxt b{font-size:12px!important;color:#333}
+#cnx .cxt i{font-size:13px!important}
+#cnx .cxk .al{padding-bottom:16px!important}
+#cnx .cxk.ln .al{padding-bottom:0!important}
+#cnx .cxk.ln .al b{margin-bottom:-5px!important}
+#alc .cb u,#cnx .cb u,#alc .cb u *,#cnx .cb u *,#cnx .cxx span,#cnx .cxx span *{font-family:Inter,sans-serif!important;vertical-align:baseline}
 </style></head><body class="gate">
 <div id="gate"><img id="gimg" alt="Logo"><h1>Alcance y Conexión</h1><p class="gs">Red García Montoya</p>
 <div class="gq">Ingresar como</div>
@@ -1696,21 +1719,22 @@ function render(){var host=document.getElementById('cnx');if(!host||typeof D=='u
  h+='<div class="pp" id="cxp" '+(open?'':'hidden')+'>'+panel()+'</div>';
  h+=ST.lid?'<div class="ad"><button type="button" data-k="1">'+ST.lid+' - '+(ST.lname||'')+'</button></div>':'';
  var ES=[['Conectado','#1fa24a','#fff'],['No conectado','#f28c28','#fff'],['No contesta','#f6c928','#000'],['Sin reportar','#ed0102','#fff']];
- var all2=ST.sel=='Todos',cur=ES.filter(function(e){return e[0]==ST.sel})[0]||(all2?null:ES[0]),line=!!cur&&cur[0]=='Sin reportar',BH=line?70:96;
+ var all2=ST.sel=='Todos',cur=ES.filter(function(e){return e[0]==ST.sel})[0]||(all2?null:ES[0]),line=!!cur&&cur[0]=='Sin reportar',BH=line?70:84;
  var X=tl.map(function(t){var r=base.filter(function(x){return x.tl==t});return {l:TLB[t],n:r.length,c:ES.map(function(e){return r.filter(function(x){return x.est==e[0]}).length})}});
  X.forEach(function(o){o.v=all2?o.n:o.c[ES.indexOf(cur)]});
  var tv=X.reduce(function(a,o){return a+o.v},0),mxv=Math.max(1,Math.max.apply(null,X.map(function(o){return o.v})));
  var dot=function(c){return '<span class="cxo" style="background:'+c+'"></span>'};
  var menu=ST.dd?'<div class="cxm">'+[['Todos','#000']].concat(ES).map(function(e){return '<button data-e="'+e[0]+'">'+(e[0]=='Todos'?'<span class="cxo cxa"></span>':dot(e[1]))+'<span class="cxn">'+e[0]+'</span></button>'}).join('')+'</div>':'';
- var nx=X.length;
- h+='<div class="ak cxk"><div class="cxf"><button class="cxd" data-dd="1"><i></i><span class="cxn">'+(all2?'Todos':cur[0])+'</span></button>'+menu+'</div><div class="gr'+(line?' nl':'')+'">'+X.map(function(o){
+ var nx=X.length,pc=function(o){return o.n?Math.round(o.c[0]/o.n*100):0},pv=X.map(pc),pmn=Math.min.apply(null,pv),pmx=Math.max.apply(null,pv),yy=function(o){return pmx==pmn?22:8+(pc(o)-pmn)/(pmx-pmn)*30};
+ h+='<div class="ak cxk'+(line?' ln':'')+'"><div class="cxf"><button class="cxd" data-dd="1"><i></i><span class="cxn">'+(all2?'Todos':cur[0])+'</span></button>'+menu+'</div><div class="gr'+(line?' nl':'')+'">'+X.map(function(o){
    var hh=Math.round(o.v/mxv*BH),inside=hh>=20;
    if(all2)return '<button class="cb"><i class="st" style="height:'+hh+'px">'+o.c.map(function(v,j){return v?'<s style="flex:'+v+';background:'+ES[j][1]+'"><em style="color:'+ES[j][2]+'">'+v+'</em></s>':''}).join('')+'</i><u>'+o.l+'</u></button>';
    return '<button class="cb"><i style="height:'+hh+'px;background:'+cur[1]+'"><b class="'+(inside?'':'up')+'" style="'+(inside?'color:'+cur[2]:'')+'">'+o.v+'</b></i><u>'+o.l+'</u></button>'}).join('')+'</div>'
-  +(line?'<div class="cxp"><div class="in"><svg viewBox="0 0 100 50" preserveAspectRatio="none"><polyline fill="none" stroke="#000" stroke-width="1.4" stroke-dasharray="4 3" vector-effect="non-scaling-stroke" points="'+X.map(function(o,i){var p=o.n?Math.round(o.c[0]/o.n*100):0;return ((i+.5)/nx*100)+','+(50-(8+p/100*20))}).join(' ')+'"/></svg>'+X.map(function(o,i){var p=o.n?Math.round(o.c[0]/o.n*100):0,y=8+p/100*20;return '<span class="pt" style="left:'+((i+.5)/nx*100)+'%;bottom:'+y+'px"></span><em class="pl" style="left:'+((i+.5)/nx*100)+'%;bottom:'+(y+6)+'px">'+p+'%</em>'}).join('')+'</div></div><div class="cxx">'+X.map(function(o){return '<span>'+o.l+'</span>'}).join('')+'</div>':'')
+  +(line?'<div class="cxp"><div class="in"><svg viewBox="0 0 100 60" preserveAspectRatio="none"><polyline fill="none" stroke="#000" stroke-width="1.4" stroke-dasharray="4 3" vector-effect="non-scaling-stroke" points="'+X.map(function(o,i){return ((i+.5)/nx*100)+','+(60-yy(o))}).join(' ')+'"/></svg>'+X.map(function(o,i){var p=pc(o),y=yy(o);return '<span class="pt" style="left:'+((i+.5)/nx*100)+'%;bottom:'+y+'px"></span><em class="pl" style="left:'+((i+.5)/nx*100)+'%;bottom:'+(y+6)+'px">'+p+'%</em>'}).join('')+'</div></div><div class="cxx">'+X.map(function(o){return '<span>'+o.l+'</span>'}).join('')+'</div>':'')
   +'<div class="al"><small>Total</small><b>'+tv+'</b></div></div>';
- h+='<div class="ls" style="display:none">';
- h+=L.length?L.map(function(o,i){return '<div class="lr"><div class="lw"><i>'+(i+1)+'</i><span>'+o.n+'<em>'+o.c+'</em></span><b>'+o.g+'</b></div><div class="lb" style="width:calc((100% - 28px - 70px) * '+(o.g/mx)+')"></div></div>'}).join(''):'<div class="ln">Sin resultados para esta selección</div>';
+ var lst=base.filter(function(r){return all2||r.est==cur[0]}).sort(function(a,b){return b.dk-a.dk||(a.inv<b.inv?-1:1)});
+ h+='<div class="lt">Invitados</div><div class="ls">';
+ h+=lst.length?lst.map(function(r,i){return '<div class="lr"><div class="lw cxt"><i>'+(i+1)+'</i><span>'+r.inv+'</span><b>'+r.lid+'</b></div></div>'}).join(''):'<div class="ln">Sin resultados para esta selección</div>';
  h+='</div>';
  host.innerHTML=h;fit();snap(host);
  var inp=host.querySelector('#cxq');if(inp&&ST._f){inp.focus();inp.setSelectionRange(inp.value.length,inp.value.length)}}
