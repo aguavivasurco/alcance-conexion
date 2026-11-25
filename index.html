@@ -1104,6 +1104,20 @@ body.vc #fxb,body.vc #fxp{display:none!important}
 #cnx .cxn{padding:0!important;background:none!important}
 #cnx .cxm{position:absolute;left:0;top:100%;margin-top:4px;background:#fff;border-radius:14px;box-shadow:0 10px 28px rgba(0,0,0,.25);padding:6px;z-index:30;min-width:170px}
 #cnx .cxm button{display:flex;align-items:center;gap:9px;width:100%;border:0;background:none;font:inherit;font-size:13px;font-weight:600;color:#000;padding:9px 10px;border-radius:10px;cursor:pointer;text-align:left}
+#cnx .ak.cxk{grid-template-columns:1fr 31%!important;column-gap:6px!important;padding:12px 14px 12px!important}
+#cnx .cxk .cxf{grid-column:1;grid-row:1;margin:0 0 2px;position:relative;z-index:30}
+#cnx .cxk .gr{grid-column:1;grid-row:2;height:108px!important;margin-top:0!important}
+#cnx .cxk .gr.nl{height:86px!important}
+#cnx .cxk .gr.nl::after{bottom:0!important}
+#cnx .cxk .gr.nl .cb u{display:none!important}
+#cnx .cxk .cxp{grid-column:1;grid-row:3;margin-top:0;border-top:0;border-bottom:1px solid #c4c4c4;height:50px}
+#cnx .cxk .cxx{grid-column:1;grid-row:4;display:flex;gap:6px;padding:0 2px}
+#cnx .cxk .cxx span{flex:1;min-width:0;text-align:center;font-size:10px;font-weight:700;color:#000;padding:6px 0 0!important;background:none!important}
+#cnx .cxk .al{grid-column:2;grid-row:1/span 4;height:auto;align-self:start!important;display:flex;flex-direction:column;align-items:center;justify-content:flex-start!important;padding-top:6px!important}
+#cnx .cxk .al small{position:static!important;font-size:13px;font-weight:700}
+#cnx .cxk .al b{margin:6px 0 0!important}
+#cnx .cxd{background:none!important;padding:0!important;font-size:15px!important;font-weight:800!important;gap:7px}
+#cnx .cxm{z-index:40}
 </style></head><body class="gate">
 <div id="gate"><img id="gimg" alt="Logo"><h1>Alcance y Conexión</h1><p class="gs">Red García Montoya</p>
 <div class="gq">Ingresar como</div>
@@ -1682,18 +1696,19 @@ function render(){var host=document.getElementById('cnx');if(!host||typeof D=='u
  h+='<div class="pp" id="cxp" '+(open?'':'hidden')+'>'+panel()+'</div>';
  h+=ST.lid?'<div class="ad"><button type="button" data-k="1">'+ST.lid+' - '+(ST.lname||'')+'</button></div>':'';
  var ES=[['Conectado','#1fa24a','#fff'],['No conectado','#f28c28','#fff'],['No contesta','#f6c928','#000'],['Sin reportar','#ed0102','#fff']];
- var all2=ST.sel=='Todos',cur=ES.filter(function(e){return e[0]==ST.sel})[0]||(all2?null:ES[0]),BH=96;
+ var all2=ST.sel=='Todos',cur=ES.filter(function(e){return e[0]==ST.sel})[0]||(all2?null:ES[0]),line=!!cur&&cur[0]=='Sin reportar',BH=line?70:96;
  var X=tl.map(function(t){var r=base.filter(function(x){return x.tl==t});return {l:TLB[t],n:r.length,c:ES.map(function(e){return r.filter(function(x){return x.est==e[0]}).length})}});
  X.forEach(function(o){o.v=all2?o.n:o.c[ES.indexOf(cur)]});
- var tv=X.reduce(function(a,o){return a+o.v},0),mxv=Math.max(1,Math.max.apply(null,X.map(function(o){return o.v}))),line=!!cur&&cur[0]=='Conectado';
+ var tv=X.reduce(function(a,o){return a+o.v},0),mxv=Math.max(1,Math.max.apply(null,X.map(function(o){return o.v})));
  var dot=function(c){return '<span class="cxo" style="background:'+c+'"></span>'};
  var menu=ST.dd?'<div class="cxm">'+[['Todos','#000']].concat(ES).map(function(e){return '<button data-e="'+e[0]+'">'+(e[0]=='Todos'?'<span class="cxo cxa"></span>':dot(e[1]))+'<span class="cxn">'+e[0]+'</span></button>'}).join('')+'</div>':'';
- h+='<div class="ak cxk"><div class="al"><small>Total</small><b>'+tv+'</b></div><div class="gr">'+X.map(function(o){
+ var nx=X.length;
+ h+='<div class="ak cxk"><div class="cxf"><button class="cxd" data-dd="1"><i></i><span class="cxn">'+(all2?'Todos':cur[0])+'</span></button>'+menu+'</div><div class="gr'+(line?' nl':'')+'">'+X.map(function(o){
    var hh=Math.round(o.v/mxv*BH),inside=hh>=20;
    if(all2)return '<button class="cb"><i class="st" style="height:'+hh+'px">'+o.c.map(function(v,j){return v?'<s style="flex:'+v+';background:'+ES[j][1]+'"><em style="color:'+ES[j][2]+'">'+v+'</em></s>':''}).join('')+'</i><u>'+o.l+'</u></button>';
    return '<button class="cb"><i style="height:'+hh+'px;background:'+cur[1]+'"><b class="'+(inside?'':'up')+'" style="'+(inside?'color:'+cur[2]:'')+'">'+o.v+'</b></i><u>'+o.l+'</u></button>'}).join('')+'</div>'
-  +(line?'<div class="cxe">% Efect.</div><div class="cxp"><div class="in"><svg viewBox="0 0 100 50" preserveAspectRatio="none"><polyline fill="none" stroke="#000" stroke-width="1.4" stroke-dasharray="4 3" vector-effect="non-scaling-stroke" points="'+X.map(function(o,i){var p=o.n?Math.round(o.v/o.n*100):0;return ((i+.5)/X.length*100)+','+(50-(10+p/100*22))}).join(' ')+'"/></svg>'+X.map(function(o,i){var p=o.n?Math.round(o.v/o.n*100):0,y=10+p/100*22;return '<span class="pt" style="left:'+((i+.5)/X.length*100)+'%;bottom:'+y+'px"></span><em class="pl" style="left:'+((i+.5)/X.length*100)+'%;bottom:'+(y+6)+'px">'+p+'%</em>'}).join('')+'</div></div>':'')
-  +'<div class="cxf"><button class="cxd" data-dd="1"><i></i>'+(all2?'<span class="cxo cxa"></span><span class="cxn">Todos</span>':dot(cur[1])+'<span class="cxn">'+cur[0]+'</span>')+'</button>'+menu+'</div></div>';
+  +(line?'<div class="cxp"><div class="in"><svg viewBox="0 0 100 50" preserveAspectRatio="none"><polyline fill="none" stroke="#000" stroke-width="1.4" stroke-dasharray="4 3" vector-effect="non-scaling-stroke" points="'+X.map(function(o,i){var p=o.n?Math.round(o.c[0]/o.n*100):0;return ((i+.5)/nx*100)+','+(50-(8+p/100*20))}).join(' ')+'"/></svg>'+X.map(function(o,i){var p=o.n?Math.round(o.c[0]/o.n*100):0,y=8+p/100*20;return '<span class="pt" style="left:'+((i+.5)/nx*100)+'%;bottom:'+y+'px"></span><em class="pl" style="left:'+((i+.5)/nx*100)+'%;bottom:'+(y+6)+'px">'+p+'%</em>'}).join('')+'</div></div><div class="cxx">'+X.map(function(o){return '<span>'+o.l+'</span>'}).join('')+'</div>':'')
+  +'<div class="al"><small>Total</small><b>'+tv+'</b></div></div>';
  h+='<div class="ls" style="display:none">';
  h+=L.length?L.map(function(o,i){return '<div class="lr"><div class="lw"><i>'+(i+1)+'</i><span>'+o.n+'<em>'+o.c+'</em></span><b>'+o.g+'</b></div><div class="lb" style="width:calc((100% - 28px - 70px) * '+(o.g/mx)+')"></div></div>'}).join(''):'<div class="ln">Sin resultados para esta selección</div>';
  h+='</div>';
