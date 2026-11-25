@@ -1552,6 +1552,20 @@ body.vr #fxb,body.vr #fxp{display:none!important}
 #alc .lw i,#alc .lw b,#alc .ct,#alc .ct b{top:0!important}
 #alc .lr{padding-bottom:4px!important;margin-bottom:4px!important;padding-top:0}
 #alc .ct b{top:3px!important;line-height:1!important}
+#alc .lw b,#alc .lw b *,#alc .ct b,#alc .ct b *{font-family:Inter,sans-serif!important}
+#alc .ct b{top:0!important}
+#alc .ct .ar{position:relative;top:2px}
+#alc .lr{padding-bottom:2px!important;margin-bottom:2px!important}
+#alc .lw{min-height:0!important;line-height:1!important}
+#alc .lw span{line-height:1.1!important}
+#alc .lw em{padding:1px 7px!important;font-size:10px!important}
+#alc .ct .ar{top:0!important;width:17px!important;height:17px!important}
+#alc .ct b{font-size:15px!important}
+#alc .ct b{top:3px!important}
+#alc .lw em{position:relative;top:-3px;vertical-align:middle}
+#alc .lw em{top:0!important;vertical-align:baseline!important;flex:none;line-height:1.3!important}
+#alc .lw>span{display:flex!important;align-items:center;overflow:hidden;white-space:nowrap}
+#alc .ct b{top:1px!important}
 </style></head><body class="gate">
 <div id="gate"><img id="gimg" alt="Logo"><h1>Alcance y Conexión</h1><p class="gs">Red García Montoya</p>
 <div class="gq">Ingresar como</div>
@@ -2381,9 +2395,8 @@ function drawAlc(cfg){
  cfg._W=W;cfg._H=H;
  // columnas
  function col(g,x,y,w){
-  c.fillStyle='#ed0102';rr(c,x,y,w,26,13);c.fill();
-  c.fillStyle='#fff';c.font='800 13px Manrope,Inter,sans-serif';c.fillText(g.p=='Otros'?'Otros':'Invitados',x+14,y+17.5);
-  c.font='800 14px Inter,sans-serif';var sw=String(g.s),bw2=Math.max(26,c.measureText(sw).width+16);c.fillStyle='#fff';rr(c,x+w-bw2-3,y+3,bw2,20,10);c.fill();c.fillStyle='#ed0102';c.textAlign='center';c.fillText(sw,x+w-bw2/2-3,y+18);c.textAlign='left';
+  c.font='800 15px Inter,sans-serif';var sw=String(g.s),bw2=Math.max(40,c.measureText(sw).width+28);
+  c.fillStyle='#ed0102';rr(c,x,y,bw2,26,13);c.fill();c.fillStyle='#fff';c.textAlign='center';c.fillText(sw,x+bw2/2,y+18.5);c.textAlign='left';
   var ry=y+GH-6;
   g.l.forEach(function(o,i){var yy=ry+i*RH;
    c.strokeStyle='#eee';c.lineWidth=1;c.beginPath();c.moveTo(x,yy+RH);c.lineTo(x+w,yy+RH);c.stroke();
