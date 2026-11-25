@@ -765,6 +765,13 @@ body.gate{overflow:hidden}
 #vin #bx9{padding-top:8px}
 #vin .tgw{min-height:var(--tgh,0)}
 #bx9 .mt{display:none!important}
+#vin .rbx text[fill="#111"]{font-weight:700!important;fill:#000!important}
+#vin .legend{font-weight:600!important}
+#vin .legend,#vin .legend span{color:#000!important}
+#vin .legend span,#vin .legend span *{font-weight:600!important;color:#000!important;opacity:1!important}
+#vin .legend button,#vin .legend .ar2,#vin .legend .ar2.on{color:#222!important;opacity:1!important}
+#vin .legend i{opacity:1}
+#vin #bx9 #ch9{margin-top:-14px}
 </style></head><body class="gate">
 <div id="gate"><img id="gimg" alt="Logo"><h1>Alcance y Conexión</h1><p class="gs">Red García Montoya</p>
 <div class="gq">Ingresar como</div>
@@ -903,7 +910,7 @@ function VI(){const mm=m=>m.slice(0,3),CL=['#16a34a','#ff8a00','#f2c200','#b8000
    if(g=='se'&&S.ord=='f'&&i>0&&(L[i-1].r.mes!=r.mes||L[i-1].r.anio!=r.anio))sep+=`<line x1="${i*sw}" x2="${i*sw}" y1="${PH-8}" y2="${PH+36}" stroke="#bdbdbd" stroke-dasharray="3 3"/>`;
    bars+=`<path d="M${x0},${PH}V${y0+rr}Q${x0},${y0} ${x0+rr},${y0}H${x0+bw-rr}Q${x0+bw},${y0} ${x0+bw},${y0+rr}V${PH}Z" fill="#ed0102"/>`+(h>=14?`<text x="${x}" y="${PH-h/2+4}" text-anchor="middle" font-size="11" font-weight="700" fill="#fff">${o.g}</text>`:'');
    pts+=`${x},${yy} `;dots+=`<circle cx="${x}" cy="${yy}" r="4" fill="#8d8d8d"/>`;lab+=`<rect x="${x-23}" y="${yy-27}" width="46" height="18" rx="5" fill="#ececec"/><text x="${x}" y="${yy-14}" text-anchor="middle" font-size="10.5" font-weight="700" fill="#6e6e6e">${fp(o.p)}</text>`;
-   const t1=cmp?TL2[o.k][0]:g=='an'?r.anio:g=='me'?mm(r.mes):String(r.dk%100).padStart(2,'0'),p=L[i-1],t2=cmp?'':g=='me'?(yrs?r.anio:''):g=='se'?(S.ord!='f'||!p||p.r.mes!=r.mes||p.r.anio!=r.anio?mm(r.mes)+(yrs?' '+String(r.anio).slice(2):''):''):'';
+   const t1=cmp?TL2[o.k][0]:g=='an'?r.anio:g=='me'?mm(r.mes):String(r.dk%100).padStart(2,'0'),p=L[i-1],t2=cmp||(K==9&&S.se.size<2)?'':g=='me'?(yrs?r.anio:''):g=='se'?(S.ord!='f'||!p||p.r.mes!=r.mes||p.r.anio!=r.anio?mm(r.mes)+(yrs?' '+String(r.anio).slice(2):''):''):'';
    xl+=`<text x="${x}" y="${PH+17}" text-anchor="middle" font-size="12" fill="#111">${t1}</text>`+(t2?`<text x="${x}" y="${PH+32}" text-anchor="middle" font-size="11" fill="#111">${t2}</text>`:'')});
   return (false?'<p class="note">Comparativo por turno: elige un mes en Fecha y agrupa por Mes.</p>':'')+`<div class="rbx" style="overflow-x:${n*sw>W+1?'auto':'hidden'}"><svg width="${n*sw}" height="${PH+38}"><line x1="0" x2="${n*sw}" y1="${PH}" y2="${PH}" stroke="#6e6e6e" stroke-width="1.3"/>${sep}${bars}<polyline points="${pts}" fill="none" stroke="#f4a6a6" stroke-width="2.5" stroke-dasharray="6 5" stroke-linecap="round"/>${dots}${lab}${xl}</svg></div>`},
  3(){const S=B[3],a=S.mode=='a',m={};sel(S,1).forEach(r=>{const o=m[U(r.c12)]??={g:0,c:0};o.g++;if(r.est==EST[0])o.c++});
