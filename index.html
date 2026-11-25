@@ -737,6 +737,12 @@ body.gate{overflow:hidden}
 #fnav button{color:rgba(255,255,255,.74)}
 #fnav button.on{color:#fff}
 #fnav button.on::before{background:#fff}
+
+/* ===== Ajustes 2 ===== */
+#vin .tcd{padding-top:16px!important;padding-bottom:16px!important}
+#vin .tcd-h{margin-bottom:12px!important}
+#vin .legend b{color:#000!important}
+#vin .bgc span{color:#000!important}
 </style></head><body class="gate">
 <div id="gate"><img id="gimg" alt="Logo"><h1>Alcance y Conexión</h1><p class="gs">Red García Montoya</p>
 <div class="gq">Ingresar como</div>
@@ -870,7 +876,7 @@ function VI(){const mm=m=>m.slice(0,3),CL=['#16a34a','#ff8a00','#f2c200','#b8000
  2(K=2){const S=B[K],a=S.mode=='a',g=S.g,m={},mt=metaOf(S),cmp=S.hor=='*';sel(S).forEach(r=>{const ti=TL2.findIndex(t=>t[0]==r.tl);if(cmp&&ti<0)return;const k=cmp?ti:g=='an'?+r.anio:g=='me'?r.anio*100+MES.indexOf(r.mes)+1:r.dk,o=m[k]??={k,r,g:0,c:0,ms:new Set()};o.g++;o.ms.add(r.mes);if(r.est==EST[0])o.c++});
   const L=Object.values(m).map(o=>{const meta=cmp?metaOf({...S,hor:TL2[o.k][0]})*o.ms.size:g=='an'?mt*o.ms.size:g=='me'?mt:mt/4;return{...o,p:a?(meta?o.g/meta*100:0):pct(o.c,o.g)}}).sort((x,y)=>S.ord=='g'?y.g-x.g:S.ord=='ga'?x.g-y.g:S.ord=='e'?y.p-x.p:S.ord=='ea'?x.p-y.p:x.k-y.k),n=L.length,W=($('ch'+K).clientWidth||320);
   if(!n)return '<p class="note">Sin datos para esta selección</p>';
-  const yrs=new Set(D.map(r=>r.anio)).size>1,sw=Math.max(K==9?50:62,W/n),bw=Math.min(40,sw-14),PH=K==9?104:120,BM=K==9?50:60,mx=Math.max(...L.map(x=>x.g))||1,ps=L.map(x=>x.p),pa=Math.min(...ps),pz=Math.max(...ps),y=p=>52-(p-pa)/((pz-pa)||1)*22;let sep='',bars='',pts='',dots='',lab='',xl='';
+  const yrs=new Set(D.map(r=>r.anio)).size>1,sw=Math.max(K==9?50:62,W/n),bw=Math.min(40,sw-14),PH=K==9?136:120,BM=K==9?82:60,mx=Math.max(...L.map(x=>x.g))||1,ps=L.map(x=>x.p),pa=Math.min(...ps),pz=Math.max(...ps),y=p=>52-(p-pa)/((pz-pa)||1)*22;let sep='',bars='',pts='',dots='',lab='',xl='';
   L.forEach((o,i)=>{const h=o.g/mx*BM,x=i*sw+sw/2,r=o.r,rr=Math.min(5,h),x0=x-bw/2,y0=PH-h,yy=ps.length>1?y(o.p):42;
    if(g=='se'&&S.ord=='f'&&i>0&&(L[i-1].r.mes!=r.mes||L[i-1].r.anio!=r.anio))sep+=`<line x1="${i*sw}" x2="${i*sw}" y1="${PH-8}" y2="${PH+36}" stroke="#bdbdbd" stroke-dasharray="3 3"/>`;
    bars+=`<path d="M${x0},${PH}V${y0+rr}Q${x0},${y0} ${x0+rr},${y0}H${x0+bw-rr}Q${x0+bw},${y0} ${x0+bw},${y0+rr}V${PH}Z" fill="#ed0102"/>`+(h>=14?`<text x="${x}" y="${PH-h/2+4}" text-anchor="middle" font-size="11" font-weight="700" fill="#fff">${o.g}</text>`:'');
@@ -1068,7 +1074,7 @@ const mq=matchMedia('(max-width:700px)'),mode=()=>root.classList.toggle('m',mq.m
  COL=[['--c-hd2','Encabezado (igual al logo)'],['--c-mb','Fondo del mes'],['--c-mt','Triángulo del mes'],['--c-nav','Barra inferior (color activo)'],['--c-card','Fondo de tarjeta'],['--c-pill','Fondo del horario'],['--c-up','Variación positiva'],['--c-dn','Variación negativa'],['--c-bar','Barras (Alc)']],
  EL=[['m','Mes (Octubre 2026)','--s-m',10,22,'--k-m','#ffffff'],['v','Texto "vs. mes ant."','--s-v',8,16,'--k-v','#6b6b6b'],['c','Título de tarjeta (horario)','--st',9,18,'--c-pillt','#6b6b6b'],['l','Etiqueta (Alc. / Efect.)','--sl',8,16,'--k-l','#111111'],['n','Número','--sn',14,36,'--k-n','#111111'],['d','Porcentaje / variación','--sd',8,16,null,null],['f','Etiqueta del filtro (Red…)','--s-f',8,16,'--k-f','#6b6b6b'],['g','Texto del gráfico (8AM, Oct…)',null,0,0,'--k-g','#111111']],
  CARD=[['--cp','Alto interior de tarjeta',2,16],['--cg','Separación entre tarjetas',2,18],['--cr','Redondeo de tarjeta',4,24]],
- DEF={"--ff": "Manrope", "--c-hd": "#ed0102", "--c-hd2": "#ed0102", "--c-mb": "#ffffff", "--c-mt": "#ed0102", "--c-nav": "#ed0102", "--c-card": "#f5feff", "--c-pill": "#ff0000", "--c-pillt": "#ffffff", "--c-up": "#00a33c", "--c-dn": "#e5000f", "--c-bar": "#ed0102", "--c-barc": "#bdbdbd", "--sl": 10, "--sn": 20, "--st": 12.5, "--sd": 10, "--s-t": 17, "--cp": 2, "--cg": 4, "--cr": 8.5, "--ff-t": "", "--ff-c": "", "--ff-l": "Manrope", "--ff-n": "Inter", "--ff-d": "Inter", "--ff-s": "", "--ff-m": "Manrope", "--ff-v": "Manrope", "--ff-r": "", "--ff-f": "", "--ff-g": "", "--w-t": 700, "--w-c": 500, "--w-l": 500, "--w-n": 700, "--w-d": 400, "--w-s": 400, "--w-m": 800, "--w-v": 600, "--w-r": 700, "--w-f": 600, "--i-t": 0, "--i-c": 0, "--i-l": 0, "--i-n": 0, "--i-d": 0, "--i-s": 0, "--i-m": 0, "--i-v": 0, "--i-r": 0, "--i-f": 0, "--i-g": 0, "--s-s": 12, "--s-m": 15, "--s-v": 12, "--s-r": 17, "--s-f": 11, "--k-t": "", "--k-s": "", "--k-m": "#000000", "--k-v": "", "--k-l": "#6b6b6b", "--k-n": "", "--k-r": "", "--k-f": "", "--k-g": ""};
+ DEF={"--ff": "Manrope", "--c-hd": "#ed0102", "--c-hd2": "#ed0102", "--c-mb": "#ffffff", "--c-mt": "#ed0102", "--c-nav": "#ed0102", "--c-card": "#dff4fb", "--c-pill": "#ff0000", "--c-pillt": "#ffffff", "--c-up": "#00a33c", "--c-dn": "#e5000f", "--c-bar": "#ed0102", "--c-barc": "#bdbdbd", "--sl": 10, "--sn": 20, "--st": 12.5, "--sd": 10, "--s-t": 17, "--cp": 2, "--cg": 4, "--cr": 8.5, "--ff-t": "", "--ff-c": "", "--ff-l": "Manrope", "--ff-n": "Inter", "--ff-d": "Inter", "--ff-s": "", "--ff-m": "Manrope", "--ff-v": "Manrope", "--ff-r": "", "--ff-f": "", "--ff-g": "", "--w-t": 700, "--w-c": 500, "--w-l": 500, "--w-n": 700, "--w-d": 400, "--w-s": 400, "--w-m": 800, "--w-v": 600, "--w-r": 700, "--w-f": 600, "--i-t": 0, "--i-c": 0, "--i-l": 0, "--i-n": 0, "--i-d": 0, "--i-s": 0, "--i-m": 0, "--i-v": 0, "--i-r": 0, "--i-f": 0, "--i-g": 0, "--s-s": 12, "--s-m": 15, "--s-v": 12, "--s-r": 17, "--s-f": 11, "--k-t": "", "--k-s": "", "--k-m": "#000000", "--k-v": "", "--k-l": "#6b6b6b", "--k-n": "", "--k-r": "", "--k-f": "", "--k-g": ""};
  let V={...DEF};const ld=()=>{return;let t='';try{t=localStorage.getItem('cfgInicio')||''}catch(e){}if(!t){const m=document.cookie.match(/(?:^|; )cfgInicio=([^;]*)/);if(m)try{t=decodeURIComponent(m[1])}catch(e){}}try{Object.assign(V,JSON.parse(t||'{}'))}catch(e){}},
  sv=()=>{const t=JSON.stringify(V);let ok=false;try{localStorage.setItem('cfgInicio',t);ok=true}catch(e){}try{document.cookie='cfgInicio='+encodeURIComponent(t)+';max-age=31536000;path=/;SameSite=Lax';ok=true}catch(e){}return ok};ld();
  const FB=',"Hanken Grotesk","Helvetica Neue",Arial,sans-serif',R=document.documentElement,PXK=['--sl','--sn','--st','--sd','--s-t','--s-s','--s-m','--s-v','--s-r','--s-f','--cp','--cg','--cr'],
@@ -1149,4 +1155,11 @@ function probar(){if(pin.value.length<6)return;if(h('ayc|'+pin.value)===HASH){en
 pin.addEventListener('input',()=>{pin.value=pin.value.replace(/\D/g,'').slice(0,6);err.textContent='';if(pin.value.length===6)probar()});
 fm.addEventListener('submit',e=>{e.preventDefault();if(pin.value.length<6){err.textContent='Ingresa los 6 dígitos'}else probar()});
 })();
-</script></body></html>
+</script>
+<script>
+(function(){var M=['enero','febrero','marzo','abril','mayo','junio','julio','agosto','septiembre','octubre','noviembre','diciembre'];
+function fix(){document.querySelectorAll('#vin .bgc').forEach(function(el){var d=new Date(),t=(el.textContent||'').trim();el.style.display=(t===''||t==='Red · '+M[d.getMonth()]+' '+d.getFullYear())?'none':''})}
+setInterval(fix,300);fix();
+})();
+</script>
+</body></html>
