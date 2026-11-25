@@ -926,6 +926,13 @@ body.va #fxb,body.va #fxp{display:none!important}
 #fnav button.on{background:#fff!important;color:var(--c-nav,#ed0102)!important;border-radius:18px!important;margin:7px 4px!important;padding:0!important;justify-content:center}
 #fnav button.on svg{fill:var(--c-nav,#ed0102)!important;stroke:var(--c-nav,#ed0102)!important}
 #fnav button.on svg .d{fill:none!important;stroke:#fff!important}
+#alc .gr::after{height:1px!important}
+#alc .lw i{font-weight:400!important}
+#alc .ab.on{background:var(--c-nav,#ed0102)!important;border-color:var(--c-nav,#ed0102)!important;color:#fff!important}
+#alc .ab.on svg,#alc .ab.on svg *{fill:#fff!important;stroke:#fff!important}
+#alc .ad button{background:var(--c-nav,#ed0102)!important;color:#fff!important;border-color:var(--c-nav,#ed0102)!important;pointer-events:none;border-radius:20px!important;padding:7px 18px!important}
+#alc .ad button *{color:#fff!important}
+#fnav button.on{margin:0 4px 7px!important;border-radius:0 0 18px 18px!important}
 </style></head><body class="gate">
 <div id="gate"><img id="gimg" alt="Logo"><h1>Alcance y Conexión</h1><p class="gs">Red García Montoya</p>
 <div class="gq">Ingresar como</div>
@@ -1388,11 +1395,11 @@ function cal(){var y=ST.cy,m=ST.cm;
  return '<div class="kw"><button class="kv" data-c="-1" aria-label="Mes anterior">‹</button><button class="kv r" data-c="1" aria-label="Mes siguiente">›</button></div><div class="k2">'+mcal(y,m)+'</div>'}
 function panel(){if(ST.open=='cal')return '<div class="qb">'+quick().map(function(q){return '<button data-q="'+q[0]+'" class="'+(q[2]?'on':'')+'">'+q[1]+'</button>'}).join('')+'</div>'+cal();
  if(ST.open=='per'){var q=(ST.q||'').toLowerCase(),seen={},l=[];D.forEach(function(r){if(!seen[r.c12]){seen[r.c12]=1;l.push({c:r.c12,n:r.l12})}});
-  l=l.filter(function(o){return !q||o.c.toLowerCase().indexOf(q)==0||o.n.toLowerCase().indexOf(q)>=0}).sort(function(a,b){return a.n<b.n?-1:1}).slice(0,40);
+  l=l.filter(function(o){return !q||o.c.toLowerCase().indexOf(q)==0||o.n.toLowerCase().indexOf(q)>=0}).sort(function(a,b){var pa=a.c.slice(0,3),pb=b.c.slice(0,3);return pa!=pb?(pa<pb?1:-1):(a.c.length-b.c.length||(a.c<b.c?-1:1))}).slice(0,40);
   return '<label>Buscar líder</label><input id="alq" autocomplete="off" placeholder="Nombre o código" value="'+(ST.q||'')+'"><div class="pl">'+(l.map(function(o){return '<button data-l="'+o.c+'" data-n="'+o.n.replace(/"/g,'')+'"><em>'+o.c+'</em><span>'+o.n+'</span></button>'}).join('')||'<div class="ln">Sin coincidencias</div>')+'</div>'}
  return ''}
 function fit(){var h=document.getElementById('alc'),n=document.getElementById('fnav');if(!h||!n)return;var t=h.getBoundingClientRect().top+scrollY;h.style.height=Math.max(300,innerHeight-n.offsetHeight-t)+'px'}
-function snap(host){var ls=host.querySelector('.ls'),rs=host.querySelectorAll('.lr');if(!ls||!rs.length)return;ls.style.height='auto';var pitch=rs.length>1?rs[1].offsetTop-rs[0].offsetTop:rs[0].offsetHeight+12,avail=host.clientHeight-ls.offsetTop-14,n=Math.max(1,Math.floor(avail/pitch));ls.style.height=Math.min(rs.length,n)*pitch+'px'}
+function snap(host){var ls=host.querySelector('.ls'),rs=host.querySelectorAll('.lr');if(!ls||!rs.length)return;ls.style.height='auto';var pitch=rs.length>1?rs[1].offsetTop-rs[0].offsetTop:rs[0].offsetHeight+12,avail=host.clientHeight-ls.offsetTop-14,n=Math.max(1,Math.floor(avail/pitch));if(rs.length>n){ls.style.height=n*pitch+'px';ls.style.overflowY='auto'}else{ls.style.height='auto';ls.style.overflowY='hidden'}}
 function render(){var host=document.getElementById('alc');if(!host||typeof D=='undefined'||!D)return;
  var open=ST.open,base=rows(true),tl=tlist();ST.tur.forEach(function(t){if(tl.indexOf(t)<0)ST.tur.delete(t)});
  var all=rows(false),total=all.length,m={};
@@ -1401,7 +1408,7 @@ function render(){var host=document.getElementById('alc');if(!host||typeof D=='u
  var cnt={};base.forEach(function(r){cnt[r.tl]=(cnt[r.tl]||0)+1});var cm=Math.max(1,Math.max.apply(null,tl.map(function(t){return cnt[t]||0})));
  var h='<div class="ah"><button class="at" data-o="cal"><i></i><span>'+label()+'</span></button><div class="ai"><button class="ab'+(open=='per'||ST.lid?' on':'')+'" data-o="per" aria-label="Líder">'+PER+'</button></div></div>';
  h+='<div class="pp" id="alp" '+(open?'':'hidden')+'>'+panel()+'</div>';
- h+=ST.lid?'<div class="ad"><button data-x="lid">'+(ST.lname||ST.lid)+' ✕</button></div>':'';
+ h+=ST.lid?'<div class="ad"><button type="button" data-k="1">'+(ST.lname||ST.lid)+'</button></div>':'';
  var BH=74;
  h+='<div class="ak"><div class="al"><small>Invitados</small><b>'+total+'</b></div><div class="gr">'+tl.map(function(t){var v=cnt[t]||0,hh=Math.round(v/cm*BH),inside=hh>=20;return '<button class="cb'+(ST.tur.has(t)?' on':'')+'" data-t="'+t+'"><i style="height:'+hh+'px"><b class="'+(inside?'':'up')+'">'+v+'</b></i><u>'+TLB[t]+'</u></button>'}).join('')+'</div></div>';
  h+='<div class="lt">Líderes</div><div class="ls">';
@@ -1412,7 +1419,8 @@ function render(){var host=document.getElementById('alc');if(!host||typeof D=='u
 function wire(){var host=document.getElementById('alc');
  host.addEventListener('click',function(e){e.stopPropagation();var t=e.target.closest('button');if(!t){if(!e.target.closest('.pp')&&ST.open){ST.open='';render()}return}
   var d=t.dataset;
-  if(d.o){ST.open=ST.open==d.o?'':d.o;ST.q='';if(ST.open=='cal'){ST.cy=Math.floor(ST.a/10000);ST.cm=Math.floor(ST.a/100)%100}render()}
+  if(d.o=='per'&&ST.lid){ST.lid='';ST.lname='';ST.open='';ST.q='';render()}
+  else if(d.o){ST.open=ST.open==d.o?'':d.o;ST.q='';if(ST.open=='cal'){ST.cy=Math.floor(ST.a/10000);ST.cm=Math.floor(ST.a/100)%100}render()}
   else if(d.q){var n=new Date(),y=n.getFullYear(),m=n.getMonth()+1;
    if(d.q=='dom'){setDay(lastSun());ST.open=''}else if(d.q=='mes'){setMonth(y,m);ST.open=''}else if(d.q=='mesa'){m==1?setMonth(y-1,12):setMonth(y,m-1);ST.open=''}
    else if(d.q=='anio'){setYear(y);ST.open=''}else if(d.q=='anioa'){setYear(y-1);ST.open=''}else{ST.mode='range';ST.rs=1;ST.a=ST.b=0}
