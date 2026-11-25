@@ -851,33 +851,35 @@ body.hm header#hd{display:block!important}
 body.va #fxb,body.va #fxp{display:none!important}
 #alc{position:relative;margin:0 4px;padding:4px 0 0;display:flex;flex-direction:column;font-family:var(--ff,Manrope),sans-serif;color:#000;overflow:visible}
 #alc .ah{display:flex;align-items:center;justify-content:space-between;height:29px;flex:none}
-#alc .at{font-size:15px;font-weight:800;color:#000;margin-left:11px}
+#alc .at{display:flex;align-items:center;gap:7px;border:0;background:none;font:inherit;font-size:15px;font-weight:800;color:#000;padding:5px 14px 5px 11px;cursor:pointer;white-space:nowrap}
+#alc .at i{display:inline-block;border-top:6px solid var(--c-mt,#ed0102);border-left:4.5px solid transparent;border-right:4.5px solid transparent}
 #alc .ai{display:flex;gap:6px}
 #alc .ab{width:30px;height:30px;border-radius:10px;border:1px solid #e4e4e4;background:#f3f3f3;color:#000;display:flex;align-items:center;justify-content:center;padding:0;cursor:pointer}
 #alc .ab.on{background:var(--c-card,#dff4fb);border-color:var(--c-card,#dff4fb)}
 #alc .ab svg{width:14px;height:14px}
-#alc .ad{display:flex;justify-content:center;margin:14px 0 0;flex-wrap:wrap;gap:6px;flex:none}
+#alc .ad{display:flex;justify-content:center;margin:10px 0 0;flex-wrap:wrap;gap:6px;flex:none}
 #alc .ad>span{background:var(--c-nav,#ed0102);color:#fff;font-size:13px;font-weight:700;padding:7px 18px;border-radius:20px}
-#alc .ad>button{border:0;background:#f1f1f1;color:#000;font:inherit;font-size:12px;font-weight:600;padding:7px 12px;border-radius:20px;cursor:pointer}
-#alc .ak{flex:none;margin-top:14px;background:var(--c-card,#dff4fb);border-radius:16px;padding:14px 14px 10px;display:flex;gap:8px;min-height:170px}
-#alc .al{display:flex;flex-direction:column;width:38%;flex:none;min-width:0}
+#alc .ad>button{border:0;background:none;color:#000;font:inherit;font-size:13px;font-weight:700;padding:2px 8px;cursor:pointer}
+#alc .ak{flex:none;margin-top:14px;background:var(--c-card,#dff4fb);border-radius:16px;padding:14px 14px 10px;display:flex;gap:8px;align-items:center}
+#alc .al{display:flex;flex-direction:column;justify-content:center;gap:6px;width:36%;flex:none;min-width:0}
 #alc .al small{font-size:13px;font-weight:600;color:#000}
-#alc .al b{font-family:Inter,sans-serif;font-weight:800;font-size:58px;line-height:1;letter-spacing:-.04em;color:#000;margin:auto 0;padding-bottom:10px}
-#alc .gr{flex:1;min-width:0;display:flex;align-items:flex-end;gap:6px;padding:0 2px}
-#alc .cb{flex:1;min-width:0;display:flex;flex-direction:column;align-items:center;justify-content:flex-end;height:100%;border:0;background:none;padding:0;font:inherit;color:#000;cursor:pointer}
+#alc .al b{font-family:Inter,sans-serif;font-weight:800;font-size:42px;line-height:1;letter-spacing:-.04em;color:#000;margin:auto 0}
+#alc .gr{flex:1;min-width:0;display:flex;align-items:flex-end;gap:6px;padding:0 2px;position:relative;height:104px}
+#alc .gr::after{content:'';position:absolute;left:0;right:0;bottom:19px;height:2px;background:#9a9a9a}
+#alc .cb{flex:1;min-width:0;display:flex;flex-direction:column;align-items:center;justify-content:flex-end;height:100%;position:relative;z-index:1;border:0;background:none;padding:0;font:inherit;color:#000;cursor:pointer}
 #alc .cb i{font-style:normal;display:block;position:relative;width:100%;max-width:34px;background:#fff;border-radius:6px 6px 0 0;margin-top:auto}
 #alc .cb i b{position:absolute;left:0;right:0;top:4px;text-align:center;font-family:Inter,sans-serif;font-weight:700;font-size:12px;color:#000}
 #alc .cb i b.up{top:auto;bottom:100%;margin-bottom:2px}
-#alc .cb u{display:block;width:100%;text-decoration:none;border-top:2px solid #9a9a9a;padding-top:4px;font-size:10px;font-weight:700;color:#000;line-height:1.1}
+#alc .cb u{display:block;width:100%;text-decoration:none;height:19px;padding-top:4px;box-sizing:border-box;font-size:10px;font-weight:700;color:#000;line-height:1.1}
 #alc .cb.on i{background:var(--c-nav,#ed0102)}
 #alc .cb.on i b:not(.up){color:#fff}
 #alc .lt{flex:none;padding:18px 0 10px;font-size:15px;font-weight:800;color:#000;background:#fff;position:relative;z-index:2}
 #alc .ls{flex:1;min-height:0;overflow-y:auto;overflow-x:hidden;-webkit-overflow-scrolling:touch;padding-bottom:12px}
 #alc .lr{margin-bottom:12px}
-#alc .lw{display:grid;grid-template-columns:22px 1fr auto;gap:6px;align-items:center;font-size:13px;color:#000}
+#alc .lw{display:grid;grid-template-columns:22px 1fr auto;gap:6px;align-items:center;font-size:13px;color:#000;font-family:Montserrat,sans-serif}
 #alc .lw i{font-style:normal;font-weight:700;font-family:Inter,sans-serif}
-#alc .lw span{overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-weight:500}
-#alc .lw em{font-style:normal;font-family:Inter,sans-serif;font-weight:600;font-size:10.5px;border:1px solid #000;border-radius:6px;padding:1px 6px;margin-left:8px}
+#alc .lw span{overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-weight:500;font-family:Montserrat,sans-serif}
+#alc .lw em{font-style:normal;font-family:Montserrat,sans-serif;font-weight:600;font-size:10.5px;background:var(--c-card,#dff4fb);color:#000;border:0;border-radius:6px;padding:2px 7px;margin-left:8px}
 #alc .lw b{font-family:Inter,sans-serif;font-weight:800;font-size:14px}
 #alc .lb{height:6px;border-radius:4px;background:var(--c-nav,#ed0102);margin:5px 0 0 28px;min-width:3px}
 #alc .ln{font-size:13px;color:#666;padding:6px 0}
@@ -899,6 +901,9 @@ body.va #fxb,body.va #fxp{display:none!important}
 #alc .pp input{width:100%;box-sizing:border-box;font:inherit;font-size:14px;padding:9px 10px;border:1px solid #ddd;border-radius:10px;background:#f7f7f7;color:#000}
 #alc .pl button{display:flex;gap:10px;width:100%;text-align:left;border:0;background:none;font:inherit;font-size:13px;padding:9px 4px;border-radius:8px;color:#000;cursor:pointer}
 #alc .pl button em{font-style:normal;font-weight:700;width:48px;flex:none}
+#alc .lw em,#alc .lw em *{font-family:Montserrat,sans-serif!important}
+#alc .lw em,#alc .lw em *{font-weight:600!important;font-variant-numeric:normal}
+#alc .lw span .dg{font-family:Montserrat,sans-serif}
 #alc .kg button,#alc .kg button *{color:#000!important;opacity:1!important}
 #alc .kg button.sel,#alc .kg button.sel *{color:#fff!important}
 #alc .kg span{color:#777}
@@ -1350,8 +1355,8 @@ function lastSun(){var n=new Date();n.setDate(n.getDate()-n.getDay());return dk(
 function setDay(k){ST.mode='day';ST.a=ST.b=k}
 function setMonth(y,m){ST.mode='month';ST.a=mk(y,m,1);ST.b=mk(y,m,31)}
 function setYear(y){ST.mode='year';ST.a=mk(y,1,1);ST.b=mk(y,12,31)}
-function init(){setDay(lastSun());ST.cy=Math.floor(ST.a/10000);ST.cm=Math.floor(ST.a/100)%100}
-function label(){if(ST.mode=='day')return fmt(ST.a);var y=Math.floor(ST.a/10000),m=Math.floor(ST.a/100)%100;if(ST.mode=='month')return MES[m-1].toLowerCase()+' '+y;if(ST.mode=='year')return String(y);return 'Del '+fmt(ST.a)+' al '+fmt(ST.b)}
+function init(){var n=new Date();setMonth(n.getFullYear(),n.getMonth()+1);ST.cy=Math.floor(ST.a/10000);ST.cm=Math.floor(ST.a/100)%100}
+function label(){if(ST.mode=='day')return fmt(ST.a);var y=Math.floor(ST.a/10000),m=Math.floor(ST.a/100)%100;if(ST.mode=='month')return MES[m-1]+' '+y;if(ST.mode=='year')return String(y);return 'Del '+fmt(ST.a)+' al '+fmt(ST.b)}
 function rows(noTur){var sv=function(r){return SV.has(r.serv)||(SV.size==2&&r.serv=='Otro')};return D.filter(function(r){return sv(r)&&tsOk(r)&&r.dk>=ST.a&&r.dk<=ST.b&&(!ST.lid||r.c12==ST.lid)&&(noTur||!ST.tur.size||ST.tur.has(r.tl))})}
 function tlist(){var a=[];if(SV.has('Familiar'))a.push('8AM','10AM','12PM','6PM');if(SV.has('Next'))a.push('NEXT');return a}
 function quick(){var n=new Date(),y=n.getFullYear(),m=n.getMonth()+1,pm=m==1?12:m-1,py=m==1?y-1:y;
@@ -1373,11 +1378,11 @@ function render(){var host=document.getElementById('alc');if(!host||typeof D=='u
  all.forEach(function(r){var o=m[r.c12]||(m[r.c12]={c:r.c12,n:r.l12,g:0});o.g++});
  var L=Object.keys(m).map(function(k){return m[k]}).sort(function(a,b){return b.g-a.g||(a.n<b.n?-1:1)}),mx=L.length?L[0].g:1;
  var cnt={};base.forEach(function(r){cnt[r.tl]=(cnt[r.tl]||0)+1});var cm=Math.max(1,Math.max.apply(null,tl.map(function(t){return cnt[t]||0})));
- var h='<div class="ah"><span class="at">Alcance</span><div class="ai"><button class="ab'+(open=='cal'?' on':'')+'" data-o="cal" aria-label="Fecha">'+CAL+'</button><button class="ab'+(open=='per'||ST.lid?' on':'')+'" data-o="per" aria-label="Líder">'+PER+'</button></div></div>';
+ var h='<div class="ah"><button class="at" data-o="cal"><i></i><span>'+label()+'</span></button><div class="ai"><button class="ab'+(open=='cal'?' on':'')+'" data-o="cal" aria-label="Fecha">'+CAL+'</button><button class="ab'+(open=='per'||ST.lid?' on':'')+'" data-o="per" aria-label="Líder">'+PER+'</button></div></div>';
  h+='<div class="pp" id="alp" '+(open?'':'hidden')+'>'+panel()+'</div>';
- h+='<div class="ad"><span>'+label()+'</span>'+(ST.lid?'<button data-x="lid">'+(ST.lname||ST.lid)+' ✕</button>':'')+'</div>';
- var BH=84;
- h+='<div class="ak"><div class="al"><small>Total de invitados</small><b>'+total+'</b></div><div class="gr">'+tl.map(function(t){var v=cnt[t]||0,hh=Math.round(v/cm*BH),inside=hh>=20;return '<button class="cb'+(ST.tur.has(t)?' on':'')+'" data-t="'+t+'"><i style="height:'+hh+'px"><b class="'+(inside?'':'up')+'">'+v+'</b></i><u>'+TLB[t]+'</u></button>'}).join('')+'</div></div>';
+ h+=ST.lid?'<div class="ad"><button data-x="lid">'+(ST.lname||ST.lid)+' ✕</button></div>':'';
+ var BH=74;
+ h+='<div class="ak"><div class="al"><small>Invitados</small><b>'+total+'</b></div><div class="gr">'+tl.map(function(t){var v=cnt[t]||0,hh=Math.round(v/cm*BH),inside=hh>=20;return '<button class="cb'+(ST.tur.has(t)?' on':'')+'" data-t="'+t+'"><i style="height:'+hh+'px"><b class="'+(inside?'':'up')+'">'+v+'</b></i><u>'+TLB[t]+'</u></button>'}).join('')+'</div></div>';
  h+='<div class="lt">Líderes</div><div class="ls">';
  h+=L.length?L.map(function(o,i){return '<div class="lr"><div class="lw"><i>'+(i+1)+'</i><span>'+o.n+'<em>'+o.c+'</em></span><b>'+o.g+'</b></div><div class="lb" style="width:calc((100% - 28px) * '+(o.g/mx)+')"></div></div>'}).join(''):'<div class="ln">Sin resultados para esta selección</div>';
  h+='</div>';
