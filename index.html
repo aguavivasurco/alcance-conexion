@@ -837,6 +837,13 @@ body.hm header#hd{display:block!important}
 #fnav button.on svg{fill:#fff!important;stroke:#fff!important;stroke-width:1.6!important}
 #fnav button.on svg .d{fill:none!important;stroke:var(--c-nav,#ed0102)!important;stroke-width:1.5}
 #fnav button.on svg path:not(.d){stroke-width:2.4}
+#skl{inset:0!important;top:0!important;bottom:0!important;background:#fff!important;z-index:2000!important;padding:0!important;display:flex;align-items:center;justify-content:center}
+#skl .spn{width:46px;height:46px;border-radius:50%;border:5px solid #f6c9c9;border-top-color:#ed0102;animation:spn .9s linear infinite}
+@keyframes spn{to{transform:rotate(360deg)}}
+#hd #pn .pt{display:flex;align-items:center;gap:8px}
+#hd #pn .pback{display:flex!important;width:34px!important;height:34px!important;padding:0!important;margin:0 0 0 -8px!important;justify-content:center;align-items:center;background:none!important;border:0!important;color:#111!important;border-radius:50%!important;font-size:0!important;cursor:pointer}
+#hd #pn .pback::before{display:none!important;content:none!important}
+#vin #bx9{margin-top:-7px}
 </style></head><body class="gate">
 <div id="gate"><img id="gimg" alt="Logo"><h1>Alcance y Conexión</h1><p class="gs">Red García Montoya</p>
 <div class="gq">Ingresar como</div>
@@ -1094,7 +1101,7 @@ if(!$('det')._tp){$('det')._tp=1;holdTip($('det'),i=>{const o=(window.XD||[])[i]
 const VW=['Resumen de alcance','Detalle de Conexión','Avance semanal','Indicadores','Reconocimiento','Inicio'],ORD=[5,0,1,2,3,4];let cur=-1,op=null;
 function drawPn(){const p=$('pn'),ic={m:'bh',t:'bt'};Object.keys(ic).forEach(k=>$(ic[k]).classList.toggle('act',op==k));$('hd').classList.toggle('open',!!op);
  if(op=='m')p.innerHTML=ORD.map(i=>`<button data-i="${i}" class="${i==cur?'on':''}">${VW[i]}</button>`).join('');
- else if(op=='t')p.innerHTML='<div class="pt">Servicio</div>'+['Familiar','Next'].map(k=>`<label><input type="checkbox" data-k="${k}"${SVC.has(k)?' checked':''}>${k}</label>`).join('');
+ else if(op=='t')p.innerHTML='<div class="pt"><button type="button" class="pback" data-back aria-label="Volver"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 5l-7 7 7 7"/></svg></button>Servicio</div>'+['Familiar','Next'].map(k=>`<label><input type="checkbox" data-k="${k}"${SVC.has(k)?' checked':''}>${k}</label>`).join('');
  else p.innerHTML=''}
 const show=i=>{setTimeout(fit,0);$('main').classList.toggle('nopad',i==2);document.body.classList.toggle('fv',i<2);cur=i;op=null;$('hd').classList.toggle('ind',i==3);$('hd').classList.remove('mo');document.body.classList.toggle('hm',i==5);if(i!=5){const c=$('cfg');if(c)c.hidden=true}scrollTo(0,0);document.querySelectorAll('main .v').forEach((v,k)=>v.classList.toggle('on',k==i));nav();drawPn();(i==3||i==5)&&window.RC&&RC()};
 const FI={5:'<path d="M3 10.5 10 4l7 6.5V17H3z"/><path class="d" d="M8 17v-4.5h4V17"/>',0:'<path d="M5 17V10M10 17V4M15 17v-5"/>',1:'<circle cx="7.5" cy="7" r="2.8"/><path d="M2.5 16c.5-3 2.5-4.6 5-4.6s4.5 1.6 5 4.6"/><path d="M13 4.5a2.6 2.6 0 0 1 0 5M14.5 12c1.5.6 2.4 1.9 2.7 4"/>',2:'<rect x="3" y="4" width="14" height="13" rx="2.5"/><path class="d" d="M3 8.5h14"/><path d="M7 2.5v3M13 2.5v3"/>',3:'<circle cx="10" cy="10" r="7"/><circle class="d" cx="10" cy="10" r="3.2"/><path class="d" d="M10 10l4.5-4.5"/>',4:'<path d="M6 3h8v4.5a4 4 0 0 1-8 0z"/><path d="M6 5H3.5c0 2.2 1 3.4 2.8 3.6M14 5h2.5c0 2.2-1 3.4-2.8 3.6M10 11.5V15M7 17h6"/>'},FL={5:'Inicio',0:'Resumen',1:'Detalle',2:'Semanal',3:'Indicadores',4:'Reconoc.'};
@@ -1166,7 +1173,7 @@ function VC(){const C={mode:'red',y:0,m:0,g:'mes',sk:'',sd:''},now=new Date(),tb
  PANELS.push({fix(){},cb:()=>window.drawC()});window.drawC()}
 function nowTxt(){const d=new Date(),p=n=>String(n).padStart(2,'0'),h=d.getHours();return p(d.getDate())+'/'+p(d.getMonth()+1)+'/'+d.getFullYear()+' '+p(h%12||12)+':'+p(d.getMinutes())+' '+(h<12?'AM':'PM')}
 const mq=matchMedia('(max-width:700px)'),mode=()=>root.classList.toggle('m',mq.matches);mq.addEventListener('change',mode);mode();nav();$('fnav').onclick=e=>{e.stopPropagation();if(e.target.closest('[data-more]')){document.getElementById('fsheet').classList.toggle('open');return}const b=e.target.closest('button[data-i]');if(b)show(+b.dataset.i)};document.addEventListener('click',e=>{const sh=document.getElementById('fsheet');if(!sh)return;const b=e.target.closest('#fsheet button[data-i]');if(b){show(+b.dataset.i);return}sh.classList.remove('open')});
-$('hb').onclick=e=>{e.stopPropagation();$('bt').click()};
+$('hb').onclick=e=>{e.stopPropagation();$('bt').click()};$('pn').addEventListener('click',e=>{if(e.target.closest('[data-back]')){e.stopPropagation();$('bt').click()}},true);
 (()=>{document.body.classList.remove('dk');$('vin').querySelector('.ibr img').src=$('hd').querySelector('img').src})();
 (()=>{const FONTS=[['Instrument Sans','"Instrument Sans"'],['Inter','Inter'],['Montserrat','Montserrat'],['Poppins','Poppins'],['DM Sans','"DM Sans"'],['Manrope','Manrope'],['Outfit','Outfit'],['Plus Jakarta Sans','"Plus Jakarta Sans"'],['Figtree','Figtree'],['Sora','Sora'],['Sistema (Arial)','Arial']],
  WT=[[400,'Normal'],[500,'Medio'],[600,'Seminegrita'],[700,'Negrita'],[800,'Extra negrita']],
@@ -1261,10 +1268,10 @@ function fix(){document.querySelectorAll('#vin .bgc').forEach(function(el){var d
 setInterval(fix,300);fix();
 })();
 </script>
-<div id="skl"><i style="width:150px;height:22px;border-radius:8px"></i><i style="height:112px;margin-top:16px"></i><div class="r"><i style="height:112px"></i><i style="height:112px"></i></div><i style="height:12px;margin-top:22px;border-radius:6px;width:60%"></i><i style="height:200px;margin-top:20px"></i><i style="height:14px;margin:14px auto 0;width:50%;border-radius:7px"></i></div>
+<div id="skl"><div class="spn"></div></div>
 <script>
 (function(){var t0=Date.now(),sk=document.getElementById('skl'),m=document.getElementById('main');if(!sk)return;
-function done(){var w=Math.max(0,1500-(Date.now()-t0));setTimeout(function(){sk.remove();try{window.dispatchEvent(new Event('resize'))}catch(e){}},w)}
+function done(){var w=Math.max(0,3000-(Date.now()-t0));setTimeout(function(){sk.remove();try{window.dispatchEvent(new Event('resize'))}catch(e){}},w)}
 function chk(){return m&&!m.classList.contains('loading')}
 if(!m||chk()){done();return}
 var o=new MutationObserver(function(){if(chk()){o.disconnect();done()}});o.observe(m,{attributes:true,attributeFilter:['class']});
