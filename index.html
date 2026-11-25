@@ -1535,6 +1535,15 @@ body.vr #fxb,body.vr #fxp{display:none!important}
 #alc .lr{padding-bottom:3px!important;margin-bottom:3px!important}
 #alc .ct b{top:0!important}
 #alc .ls{margin-top:12px!important}
+
+#alc .at,#cnx .at,#vin .tcd-m,#rnk .xdt,#alc .at span,#cnx .at span,#alc .at .dg,#cnx .at .dg,#rnk .xdt .dg,#vin .tcd-m .dg,#rnk .xdt *{font-weight:700!important}
+#alc .lw{grid-template-columns:1fr auto!important}
+#alc .lw em{margin-left:0!important;margin-right:8px!important}
+#alc .lb{margin-left:0!important}
+#alc .ct .ar{width:18px!important;height:18px!important;border-radius:6px!important}
+#alc .ct svg{width:9px!important;height:9px!important}
+#alc .tzb{background:none!important;border:0!important;color:#000!important;font-size:26px!important;font-weight:700!important;width:24px!important;height:28px!important;border-radius:0!important;padding:0 0 4px!important}
+#alc .lw em{display:inline-block;min-width:46px;text-align:center;box-sizing:border-box}
 </style></head><body class="gate">
 <div id="gate"><img id="gimg" alt="Logo"><h1>Alcance y Conexión</h1><p class="gs">Red García Montoya</p>
 <div class="gq">Ingresar como</div>
@@ -2030,7 +2039,7 @@ function drawTip(){var host=document.getElementById('alc');if(!host)return;var o
  var rr=g.r.slice().sort(function(a,b){return b.dk-a.dk||(a.inv<b.inv?-1:1)});
  var h='<div class="tzh"><button class="tzb" data-tb="1" aria-label="Volver">‹</button><div class="tzt">'+g.n+'</div><x-n class="tzn">'+g.r.length+'</x-n></div><div class="tzd">'+rr.map(function(r,i){var on=!!ST.tip.o[i];
   return '<div class="tzg"><div class="tzi"><x-n class="tzx">'+(i+1)+'</x-n><div class="n1">'+r.inv+'</div><button class="tzp" data-tk="'+i+'" aria-label="'+(on?'Ocultar':'Ver detalle')+'">'+(on?'\u2212':'+')+'</button></div>'+(on?'<div class="tzo">'+[['Fecha',r.f],['Tipo',r.tp||'\u2014'],['Distrito',r.dist||'\u2014'],['Invitado por',r.lid]].map(function(x){return '<div class="tzl"><x-l>'+x[0]+':</x-l><x-v>'+x[1]+'</x-v></div>'}).join('')+'</div>':'')+'</div>'}).join('')+'</div>';
- var tp=document.createElement('div');tp.className='tipx';tp.innerHTML=h;var top=lt.offsetTop,bot=ls.offsetTop+ls.offsetHeight;tp.style.top=top+'px';tp.style.height=Math.max(180,bot-top)+'px';host.appendChild(tp);var q2=tp.querySelector('.tzd');if(q2)q2.scrollTop=sc0}
+ var tp=document.createElement('div');tp.className='tipx';tp.innerHTML=h;var top=ls.offsetTop,bot=ls.offsetTop+ls.offsetHeight;tp.style.top=top+'px';tp.style.height=Math.max(180,bot-top)+'px';host.appendChild(tp);var q2=tp.querySelector('.tzd');if(q2)q2.scrollTop=sc0}
 function render(){var host=document.getElementById('alc');if(!host||typeof D=='undefined'||!D)return;
  var sig=ST.mode+'|'+ST.a+'|'+ST.b+'|'+ST.lid+'|'+(ST.yw?1:0);if(ST.wkA!=sig){ST.wk=-1;ST.wkA=sig}if(ST.lid)ST.tur.clear();
  var open=ST.open,base=rows(true),tl=tlist();ST.tur.forEach(function(t){if(tl.indexOf(t)<0)ST.tur.delete(t)});
@@ -2046,7 +2055,7 @@ function render(){var host=document.getElementById('alc');if(!host||typeof D=='u
  cm=Math.max(1,Math.max.apply(null,X.map(function(o){return o.r.length})));
  h+='<div class="ak'+(yrm?' yr':'')+(w2?' w2':'')+'">'+(ST.mode=='year'&&ST.lid?'<button class="yw'+(ST.yw?' on':'')+'" data-yw="1" aria-label="Ver por semanas">'+WKI+'</button>':'')+'<div class="al"><small>Invitados</small><b>'+total+'</b></div><div class="gr'+(X.length>8?' dn':'')+(w2?' w2':'')+'">'+X.map(function(o,ix){var v=o.r.length,hh=Math.round(v/cm*BH),inside=hh>=20,sel=mo?ST.wk==o.key:(o.k&&ST.tur.has(o.k));return '<button class="cb'+(mo?' rd':'')+(sel?' on':'')+'"'+(o.k?' data-t="'+o.k+'"':(mo?' data-w="'+o.key+'"':''))+'><i style="height:'+hh+'px"><b class="'+(inside?'':'up')+'">'+(yrm&&!v?'':v)+'</b></i><u>'+(o.l.indexOf('|')>0?o.l.split('|')[0]+'<br>'+o.l.split('|')[1]:o.l)+'</u></button>'}).join('')+'</div></div>';
  h+='<div class="lt">Líderes</div><div class="ls">';
- h+=L.length?L.map(function(o,i){return '<div class="lr" data-c="'+o.c+'"><div class="lw"><i>'+(i+1)+'</i><span>'+o.n+'<em>'+o.c+'</em></span><button class="ct" data-tip="1" aria-label="Ver invitados"><b>'+o.g+'</b>'+ARW+'</button></div><div class="lb" style="width:calc((100% - 28px - 70px) * '+(o.g/mx)+')"></div></div>'}).join(''):'<div class="ln">Sin resultados para esta selección</div>';
+ h+=L.length?L.map(function(o,i){return '<div class="lr" data-c="'+o.c+'"><div class="lw"><span><em>'+o.c+'</em>'+o.n+'</span><button class="ct" data-tip="1" aria-label="Ver invitados"><b>'+o.g+'</b>'+ARW+'</button></div><div class="lb" style="width:calc((100% - 70px) * '+(o.g/mx)+')"></div></div>'}).join(''):'<div class="ln">Sin resultados para esta selección</div>';
  h+='</div>';
  host.innerHTML=h;fit();snap(host);drawTip();
  var inp=host.querySelector('#alq');if(inp&&ST._f){inp.focus();inp.setSelectionRange(inp.value.length,inp.value.length)}}
@@ -2363,8 +2372,9 @@ function drawAlc(cfg){
  cfg._W=W;cfg._H=H;
  // columnas
  function col(g,x,y,w){
-  c.font='800 13px Manrope,Inter,sans-serif';var cw2=c.measureText(g.p).width+24;c.fillStyle='#ed0102';rr(c,x,y,cw2,24,12);c.fill();c.fillStyle='#fff';c.fillText(g.p,x+12,y+16.5);
-  c.font='800 14px Inter,sans-serif';var sw=String(g.s),bw2=Math.max(30,c.measureText(sw).width+20);c.fillStyle='#000';rr(c,x+w-bw2,y,bw2,24,12);c.fill();c.fillStyle='#fff';c.textAlign='center';c.fillText(sw,x+w-bw2/2,y+17);c.textAlign='left';
+  c.fillStyle='#ed0102';rr(c,x,y,w,26,13);c.fill();
+  c.fillStyle='#fff';c.font='800 14px Manrope,Inter,sans-serif';c.fillText(g.p,x+14,y+18);
+  c.font='800 14px Inter,sans-serif';var sw=String(g.s),bw2=Math.max(26,c.measureText(sw).width+16);c.fillStyle='#fff';rr(c,x+w-bw2-3,y+3,bw2,20,10);c.fill();c.fillStyle='#ed0102';c.textAlign='center';c.fillText(sw,x+w-bw2/2-3,y+18);c.textAlign='left';
   var ry=y+GH-6;
   g.l.forEach(function(o,i){var yy=ry+i*RH;
    c.strokeStyle='#eee';c.lineWidth=1;c.beginPath();c.moveTo(x,yy+RH);c.lineTo(x+w,yy+RH);c.stroke();
