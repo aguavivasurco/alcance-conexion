@@ -1590,6 +1590,29 @@ body.vr #fxb,body.vr #fxp{display:none!important}
 #alc .ge{font:700 10px Manrope,sans-serif;padding:3px 9px;border-radius:9px;white-space:nowrap;flex:none;display:inline-block}
 #alc .ls.lead{scroll-snap-type:none}
 #alc .gl{margin-right:12px!important}
+
+#alc .ad button.g28{background:#fbd5e1!important;border-color:#fbd5e1!important}
+#alc .ad button.g18{background:#cfe2fb!important;border-color:#cfe2fb!important}
+#alc .ad button.g28,#alc .ad button.g28 *,#alc .ad button.g18,#alc .ad button.g18 *{color:#000!important}
+#alc .lw.lh{border-radius:12px;padding:8px 10px!important}
+#alc .lr.lead.g28 .lw.lh{background:#fbd5e1}
+#alc .lr.lead.g18 .lw.lh{background:#cfe2fb}
+#alc .lr.lead:not(.g28):not(.g18) .lw.lh{background:#dff4fb}
+#alc .lw.lh>span{font-weight:800;font-size:13.5px}
+#alc .lr.lead{border-bottom:0!important}
+#alc .gi{display:block;padding:6px 0}
+#alc .gh{display:flex;align-items:center;gap:8px}
+#alc .gn{flex:1;min-width:0;font-weight:500}
+#alc .gn.tm{font-weight:800}
+#alc .gt{font:800 10px Inter,sans-serif;color:#555;flex:none}
+#alc .gxp{width:18px;height:18px;border-radius:6px;border:0;background:#ed0102;color:#fff;font:700 14px/1 Manrope,sans-serif;padding:0 0 2px;cursor:pointer;display:flex;align-items:center;justify-content:center;flex:none}
+#alc .gdt{margin:6px 0 2px;padding:8px 10px;background:#f6f6f6;border-radius:10px}
+#alc .gdl{display:flex;gap:6px;font-size:12px;padding:2px 0}
+#alc .gdl x-l{color:#666;flex:none;display:inline}
+#alc .gdl x-v{color:#000;font-weight:600;display:inline;word-break:break-word}
+#alc .lw.lh>span,#alc .lw.lh>span *{font-weight:800!important;font-family:Manrope,sans-serif!important}
+#alc .gdl,#alc .gdl *{font-family:Manrope,sans-serif!important}
+#alc .lw.lh>span{display:block!important}
 </style></head><body class="gate">
 <div id="gate"><img id="gimg" alt="Logo"><h1>Alcance y Conexión</h1><p class="gs">Red García Montoya</p>
 <div class="gq">Ingresar como</div>
@@ -1630,7 +1653,7 @@ const thead=(cols,st)=>'<thead><tr>'+cols.map(c=>`<th class="sh ${c.cls||''}" da
 const srt=(rows,st,cols)=>{const c=cols.find(x=>x.k==st.k);if(!c)return rows;const s=st.d=='desc'?-1:1,v=c.v||(r=>r[c.k]);return[...rows].sort((a,b)=>{const x=v(a),y=v(b);return s*(c.t=='n'?x-y:c.t=='c'?(String(x).toUpperCase()<String(y).toUpperCase()?-1:String(x).toUpperCase()>String(y).toUpperCase()?1:0):String(x).localeCompare(String(y),'es',{numeric:true,sensitivity:'base'}))})};
 const bindSort=(tb,st,cols,fn)=>tb.addEventListener('click',e=>{const th=e.target.closest('th[data-k]');if(!th)return;const k=th.dataset.k,c=cols.find(x=>x.k==k);if(st.k==k)st.d=st.d=='desc'?'asc':'desc';else{st.k=k;st.d=c.t=='n'?'desc':'asc'}fn()});
 let D,TO;const cnt=(a,i)=>a.filter(r=>r.est==EST[i]).length;
-function prep(raw){const K={};raw.forEach(r=>{if(r[5]&&String(r[5]).trim()){const k=String(r[5]).trim();if(!K[k])K[k]=(r[6]&&String(r[6]).trim())||''}});const KS=Object.keys(K).sort((a,b)=>b.length-a.length);return raw.map(r=>{let c12=r[5]&&String(r[5]).trim(),l12=r[6],k12=!!c12;if(!c12){const cd=String(r[0]).trim(),m=KS.find(k=>cd.indexOf(k)==0);if(m){c12=m;l12=K[m]||l12;k12=true}else c12=r[0]}const o={cod:String(r[0]),lid:r[1],inv:r[2],est:canon(r[3]),tur:String(r[4]||''),c12:c12,k12:k12,l12:l12||'—',f:String(r[7]).trim(),dist:String(r[8]||'').trim(),edad:String(r[9]||'').trim(),tp:String(r[10]||'').split('-')[0].trim()};
+function prep(raw){const K={};raw.forEach(r=>{if(r[5]&&String(r[5]).trim()){const k=String(r[5]).trim();if(!K[k])K[k]=(r[6]&&String(r[6]).trim())||''}});const KS=Object.keys(K).sort((a,b)=>b.length-a.length);return raw.map(r=>{let c12=r[5]&&String(r[5]).trim(),l12=r[6],k12=!!c12;if(!c12){const cd=String(r[0]).trim(),m=KS.find(k=>cd.indexOf(k)==0);if(m){c12=m;l12=K[m]||l12;k12=true}else c12=r[0]}const o={cod:String(r[0]),lid:r[1],inv:r[2],est:canon(r[3]),tur:String(r[4]||''),c12:c12,k12:k12,l12:l12||'—',f:String(r[7]).trim(),dist:String(r[8]||'').trim(),edad:String(r[9]||'').trim(),cel:String(r[11]||'').trim(),tp:String(r[10]||'').split('-')[0].trim()};
  const[d,m,y]=o.f.split('/').map(Number),w=new Date(y,m-1,d).getDay();o.mes=MES[m-1];o.anio=String(y);o.dk=y*10000+m*100+d;
  const tn=o.tur.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'');
  o.serv=w==0?'Familiar':w==6?'Next':tn.startsWith('sab')?'Next':tn.startsWith('dom')?'Familiar':'Otro';
@@ -2097,14 +2120,15 @@ function render(){var host=document.getElementById('alc');if(!host||typeof D=='u
  var cnt={};base.forEach(function(r){cnt[r.tl]=(cnt[r.tl]||0)+1});var cm=Math.max(1,Math.max.apply(null,tl.map(function(t){return cnt[t]||0})));
  var h='<div class="ah"><button class="at" data-o="cal"><i></i><span>'+label()+'</span></button><div class="ai"><button class="ab" data-rep="1" aria-label="Reporte">'+(window.REPI||'')+'</button><button class="ab'+(open=='per'||ST.lid?' on':'')+'" data-o="per" aria-label="Líder">'+PER+'</button></div></div>';
  h+='<div class="pp" id="alp" '+(open?'':'hidden')+'>'+panel()+'</div>';
- h+=ST.lid?'<div class="ad"><button type="button" data-k="1">'+ST.lid+' - '+(ST.lname||'')+'</button></div>':'';
+ h+=ST.lid?'<div class="ad"><button type="button" data-k="1" class="'+(/^C28/i.test(ST.lid)?'g28':(/^C18/i.test(ST.lid)?'g18':''))+'">'+ST.lid+' - '+(ST.lname||'')+'</button></div>':'';
  var ml={};rows(true,true).forEach(function(r){ml[Math.floor(r.dk/100)%100]=1});ml=Object.keys(ml).map(Number).sort(function(a,b){return a-b});
  var w2=ST.mode=='year'&&!!ST.lid&&!!ST.yw,BH=w2?64:74,X=xs(base,tl,ml),mo=!!ST.lid,yrm=X.length>8;
  cm=Math.max(1,Math.max.apply(null,X.map(function(o){return o.r.length})));
  h+='<div class="ak'+(yrm?' yr':'')+(w2?' w2':'')+'">'+(ST.mode=='year'&&ST.lid?'<button class="yw'+(ST.yw?' on':'')+'" data-yw="1" aria-label="Alternar semana o mes">'+(ST.yw?'Sem':'Mes')+'</button>':'')+'<div class="al"><small>Invitados</small><b>'+total+'</b></div><div class="gr'+(X.length>8?' dn':'')+(w2?' w2':'')+'">'+X.map(function(o,ix){var v=o.r.length,hh=Math.round(v/cm*BH),inside=hh>=20,sel=mo?ST.wk==o.key:(o.k&&ST.tur.has(o.k));return '<button class="cb'+(mo?' rd':'')+(sel?' on':'')+'"'+(o.k?' data-t="'+o.k+'"':(mo?' data-w="'+o.key+'"':''))+'><i style="height:'+hh+'px"><b class="'+(inside?'':'up')+'">'+(yrm&&!v?'':v)+'</b></i><u>'+(o.l.indexOf('|')>0?o.l.split('|')[0]+'<br>'+o.l.split('|')[1]:o.l)+'</u></button>'}).join('')+'</div></div>';
  h+='<div class="lt">Líderes</div>'+(ST.lid?'':'<div class="rgw"><button class="rgb" data-rgo="1">'+(ST.rg||'Red')+'<i class="rgt"></i></button>'+(ST.rgo?'<div class="rgm">'+[['','Red'],['C28','C28'],['C18','C18']].map(function(q){return '<button data-rv="'+q[0]+'" class="'+((ST.rg||'')==q[0]?'on':'')+'">'+q[1]+'</button>'}).join('')+'</div>':'')+'</div>')+'<div class="ls'+(ST.lid?' lead':'')+'">';
- h+=L.length?L.map(function(o,i){if(ST.lid){var gs=o.r.slice().sort(function(a,b){return b.dk-a.dk||(a.inv<b.inv?-1:1)});
-  return '<div class="lr lead'+(/^C28/i.test(o.c)?' g28':(/^C18/i.test(o.c)?' g18':''))+'" data-c="'+o.c+'"><div class="lw"><span><em>'+o.c+'</em>'+o.n+'</span><div class="ct2"><b>'+o.g+'</b><button class="gxb" data-gx="1" aria-label="'+(ST.gx?'Mostrar invitados':'Ocultar invitados')+'">'+(ST.gx?'+':'\u2212')+'</button></div></div>'+(ST.gx?'':'<div class="gl">'+gs.map(function(r){var e=(ES_.filter(function(q){return q[0]==r.est})[0])||['','#e4e4e4','#000'];return '<div class="gi"><span class="gn">'+r.inv+'</span><x-e class="ge" style="background:'+e[1]+';color:'+e[2]+'">'+(r.est||'\u2014')+'</x-e></div>'}).join('')+'</div>')+'</div>'}
+ h+=L.length?L.map(function(o,i){if(ST.lid){var gs=o.r.slice().sort(function(a,b){return b.dk-a.dk||(a.inv<b.inv?-1:1)}),LC=String(o.c).toUpperCase();
+  return '<div class="lr lead'+(/^C28/i.test(o.c)?' g28':(/^C18/i.test(o.c)?' g18':''))+'" data-c="'+o.c+'"><div class="lw lh"><span>'+o.c+' - '+o.n+'</span><div class="ct2"><b>'+o.g+'</b><button class="gxb" data-gx="1" aria-label="'+(ST.gx?'Mostrar invitados':'Ocultar invitados')+'">'+(ST.gx?'+':'\u2212')+'</button></div></div>'+(ST.gx?'':'<div class="gl">'+gs.map(function(r,ix){var e=(ES_.filter(function(q){return q[0]==r.est})[0])||['','#e4e4e4','#000'],tm=String(r.cod).toUpperCase()!==LC,on=!!(ST.gd&&ST.gd[ix]);
+   return '<div class="gi"><div class="gh"><span class="gn'+(tm?' tm':'')+'">'+r.inv+'</span>'+(tm?'<span class="gt">'+r.cod+'</span>':'')+'<x-e class="ge" style="background:'+e[1]+';color:'+e[2]+'">'+(r.est||'\u2014')+'</x-e><button class="gxp" data-gd="'+ix+'" aria-label="'+(on?'Ocultar':'Ver detalle')+'">'+(on?'\u2212':'+')+'</button></div>'+(on?'<div class="gdt">'+[['Fecha',r.f],['Tipo',r.tp],['Distrito',r.dist],['Edad',r.edad?r.edad+' años':''],['Celular',r.cel],['Invitado por',r.cod+' - '+r.lid]].map(function(x){return '<div class="gdl"><x-l>'+x[0]+':</x-l><x-v>'+(x[1]||'\u2014')+'</x-v></div>'}).join('')+'</div>':'')+'</div>'}).join('')+'</div>')+'</div>'}
   return '<div class="lr'+(/^C28/i.test(o.c)?' g28':(/^C18/i.test(o.c)?' g18':''))+'" data-c="'+o.c+'"><div class="lw"><span><em>'+o.c+'</em>'+o.n+'</span><button class="ct" data-tip="1" aria-label="Ver invitados"><b>'+o.g+'</b>'+ARW+'</button></div><div class="lb" style="width:calc((100% - 70px) * '+(o.g/mx)+')"></div></div>'}).join(''):'<div class="ln">Sin resultados para esta selección</div>';
  h+='</div>';
  host.innerHTML=h;fit();snap(host);if(ST.lid){var ls2=host.querySelector('.ls');if(ls2){ls2.style.height=Math.max(120,host.clientHeight-ls2.offsetTop-14)+'px';ls2.style.overflowY='auto'}}drawTip();
@@ -2138,6 +2162,7 @@ function wire(){var host=document.getElementById('alc');
   else if(d.rgo!==undefined){ST.rgo=!ST.rgo;render()}
   else if(d.rv!==undefined){ST.rg=d.rv;ST.rgo=false;ST.tip=null;render()}
   else if(d.gx!==undefined){ST.gx=!ST.gx;render()}
+  else if(d.gd!==undefined){ST.gd=ST.gd||{};ST.gd[d.gd]=!ST.gd[d.gd];render()}
    else if(d.yw!==undefined){ST.yw=!ST.yw;render()}
   else if(d.w!==undefined){ST.wk=ST.wk==+d.w?-1:+d.w;render()}
   else if(d.t){var k2=d.t,was=ST.tur.has(k2);ST.tur.clear();if(!was)ST.tur.add(k2);render()}
