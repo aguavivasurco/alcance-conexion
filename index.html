@@ -1655,6 +1655,8 @@ body.vr #fxb,body.vr #fxp{display:none!important}
 #alc .ct .ar.vr{text-transform:none!important;letter-spacing:0!important}
 #alc .ls{padding-left:14px!important;padding-right:14px!important}
 #alc .ls.lead{padding-left:0!important;padding-right:0!important}
+#alc .ad{position:relative}
+#alc .ad button.lbk{position:absolute;left:0;top:50%;transform:translateY(-50%);width:30px;height:30px;padding:0!important;border-radius:10px!important;background:#f3f3f3!important;border:1px solid #e4e4e4!important;color:#000!important;font:700 22px/1 Manrope,sans-serif!important;pointer-events:auto!important;display:flex;align-items:center;justify-content:center;padding-bottom:3px!important}
 </style></head><body class="gate">
 <div id="gate"><img id="gimg" alt="Logo"><h1>Alcance y Conexión</h1><p class="gs">Red García Montoya</p>
 <div class="gq">Ingresar como</div>
@@ -2162,7 +2164,7 @@ function render(){var host=document.getElementById('alc');if(!host||typeof D=='u
  var cnt={};base.forEach(function(r){cnt[r.tl]=(cnt[r.tl]||0)+1});var cm=Math.max(1,Math.max.apply(null,tl.map(function(t){return cnt[t]||0})));
  var h='<div class="ah"><button class="at" data-o="cal"><i></i><span>'+label()+'</span></button><div class="ai"><div class="rgw2"><button class="rgb" data-rgo="1" aria-label="Filtrar red">'+(ST.lid?'Líder':(ST.rg||'Red'))+'<i class="rgt"></i></button>'+(ST.rgo?'<div class="rgm">'+[['','Red'],['C18','C18'],['C28','C28']].map(function(q){return '<button data-rv="'+q[0]+'" class="'+(!ST.lid&&(ST.rg||'')==q[0]?'on':'')+'">'+q[1]+'</button>'}).join('')+'<button data-rl="1" class="'+(ST.lid||open=='per'?'on':'')+'">Líder</button></div>':'')+'</div><button class="ab" data-rep="1" aria-label="Reporte">'+(window.REPI||'')+'</button></div></div>';
  h+='<div class="pp" id="alp" '+(open?'':'hidden')+'>'+panel()+'</div>';
- h+=ST.lid?'<div class="ad"><button type="button" data-k="1" class="'+(/^C28/i.test(ST.lid)?'g28':(/^C18/i.test(ST.lid)?'g18':''))+'">'+ST.lid+' - '+(ST.lname||'')+'</button></div>':'';
+ h+=ST.lid?'<div class="ad"><button type="button" class="lbk" data-lb="1" aria-label="Volver a Red">‹</button><button type="button" data-k="1" class="'+(/^C28/i.test(ST.lid)?'g28':(/^C18/i.test(ST.lid)?'g18':''))+'">'+ST.lid+' - '+(ST.lname||'')+'</button></div>':'';
  var ml={};rows(true,true).forEach(function(r){ml[Math.floor(r.dk/100)%100]=1});ml=Object.keys(ml).map(Number).sort(function(a,b){return a-b});
  var w2=ST.mode=='year'&&!!ST.lid&&!!ST.yw,BH=w2?64:74,X=xs(base,tl,ml),mo=!!ST.lid,yrm=X.length>8;
  cm=Math.max(1,Math.max.apply(null,X.map(function(o){return o.r.length})));
@@ -2198,6 +2200,7 @@ function wire(){var host=document.getElementById('alc');
   var t=e.target.closest('button');if(!t){if(ST.rgo){ST.rgo=false;render();return}if(!e.target.closest('.pp')&&ST.open){ST.open='';render()}return}
   var d=t.dataset;if(d.rgo===undefined&&d.rv===undefined&&d.rl===undefined)ST.rgo=false;
   if(d.o=='per'&&ST.lid){ST.lid='';ST.lname='';ST.open='';ST.q='';ST.tur.clear();ST.wk=-1;ST.yw=false;init();render()}
+  else if(d.lb!==undefined){ST.lid='';ST.lname='';ST.open='';ST.q='';ST.rg='';ST.tur.clear();ST.wk=-1;ST.yw=false;ST.tip=null;init();render()}
   else if(d.bk!==undefined){ST.open='';ST.q='';render()}
   else if(d.o){ST.open=ST.open==d.o?'':d.o;ST.q='';if(ST.open=='cal'){ST.cy=Math.floor(ST.a/10000);ST.cm=Math.floor(ST.a/100)%100}render()}
   else if(d.q){var n=new Date(),y=n.getFullYear(),m=n.getMonth()+1;
@@ -2582,7 +2585,8 @@ var KEY='alcClr',IT=[
 ['rep','Botón reporte',['#alc .ai .ab'],['#alc .ai .ab','#alc .ai .ab svg'],'#f3f3f3','#000000'],
 ['menu','Menú de Red',['#alc .rgm'],['#alc .rgm button'],'#ffffff','#000000'],
 ['bus','Buscador de líder',['#alc .pp'],['#alc .pp .pl button','#alc .pp .pl button *','#alc .pp label'],'#ffffff','#000000'],
-['tit','Título del líder',['#alc .ad button'],['#alc .ad button','#alc .ad button *'],'#ffffff','#000000'],
+['tm','Título líder mujer (C28)',['#alc .ad button.g28[data-k]'],['#alc .ad button.g28[data-k]','#alc .ad button.g28[data-k] *'],'#ffffff','#000000'],
+['th','Título líder hombre (C18)',['#alc .ad button.g18[data-k]'],['#alc .ad button.g18[data-k]','#alc .ad button.g18[data-k] *'],'#ffffff','#000000'],
 ['c28','Código C28',['#alc .lr.g28 .lw em'],['#alc .lr.g28 .lw em'],'#fbd5e1','#000000'],
 ['c18','Código C18',['#alc .lr.g18 .lw em'],['#alc .lr.g18 .lw em'],'#cfe2fb','#000000'],
 ['nom','Nombres de la lista',['#alc .lr:not(.lead)'],['#alc .lr:not(.lead) .lw>span'],'#ffffff','#000000'],
