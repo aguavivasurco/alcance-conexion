@@ -1613,6 +1613,24 @@ body.vr #fxb,body.vr #fxp{display:none!important}
 #alc .lw.lh>span,#alc .lw.lh>span *{font-weight:800!important;font-family:Manrope,sans-serif!important}
 #alc .gdl,#alc .gdl *{font-family:Manrope,sans-serif!important}
 #alc .lw.lh>span{display:block!important}
+
+#alc .ad button{font-weight:400!important}
+#alc .lr.lead.g28 .lw.lh,#alc .lr.lead.g18 .lw.lh,#alc .lr.lead:not(.g28):not(.g18) .lw.lh{background:none!important;padding:4px 0!important}
+#alc .lhp,#alc .gsp{display:inline-block;padding:5px 12px;border-radius:12px;font-size:13.5px}
+#alc .lhp,#alc .lhp *{font-family:Manrope,sans-serif!important;font-weight:800!important}
+#alc .gsp,#alc .gsp *{font-family:Manrope,sans-serif!important;font-weight:500!important}
+#alc .gsp.tm,#alc .gsp.tm *{font-weight:800!important}
+#alc .gsp{font-size:12.5px;padding:4px 10px}
+#alc .lr.g28 .lhp,#alc .lr.g28 .gsp{background:#fbd5e1}
+#alc .lr.g18 .lhp,#alc .lr.g18 .gsp{background:#cfe2fb}
+#alc .lr.lead:not(.g28):not(.g18) .lhp,#alc .lr.lead:not(.g28):not(.g18) .gsp{background:#dff4fb}
+#alc .lw.lh>span{display:block!important}
+#alc .gl{margin:4px 0 2px 8px;padding-left:8px}
+#alc .gs{margin-top:6px}
+#alc .gsh{display:flex;justify-content:space-between;align-items:center;gap:8px}
+#alc .gsh>span{min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+#alc .gxb.sm{width:18px;height:18px;font-size:14px}
+#alc .gl2{margin:2px 0 4px 8px;padding-left:8px;border-left:2px solid #eee}
 </style></head><body class="gate">
 <div id="gate"><img id="gimg" alt="Logo"><h1>Alcance y Conexión</h1><p class="gs">Red García Montoya</p>
 <div class="gq">Ingresar como</div>
@@ -2126,9 +2144,12 @@ function render(){var host=document.getElementById('alc');if(!host||typeof D=='u
  cm=Math.max(1,Math.max.apply(null,X.map(function(o){return o.r.length})));
  h+='<div class="ak'+(yrm?' yr':'')+(w2?' w2':'')+'">'+(ST.mode=='year'&&ST.lid?'<button class="yw'+(ST.yw?' on':'')+'" data-yw="1" aria-label="Alternar semana o mes">'+(ST.yw?'Sem':'Mes')+'</button>':'')+'<div class="al"><small>Invitados</small><b>'+total+'</b></div><div class="gr'+(X.length>8?' dn':'')+(w2?' w2':'')+'">'+X.map(function(o,ix){var v=o.r.length,hh=Math.round(v/cm*BH),inside=hh>=20,sel=mo?ST.wk==o.key:(o.k&&ST.tur.has(o.k));return '<button class="cb'+(mo?' rd':'')+(sel?' on':'')+'"'+(o.k?' data-t="'+o.k+'"':(mo?' data-w="'+o.key+'"':''))+'><i style="height:'+hh+'px"><b class="'+(inside?'':'up')+'">'+(yrm&&!v?'':v)+'</b></i><u>'+(o.l.indexOf('|')>0?o.l.split('|')[0]+'<br>'+o.l.split('|')[1]:o.l)+'</u></button>'}).join('')+'</div></div>';
  h+='<div class="lt">Líderes</div>'+(ST.lid?'':'<div class="rgw"><button class="rgb" data-rgo="1">'+(ST.rg||'Red')+'<i class="rgt"></i></button>'+(ST.rgo?'<div class="rgm">'+[['','Red'],['C28','C28'],['C18','C18']].map(function(q){return '<button data-rv="'+q[0]+'" class="'+((ST.rg||'')==q[0]?'on':'')+'">'+q[1]+'</button>'}).join('')+'</div>':'')+'</div>')+'<div class="ls'+(ST.lid?' lead':'')+'">';
- h+=L.length?L.map(function(o,i){if(ST.lid){var gs=o.r.slice().sort(function(a,b){return b.dk-a.dk||(a.inv<b.inv?-1:1)}),LC=String(o.c).toUpperCase();
-  return '<div class="lr lead'+(/^C28/i.test(o.c)?' g28':(/^C18/i.test(o.c)?' g18':''))+'" data-c="'+o.c+'"><div class="lw lh"><span>'+o.c+' - '+o.n+'</span><div class="ct2"><b>'+o.g+'</b><button class="gxb" data-gx="1" aria-label="'+(ST.gx?'Mostrar invitados':'Ocultar invitados')+'">'+(ST.gx?'+':'\u2212')+'</button></div></div>'+(ST.gx?'':'<div class="gl">'+gs.map(function(r,ix){var e=(ES_.filter(function(q){return q[0]==r.est})[0])||['','#e4e4e4','#000'],tm=String(r.cod).toUpperCase()!==LC,on=!!(ST.gd&&ST.gd[ix]);
-   return '<div class="gi"><div class="gh"><span class="gn'+(tm?' tm':'')+'">'+r.inv+'</span>'+(tm?'<span class="gt">'+r.cod+'</span>':'')+'<x-e class="ge" style="background:'+e[1]+';color:'+e[2]+'">'+(r.est||'\u2014')+'</x-e><button class="gxp" data-gd="'+ix+'" aria-label="'+(on?'Ocultar':'Ver detalle')+'">'+(on?'\u2212':'+')+'</button></div>'+(on?'<div class="gdt">'+[['Fecha',r.f],['Tipo',r.tp],['Distrito',r.dist],['Edad',r.edad?r.edad+' años':''],['Celular',r.cel],['Invitado por',r.cod+' - '+r.lid]].map(function(x){return '<div class="gdl"><x-l>'+x[0]+':</x-l><x-v>'+(x[1]||'\u2014')+'</x-v></div>'}).join('')+'</div>':'')+'</div>'}).join('')+'</div>')+'</div>'}
+ h+=L.length?L.map(function(o,i){if(ST.lid){var LC=String(o.c).toUpperCase(),G={},go=[];o.r.forEach(function(r){var k=String(r.cod).toUpperCase();if(!G[k]){G[k]={c:r.cod,n:r.lid,r:[]};go.push(G[k])}G[k].r.push(r)});
+  go.sort(function(a,b){var x=String(a.c).toUpperCase()==LC?0:1,y=String(b.c).toUpperCase()==LC?0:1;return x-y||(String(a.c)<String(b.c)?-1:1)});
+  var ix=0;
+  return '<div class="lr lead'+(/^C28/i.test(o.c)?' g28':(/^C18/i.test(o.c)?' g18':''))+'" data-c="'+o.c+'"><div class="lw lh"><span><x-p class="lhp">'+o.c+' - '+o.n+'</x-p></span><div class="ct2"><b>'+o.g+'</b><button class="gxb" data-gx="1" aria-label="'+(ST.gx?'Mostrar':'Ocultar')+'">'+(ST.gx?'+':'\u2212')+'</button></div></div>'+(ST.gx?'':'<div class="gl">'+go.map(function(g){var team=String(g.c).toUpperCase()!==LC,cl=!!(ST.gs&&ST.gs[g.c]);g.r.sort(function(a,b){return b.dk-a.dk||(a.inv<b.inv?-1:1)});
+   return '<div class="gs"><div class="gsh"><span><x-p class="gsp'+(team?' tm':'')+'">'+g.c+' - '+g.n+'</x-p></span><div class="ct2"><b>'+g.r.length+'</b><button class="gxb sm" data-gs="'+g.c+'" aria-label="'+(cl?'Mostrar':'Ocultar')+'">'+(cl?'+':'\u2212')+'</button></div></div>'+(cl?'':'<div class="gl2">'+g.r.map(function(r){var e=(ES_.filter(function(q){return q[0]==r.est})[0])||['','#e4e4e4','#000'],k=ix++,on=!!(ST.gd&&ST.gd[k]);
+    return '<div class="gi"><div class="gh"><span class="gn">'+r.inv+'</span><x-e class="ge" style="background:'+e[1]+';color:'+e[2]+'">'+(r.est||'\u2014')+'</x-e><button class="gxp" data-gd="'+k+'" aria-label="'+(on?'Ocultar':'Ver detalle')+'">'+(on?'\u2212':'+')+'</button></div>'+(on?'<div class="gdt">'+[['Fecha',r.f],['Tipo',r.tp],['Distrito',r.dist],['Edad',r.edad?r.edad+' años':''],['Celular',r.cel],['Invitado por',r.cod+' - '+r.lid]].map(function(x){return '<div class="gdl"><x-l>'+x[0]+':</x-l><x-v>'+(x[1]||'\u2014')+'</x-v></div>'}).join('')+'</div>':'')+'</div>'}).join('')+'</div>')+'</div>'}).join('')+'</div>')+'</div>'}
   return '<div class="lr'+(/^C28/i.test(o.c)?' g28':(/^C18/i.test(o.c)?' g18':''))+'" data-c="'+o.c+'"><div class="lw"><span><em>'+o.c+'</em>'+o.n+'</span><button class="ct" data-tip="1" aria-label="Ver invitados"><b>'+o.g+'</b>'+ARW+'</button></div><div class="lb" style="width:calc((100% - 70px) * '+(o.g/mx)+')"></div></div>'}).join(''):'<div class="ln">Sin resultados para esta selección</div>';
  h+='</div>';
  host.innerHTML=h;fit();snap(host);if(ST.lid){var ls2=host.querySelector('.ls');if(ls2){ls2.style.height=Math.max(120,host.clientHeight-ls2.offsetTop-14)+'px';ls2.style.overflowY='auto'}}drawTip();
@@ -2162,6 +2183,7 @@ function wire(){var host=document.getElementById('alc');
   else if(d.rgo!==undefined){ST.rgo=!ST.rgo;render()}
   else if(d.rv!==undefined){ST.rg=d.rv;ST.rgo=false;ST.tip=null;render()}
   else if(d.gx!==undefined){ST.gx=!ST.gx;render()}
+  else if(d.gs!==undefined){ST.gs=ST.gs||{};ST.gs[d.gs]=!ST.gs[d.gs];render()}
   else if(d.gd!==undefined){ST.gd=ST.gd||{};ST.gd[d.gd]=!ST.gd[d.gd];render()}
    else if(d.yw!==undefined){ST.yw=!ST.yw;render()}
   else if(d.w!==undefined){ST.wk=ST.wk==+d.w?-1:+d.w;render()}
