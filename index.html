@@ -1640,6 +1640,16 @@ body.vr #fxb,body.vr #fxp{display:none!important}
 #alc .lr:not(.lead){cursor:pointer}
 #alc .lr.lead>.xgl{margin:0;padding:0;border:0}
 #alc .lr.lead .xgs:first-child{margin-top:0}
+#alc .rgw2{position:relative}
+#alc .ai{align-items:center}
+#alc .ai .rgb{height:30px;padding:0 10px;min-width:0;border-radius:10px;font:800 12px Manrope,sans-serif;color:#39e075}
+#alc .ai .rgt{border-top-color:#39e075}
+#alc .ai .rgm{left:auto;right:0;min-width:84px}
+#alc .rgm button{display:block;width:100%;text-align:left;border:0;background:none;padding:8px 10px;font:700 13px Manrope,sans-serif;border-radius:8px;cursor:pointer;color:#000}
+#alc .rgm button.on{background:#f3f3f3}
+#alc .rgb *,#alc .rgm button *{font:inherit!important;color:inherit!important;margin:0!important;padding:0!important;display:inline!important;letter-spacing:0!important}
+#alc .rgb{white-space:nowrap;gap:0!important}
+#alc .rgb i.rgt{margin-left:7px!important}
 </style></head><body class="gate">
 <div id="gate"><img id="gimg" alt="Logo"><h1>Alcance y Conexión</h1><p class="gs">Red García Montoya</p>
 <div class="gq">Ingresar como</div>
@@ -2145,14 +2155,14 @@ function render(){var host=document.getElementById('alc');if(!host||typeof D=='u
  all.forEach(function(r){var o=m[r.c12]||(m[r.c12]={c:r.c12,n:r.l12,g:0,r:[]});o.g++;o.r.push(r)});
  ST._m=m;var L=Object.keys(m).map(function(k){return m[k]}).sort(function(a,b){return b.g-a.g||(a.n<b.n?-1:1)}),mx=L.length?L[0].g:1;if(ST.rg){L=L.filter(function(o){return String(o.c).toUpperCase().indexOf(ST.rg)==0});mx=L.length?L[0].g:1}
  var cnt={};base.forEach(function(r){cnt[r.tl]=(cnt[r.tl]||0)+1});var cm=Math.max(1,Math.max.apply(null,tl.map(function(t){return cnt[t]||0})));
- var h='<div class="ah"><button class="at" data-o="cal"><i></i><span>'+label()+'</span></button><div class="ai"><button class="ab" data-rep="1" aria-label="Reporte">'+(window.REPI||'')+'</button><button class="ab'+(open=='per'||ST.lid?' on':'')+'" data-o="per" aria-label="Líder">'+PER+'</button></div></div>';
+ var h='<div class="ah"><button class="at" data-o="cal"><i></i><span>'+label()+'</span></button><div class="ai"><div class="rgw2"><button class="rgb" data-rgo="1" aria-label="Filtrar red">'+(ST.lid?ST.lid:(ST.rg||'Red'))+'<i class="rgt"></i></button>'+(ST.rgo?'<div class="rgm">'+[['','Red'],['C18','C18'],['C28','C28']].map(function(q){return '<button data-rv="'+q[0]+'" class="'+(!ST.lid&&(ST.rg||'')==q[0]?'on':'')+'">'+q[1]+'</button>'}).join('')+'<button data-rl="1" class="'+(ST.lid||open=='per'?'on':'')+'">Líder</button></div>':'')+'</div><button class="ab" data-rep="1" aria-label="Reporte">'+(window.REPI||'')+'</button></div></div>';
  h+='<div class="pp" id="alp" '+(open?'':'hidden')+'>'+panel()+'</div>';
  h+=ST.lid?'<div class="ad"><button type="button" data-k="1" class="'+(/^C28/i.test(ST.lid)?'g28':(/^C18/i.test(ST.lid)?'g18':''))+'">'+ST.lid+' - '+(ST.lname||'')+'</button></div>':'';
  var ml={};rows(true,true).forEach(function(r){ml[Math.floor(r.dk/100)%100]=1});ml=Object.keys(ml).map(Number).sort(function(a,b){return a-b});
  var w2=ST.mode=='year'&&!!ST.lid&&!!ST.yw,BH=w2?64:74,X=xs(base,tl,ml),mo=!!ST.lid,yrm=X.length>8;
  cm=Math.max(1,Math.max.apply(null,X.map(function(o){return o.r.length})));
  h+='<div class="ak'+(yrm?' yr':'')+(w2?' w2':'')+'">'+(ST.mode=='year'&&ST.lid?'<button class="yw'+(ST.yw?' on':'')+'" data-yw="1" aria-label="Alternar semana o mes">'+(ST.yw?'Sem':'Mes')+'</button>':'')+'<div class="al"><small>Invitados</small><b>'+total+'</b></div><div class="gr'+(X.length>8?' dn':'')+(w2?' w2':'')+'">'+X.map(function(o,ix){var v=o.r.length,hh=Math.round(v/cm*BH),inside=hh>=20,sel=mo?ST.wk==o.key:(o.k&&ST.tur.has(o.k));return '<button class="cb'+(mo?' rd':'')+(sel?' on':'')+'"'+(o.k?' data-t="'+o.k+'"':(mo?' data-w="'+o.key+'"':''))+'><i style="height:'+hh+'px"><b class="'+(inside?'':'up')+'">'+(yrm&&!v?'':v)+'</b></i><u>'+(o.l.indexOf('|')>0?o.l.split('|')[0]+'<br>'+o.l.split('|')[1]:o.l)+'</u></button>'}).join('')+'</div></div>';
- h+='<div class="lt">Líderes</div>'+(ST.lid?'':'<div class="rgw"><button class="rgb" data-rgo="1">'+(ST.rg||'Red')+'<i class="rgt"></i></button>'+(ST.rgo?'<div class="rgm">'+[['','Red'],['C28','C28'],['C18','C18']].map(function(q){return '<button data-rv="'+q[0]+'" class="'+((ST.rg||'')==q[0]?'on':'')+'">'+q[1]+'</button>'}).join('')+'</div>':'')+'</div>')+'<div class="ls'+(ST.lid?' lead':'')+'">';
+ h+='<div class="lt">Líderes</div>'+''+'<div class="ls'+(ST.lid?' lead':'')+'">';
  h+=L.length?L.map(function(o,i){if(ST.lid){var LC=String(o.c).toUpperCase(),G={},go=[],ix=0;o.r.forEach(function(r){var k=String(r.cod).toUpperCase();if(!G[k]){G[k]={c:r.cod,n:r.lid,r:[],own:k==LC};go.push(G[k])}G[k].r.push(r)});
   go.sort(function(a,b){return (b.own?1:0)-(a.own?1:0)||(String(a.c)<String(b.c)?-1:1)});
   var rowH=function(r){var e=(ES_.filter(function(q){return q[0]==r.est})[0])||['','#e4e4e4','#000'],k=ix++,on=!!(ST.gd&&ST.gd[k]);
@@ -2181,7 +2191,7 @@ function wire(){var host=document.getElementById('alc');
   var ctb=e.target.closest('.ct');if(ctb){var rw=ctb.closest('.lr');ST.tip={c:rw.dataset.c,o:{}};drawTip();return}
   var lrw=e.target.closest('.lr');if(lrw&&!ST.lid&&!e.target.closest('button')&&ST._m&&ST._m[lrw.dataset.c]){ST.lid=lrw.dataset.c;ST.lname=ST._m[lrw.dataset.c].n;ST.open='';ST.rgo=false;render();return}
   var t=e.target.closest('button');if(!t){if(ST.rgo){ST.rgo=false;render();return}if(!e.target.closest('.pp')&&ST.open){ST.open='';render()}return}
-  var d=t.dataset;if(d.rgo===undefined&&d.rv===undefined)ST.rgo=false;
+  var d=t.dataset;if(d.rgo===undefined&&d.rv===undefined&&d.rl===undefined)ST.rgo=false;
   if(d.o=='per'&&ST.lid){ST.lid='';ST.lname='';ST.open='';ST.q='';ST.tur.clear();ST.wk=-1;ST.yw=false;init();render()}
   else if(d.o){ST.open=ST.open==d.o?'':d.o;ST.q='';if(ST.open=='cal'){ST.cy=Math.floor(ST.a/10000);ST.cm=Math.floor(ST.a/100)%100}render()}
   else if(d.q){var n=new Date(),y=n.getFullYear(),m=n.getMonth()+1;
@@ -2193,7 +2203,8 @@ function wire(){var host=document.getElementById('alc');
    else if(ST.mode=='range'&&ST.rs==0&&false){}else{setDay(k);ST.open=''}
    if(ST.mode=='range'&&ST.rs==1&&ST.a&&ST.a==ST.b){/* esperando fin */}render()}
   else if(d.rgo!==undefined){ST.rgo=!ST.rgo;render()}
-  else if(d.rv!==undefined){ST.rg=d.rv;ST.rgo=false;ST.tip=null;render()}
+  else if(d.rl!==undefined){ST.rgo=false;ST.open='per';ST.q='';render()}
+  else if(d.rv!==undefined){if(ST.lid){ST.lid='';ST.lname='';ST.tur.clear();ST.wk=-1;ST.yw=false;init()}ST.open='';ST.q='';ST.rg=d.rv;ST.rgo=false;ST.tip=null;render()}
   else if(d.gx!==undefined){ST.gx=!ST.gx;render()}
   else if(d.gs!==undefined){ST.gs=ST.gs||{};ST.gs[d.gs]=!ST.gs[d.gs];render()}
   else if(d.gd!==undefined){ST.gd=ST.gd||{};ST.gd[d.gd]=!ST.gd[d.gd];render()}
