@@ -1766,6 +1766,21 @@ body.vr #fxb,body.vr #fxp{display:none!important}
 #cnx .gr.ln::after{bottom:20px!important}
 #cnx .xc .gr.ln{height:91px!important}
 #cnx .xc .gr.ln .cb i b:not(.up){top:3px!important;bottom:auto!important}
+#cnx .srt{position:absolute;top:10px;right:12px;width:26px;height:26px;border-radius:8px;border:1px solid #e4e4e4;background:#f3f3f3;display:flex;align-items:center;justify-content:center;padding:0;cursor:pointer;z-index:5}
+#cnx .srt i{width:0;height:0;border-left:5px solid transparent;border-right:5px solid transparent;border-top:7px solid #000;display:block}
+#cnx .srt.asc i{transform:rotate(180deg)}
+#cnx .srt{width:20px!important;height:20px!important;background:none!important;border:0!important;top:12px!important;right:14px!important}
+#cnx .srt i{border-left-width:4px!important;border-right-width:4px!important;border-top:6px solid #ed0102!important}
+#cnx .srt i{opacity:.5}
+#cnx .srt.s1 i{transform:rotate(180deg);opacity:1}
+#cnx .srt.s2 i{opacity:1}
+#cnx .ak.cxk.xc{padding:10px 14px 10px!important}
+#cnx .xcl{gap:6px;padding-bottom:21px}
+#cnx .xcs{gap:5px}
+#cnx .xp{height:22px}
+#cnx .xtt{padding-top:0}
+#cnx .xc .gr,#cnx .xc .gr.ln{height:182px!important}
+#cnx .srt{z-index:6}
 </style></head><body class="gate">
 <div id="gate"><img id="gimg" alt="Logo"><h1>Alcance y Conexión</h1><p class="gs">Red García Montoya</p>
 <div class="gq">Ingresar como</div>
@@ -2353,7 +2368,7 @@ var sec=document.getElementById('vac');if(sec)new MutationObserver(function(){do
 var LUP='<svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><circle cx="8.5" cy="8.5" r="5.3"/><path d="M12.6 12.6 17 17"/></svg>',CAL='<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="3" width="12" height="11" rx="2"/><path d="M2 7h12M5 1.5v3M11 1.5v3"/></svg>',PER='<svg viewBox="0 0 20 20" fill="currentColor"><circle cx="10" cy="6.5" r="3.6"/><path d="M3 17.5c0-3.8 3.1-6 7-6s7 2.2 7 6z"/></svg>';
 var TLB={'8AM':'8AM','10AM':'10AM','12PM':'12PM','6PM':'6PM','NEXT':'Next'};
 var M3=['ene','feb','mar','abr','may','jun','jul','ago','sep','oct','nov','dic'],WD=['L','M','M','J','V','S','D'];
-var ST={sb:'',sx:new Set(),rg:'',rgo:false,ss:new Set(['Conectado']),mode:'day',a:0,b:0,lid:'',lname:'',tur:new Set(),open:'',cy:0,cm:0,rs:0,q:''};
+var ST={sb:'',sx:new Set(),rg:'',rgo:false,bs:0,ss:new Set(['Conectado']),mode:'day',a:0,b:0,lid:'',lname:'',tur:new Set(),open:'',cy:0,cm:0,rs:0,q:''};
 function dk(d){return d.getFullYear()*10000+(d.getMonth()+1)*100+d.getDate()}
 function mk(y,m,d){return y*10000+m*100+d}
 function fmt(k){var y=Math.floor(k/10000),m=Math.floor(k/100)%100,d=k%100;return d+' '+M3[m-1]+' '+y}
@@ -2400,9 +2415,10 @@ function render(partial){var host=document.getElementById('cnx');if(!host||typeo
  h+=ST.lid?'<div class="ad"><button type="button" class="lbk" data-lb="1" aria-label="Volver a Red">‹</button><button type="button" data-k="1">'+ST.lid+' - '+(ST.lname||'')+'</button></div>':'';
  var ES=[['Conectado','#1fa24a','#fff'],['No conectado','#f28c28','#fff'],['No contesta','#f6c928','#000'],['Sin reportar','#ed0102','#fff']];
  var mt=null,ks=function(r){return r.inv+'|'+r.cod+'|'+r.dk},hasS=ST.sx.size>0,selA=ES.filter(function(e){return ST.ss.has(e[0])}),multi=!hasS&&selA.length>1,pool=hasS?base.filter(function(r){return ST.sx.has(ks(r))}):(multi?base.filter(function(r){return ST.ss.has(r.est)}):base);
- var all2=hasS||multi,cur=all2?null:(selA[0]||ES[0]),sl=all2?(function(){var u={};pool.forEach(function(r){u[r.est]=1});var k=Object.keys(u);return k.length==1?k[0]:'Seleccionados'})():cur[0],line=!!cur&&cur[0]=='Sin reportar',BH=line?40:84;
+ var all2=hasS||multi,cur=all2?null:(selA[0]||ES[0]),sl=all2?(function(){var u={};pool.forEach(function(r){u[r.est]=1});var k=Object.keys(u);return k.length==1?k[0]:'Seleccionados'})():cur[0],line=!!cur&&cur[0]=='Sin reportar',BH=line?100:132;
  var X=tl.map(function(t){var r=pool.filter(function(x){return x.tl==t});return {k:t,l:TLB[t],m:false,n:r.length,c:ES.map(function(e){return r.filter(function(x){return x.est==e[0]}).length})}});
  X.forEach(function(o){o.v=all2?o.n:o.c[ES.indexOf(cur)]});
+ if(ST.bs)X=X.map(function(o,i){return [o,i]}).sort(function(a,b){return (ST.bs==1?a[0].v-b[0].v:b[0].v-a[0].v)||a[1]-b[1]}).map(function(a){return a[0]});
  var tv=hasS?pool.length:X.reduce(function(a,o){return a+o.v},0),mxv=Math.max(1,Math.max.apply(null,X.map(function(o){return o.v})));
  var dot=function(c){return '<span class="cxo" style="background:'+c+'"></span>'};
  var menu=ST.dd?'<div class="cxm">'+ES.map(function(e){return '<button data-e="'+e[0]+'">'+(e[0]=='Todos'?'<span class="cxo cxa"></span>':dot(e[1]))+'<span class="cxn">'+e[0]+'</span></button>'}).join('')+'</div>':'';
@@ -2410,10 +2426,10 @@ function render(partial){var host=document.getElementById('cnx');if(!host||typeo
  var ld=!!ST.lid&&!hasS,cE=ES.map(function(e){return (hasS?pool:base).filter(function(r){return r.est==e[0]&&(!ST.tur.size||ST.tur.has(r.tl))}).length});
  if(ld){var cs=ES.map(function(e){return base.filter(function(r){return r.est==e[0]}).length}),mxl=Math.max(1,Math.max.apply(null,cs)),tot=ST.sb?cs[ES.map(function(e){return e[0]}).indexOf(ST.sb)]:base.length;
   h+='<div class="ak cxk ld"><div class="xtt"><span>Total</span><b>'+tot+'</b></div><div class="gr ld">'+ES.map(function(e,j){var v=cs[j],hh=Math.round(v/mxl*84),inside=hh>=20;return '<button class="cb" data-sb="'+e[0]+'"'+(ST.sb&&ST.sb!=e[0]?' style="opacity:.3"':'')+'><i style="height:'+hh+'px;background:'+e[1]+'"><b class="'+(inside?'':'up')+'" style="'+(inside?'color:'+e[2]:'')+'">'+v+'</b></i><u>'+e[0]+'</u></button>'}).join('')+'</div></div>'}
- else h+='<div class="ak cxk xc'+(line?' ln':'')+'"><div class="xcl"><div class="xtt"><span>Total</span><b>'+ES.reduce(function(a,e,j){return a+((hasS||ST.ss.has(e[0]))?cE[j]:0)},0)+'</b></div><div class="xcs">'+ES.map(function(e,j){return '<div class="xcr1"><button class="xp'+(!hasS&&ST.ss.has(e[0])?' on':'')+'" data-e="'+e[0]+'"><s style="background:'+e[1]+'"></s>'+e[0]+'</button></div>'}).join('')+'</div></div><div class="xcg"><div class="gr'+(line?' ln':'')+'">'+X.map(function(o){
+ else h+='<div class="ak cxk xc'+(line?' ln':'')+'"><button class="srt s'+ST.bs+'" data-so="1" aria-label="Ordenar gráfico"><i></i></button><div class="xcl"><div class="xtt"><span>Total</span><b>'+ES.reduce(function(a,e,j){return a+((hasS||ST.ss.has(e[0]))?cE[j]:0)},0)+'</b></div><div class="xcs">'+ES.map(function(e,j){return '<div class="xcr1"><button class="xp'+(!hasS&&ST.ss.has(e[0])?' on':'')+'" data-e="'+e[0]+'"><s style="background:'+e[1]+'"></s>'+e[0]+'</button></div>'}).join('')+'</div></div><div class="xcg"><div class="gr'+(line?' ln':'')+'">'+X.map(function(o){
    var hh=Math.round(o.v/mxv*BH),inside=hh>=20;
    if(all2)return '<button class="cb" data-t="'+o.k+'"'+(ST.tur.size&&!ST.tur.has(o.k)?' style="opacity:.3"':'')+'><i class="st" style="height:'+hh+'px">'+o.c.map(function(v,j){return v&&(hasS||ST.ss.has(ES[j][0]))?'<s style="flex:'+v+';background:'+ES[j][1]+'"><em style="color:'+ES[j][2]+'">'+v+'</em></s>':''}).join('')+'</i><u>'+o.l+'</u></button>';
-   return '<button class="cb" data-t="'+o.k+'"'+(ST.tur.size&&!ST.tur.has(o.k)?' style="opacity:.3"':'')+'><i style="height:'+hh+'px;background:'+cur[1]+'"><b class="'+(inside?'':'up')+'" style="'+(inside?'color:'+cur[2]:'')+'">'+o.v+'</b></i><u>'+o.l+'</u></button>'}).join('')+(line?'<div class="xln" style="height:70px"><svg viewBox="0 0 100 70" preserveAspectRatio="none" style="height:70px"><polyline fill="none" stroke="#000" stroke-width="1.4" stroke-dasharray="4 3" vector-effect="non-scaling-stroke" points="'+X.map(function(o,i){var t=pmx==pmn?.5:(pc(o)-pmn)/(pmx-pmn);return ((i+.5)/nx*100)+','+(70-(46+t*12))}).join(' ')+'"/></svg>'+X.map(function(o,i){var p=pc(o),t=pmx==pmn?.5:(p-pmn)/(pmx-pmn),y=46+t*12;return '<span class="xpt" style="left:'+((i+.5)/nx*100)+'%;bottom:'+y+'px"></span><em class="xpl" style="left:'+((i+.5)/nx*100)+'%;bottom:'+(y+6)+'px">'+p+'%</em>'}).join('')+'</div>':'')+'</div></div></div>';
+   return '<button class="cb" data-t="'+o.k+'"'+(ST.tur.size&&!ST.tur.has(o.k)?' style="opacity:.3"':'')+'><i style="height:'+hh+'px;background:'+cur[1]+'"><b class="'+(inside?'':'up')+'" style="'+(inside?'color:'+cur[2]:'')+'">'+o.v+'</b></i><u>'+o.l+'</u></button>'}).join('')+(line?'<div class="xln" style="height:161px"><svg viewBox="0 0 100 161" preserveAspectRatio="none" style="height:161px"><polyline fill="none" stroke="#000" stroke-width="1.4" stroke-dasharray="4 3" vector-effect="non-scaling-stroke" points="'+X.map(function(o,i){var t=pmx==pmn?.5:(pc(o)-pmn)/(pmx-pmn);return ((i+.5)/nx*100)+','+(161-(110+t*30))}).join(' ')+'"/></svg>'+X.map(function(o,i){var p=pc(o),t=pmx==pmn?.5:(p-pmn)/(pmx-pmn),y=110+t*30;return '<span class="xpt" style="left:'+((i+.5)/nx*100)+'%;bottom:'+y+'px"></span><em class="xpl" style="left:'+((i+.5)/nx*100)+'%;bottom:'+(y+6)+'px">'+p+'%</em>'}).join('')+'</div>':'')+'</div></div></div>';
  var lst=(hasS?pool:(ld?base.filter(function(r){return !ST.sb||r.est==ST.sb}):(multi?pool:base.filter(function(r){return r.est==cur[0]})))).filter(function(r){return ld||!ST.tur.size||ST.tur.has(r.tl)}).slice().sort(function(a,b){return b.dk-a.dk||(a.inv<b.inv?-1:1)});
  var hL=lst.length?lst.map(function(r,i){var ec=(ES.filter(function(e){return e[0]==r.est})[0]||ES[0])[1];return '<div class="lr"><div class="lw cxt"><i class="xdot" style="background:'+ec+'"></i><span>'+r.inv+'<em class="'+(/^C28/i.test(r.c12||'')?'g28':(/^C18/i.test(r.c12||'')?'g18':''))+'">'+r.lid+'</em></span>'+(ST.lid?'':'<button class="xar" data-lv="'+r.c12+'" data-ln="'+String(r.l12).replace(/"/g,'')+'" aria-label="Ver líder"><svg viewBox="0 0 10 10" width="9" height="9" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3.5 1.5 7 5 3.5 8.5"/></svg></button>')+'</div></div>'}).join(''):'<div class="ln">Sin resultados</div>';
  var A_=host.querySelector('#cxA'),L_=host.querySelector('#cxL');
@@ -2433,7 +2449,8 @@ window.__rpC=function(){var ks=function(r){return r.inv+'|'+r.cod+'|'+r.dk},hasS
 function wire(){var host=document.getElementById('cnx');
  host.addEventListener('click',function(e){e.stopPropagation();var t=e.target.closest('button');if(!t){if(!e.target.closest('.pp')&&(ST.open||ST.dd||ST.rgo)&&e.target.id!='cxs'){ST.open='';ST.dd=false;ST.rgo=false;render(true)}return}
   var d=t.dataset;
-  if(d.rgo!==undefined){ST.rgo=!ST.rgo;ST.open='';ST.dd=false;render()}
+  if(d.so!==undefined){ST.bs=(ST.bs+1)%3;render()}
+  else if(d.rgo!==undefined){ST.rgo=!ST.rgo;ST.open='';ST.dd=false;render()}
   else if(d.rv!==undefined){ST.lid='';ST.lname='';ST.sb='';ST.tur.clear();ST.sx.clear();ST.rg=d.rv;ST.rgo=false;ST.open='';ST.q='';render()}
   else if(d.rl!==undefined){ST.rgo=false;ST.open='per';ST.q='';render()}
   else if(d.ri!==undefined){ST.rgo=false;ST.open='inv';ST.q='';render()}
