@@ -1662,6 +1662,7 @@ body.vr #fxb,body.vr #fxp{display:none!important}
 #alc .xgxp.open svg{transform:rotate(180deg)}
 #alc .xgh .xge{margin-left:auto}
 #alc .xgsh{margin:0;padding:3px 8px;border-radius:8px}
+#alc .xgs.own{margin-left:12px}
 </style></head><body class="gate">
 <div id="gate"><img id="gimg" alt="Logo"><h1>Alcance y Conexión</h1><p class="gs">Red García Montoya</p>
 <div class="gq">Ingresar como</div>
@@ -2178,10 +2179,10 @@ function render(){var host=document.getElementById('alc');if(!host||typeof D=='u
  h+=L.length?L.map(function(o,i){if(ST.lid){var LC=String(o.c).toUpperCase(),G={},go=[],ix=0;o.r.forEach(function(r){var k=String(r.cod).toUpperCase();if(!G[k]){G[k]={c:r.cod,n:r.lid,r:[],own:k==LC};go.push(G[k])}G[k].r.push(r)});
   go.sort(function(a,b){return (b.own?1:0)-(a.own?1:0)||(String(a.c)<String(b.c)?-1:1)});
   var rowH=function(r){var e=(ES_.filter(function(q){return q[0]==r.est})[0])||['','#e4e4e4','#000'],k=ix++,on=!!(ST.gd&&ST.gd[k]);
-    return '<div class="xgi"><div class="xgh"><span class="xgn">'+r.inv+'</span><button class="xgxp'+(on?' open':'')+'" data-gd="'+k+'" aria-label="'+(on?'Ocultar':'Ver detalle')+'"><svg viewBox="0 0 10 10" width="9" height="9"><path d="M1 2.5l4 5 4-5z" fill="currentColor"/></svg></button><x-e class="xge" style="background:'+e[1]+';color:'+e[2]+'">'+(r.est||'\u2014')+'</x-e></div>'+(on?'<div class="xgdt">'+[['Fecha',r.f],['Tipo',r.tp],['Distrito',r.dist],['Edad',r.edad?r.edad+' años':''],['Celular',r.cel],['Invitado por',r.cod+' - '+r.lid]].map(function(x){return '<div class="xgdl"><x-l>'+x[0]+':</x-l><x-v>'+(x[1]||'\u2014')+'</x-v></div>'}).join('')+'</div>':'')+'</div>'};
+    return '<div class="xgi"><div class="xgh"><span class="xgn">'+r.inv+'</span><button class="xgxp'+(on?' open':'')+'" data-gd="'+k+'" aria-label="'+(on?'Ocultar':'Ver detalle')+'"><svg viewBox="0 0 10 10" width="9" height="9"><path d="M1 2.5l4 5 4-5z" fill="currentColor"/></svg></button><x-e class="xge" data-e="'+(r.est||'')+'" style="background:'+e[1]+';color:'+e[2]+'">'+(r.est||'\u2014')+'</x-e></div>'+(on?'<div class="xgdt">'+[['Fecha',r.f],['Tipo',r.tp],['Distrito',r.dist],['Edad',r.edad?r.edad+' años':''],['Celular',r.cel],['Invitado por',r.cod+' - '+r.lid]].map(function(x){return '<div class="xgdl"><x-l>'+x[0]+':</x-l><x-v>'+(x[1]||'\u2014')+'</x-v></div>'}).join('')+'</div>':'')+'</div>'};
   var body=go.map(function(g){g.r.sort(function(a,b){return b.dk-a.dk||(a.inv<b.inv?-1:1)});
-   var cl=!!(ST.gs&&ST.gs[g.c]);
-   return '<div class="xgs"><div class="xgsh '+(g.own?'own':'oth')+'"><span><x-p class="gsp">'+g.c+' - '+g.n+'</x-p></span><div class="ct2"><b>'+g.r.length+'</b><button class="xgxb sm" data-gs="'+g.c+'" aria-label="'+(cl?'Mostrar':'Ocultar')+'">'+(cl?'+':'\u2212')+'</button></div></div>'+(cl?'':'<div class="xgl2">'+g.r.map(rowH).join('')+'</div>')+'</div>'}).join('');
+   var cl=!(ST.gs&&ST.gs[g.c]);
+   return '<div class="xgs '+(g.own?'own':'oth')+'"><div class="xgsh '+(g.own?'own':'oth')+'"><span><x-p class="gsp">'+g.c+' - '+g.n+'</x-p></span><div class="ct2"><b>'+g.r.length+'</b><button class="xgxb sm" data-gs="'+g.c+'" aria-label="'+(cl?'Mostrar':'Ocultar')+'">'+(cl?'+':'\u2212')+'</button></div></div>'+(cl?'':'<div class="xgl2">'+g.r.map(rowH).join('')+'</div>')+'</div>'}).join('');
   return '<div class="lr lead'+(/^C28/i.test(o.c)?' g28':(/^C18/i.test(o.c)?' g18':''))+'" data-c="'+o.c+'"><div class="xgl">'+body+'</div></div>'}
   return '<div class="lr'+(/^C28/i.test(o.c)?' g28':(/^C18/i.test(o.c)?' g18':''))+'" data-c="'+o.c+'"><div class="lw"><span><em>'+o.c+'</em>'+o.n+'</span><button class="ct" data-tip="1" aria-label="Ver invitados"><b>'+o.g+'</b><x-a class="ar vr">Ver</x-a></button></div><div class="lb" style="width:calc((100% - 70px) * '+(o.g/mx)+')"></div></div>'}).join(''):'<div class="ln">Sin resultados para esta selección</div>';
  h+='</div>';
@@ -2602,6 +2603,10 @@ var KEY='alcClr',IT=[
 ['inv','Nombre del invitado',[],['#alc .xgn','#alc .xgn *'],'#ffffff','#000000'],
 ['mas','Botón + / − del grupo',['#alc .xgxb'],['#alc .xgxb'],'#ed0102','#ffffff'],
 ['tri','Triángulo del invitado',['#alc .xgxp'],['#alc .xgxp'],'#ffffff','#ed0102'],
+['e0','Estado: Conectado',['#alc .xge[data-e="Conectado"]'],['#alc .xge[data-e="Conectado"]'],'#1fa24a','#ffffff'],
+['e1','Estado: No conectado',['#alc .xge[data-e="No conectado"]'],['#alc .xge[data-e="No conectado"]'],'#f28c28','#ffffff'],
+['e2','Estado: No contesta',['#alc .xge[data-e="No contesta"]'],['#alc .xge[data-e="No contesta"]'],'#f6c928','#000000'],
+['e3','Estado: Sin reportar',['#alc .xge[data-e="Sin reportar"]'],['#alc .xge[data-e="Sin reportar"]'],'#ed0102','#ffffff'],
 ['det','Detalle del invitado',['#alc .xgdt'],['#alc .xgdt x-v'],'#f5f5f5','#000000']
 ];
 var V={};try{V=JSON.parse(localStorage.getItem(KEY)||'{}')||{}}catch(e){}
@@ -2618,7 +2623,7 @@ btn.style.cssText='position:fixed;right:12px;bottom:88px;width:34px;height:34px;
 document.body.appendChild(btn);
 var pn=document.createElement('div');pn.style.cssText='position:fixed;left:0;right:0;bottom:0;max-height:70vh;overflow-y:auto;background:#fff;border-radius:18px 18px 0 0;box-shadow:0 -6px 24px rgba(0,0,0,.2);padding:14px 16px 20px;z-index:70;display:none;font-family:Manrope,sans-serif;color:#000';
 document.body.appendChild(pn);
-function build(){var h='<div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:10px"><b style="font-size:15px">Colores de Alcance</b><span><button type="button" data-z="all" style="border:0;background:#f3f3f3;border-radius:8px;padding:6px 10px;font:700 12px Manrope,sans-serif;margin-right:6px">Restablecer</button><button type="button" data-z="x" style="border:0;background:#ed0102;color:#fff;border-radius:8px;padding:6px 12px;font:700 12px Manrope,sans-serif">Cerrar</button></span></div>';
+function build(){var h='<div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:10px"><b style="font-size:15px">Colores de Alcance</b><span> <button type="button" data-z="cp" style="border:0;background:#f3f3f3;border-radius:8px;padding:6px 10px;font:700 12px Manrope,sans-serif;margin-right:6px">Copiar</button><button type="button" data-z="all" style="border:0;background:#f3f3f3;border-radius:8px;padding:6px 10px;font:700 12px Manrope,sans-serif;margin-right:6px">Restablecer</button><button type="button" data-z="x" style="border:0;background:#ed0102;color:#fff;border-radius:8px;padding:6px 12px;font:700 12px Manrope,sans-serif">Cerrar</button></span></div>';
  IT.forEach(function(t){var v=V[t[0]]||{};h+='<div style="display:flex;align-items:center;gap:8px;padding:7px 0;border-top:1px solid #eee"><span style="flex:1;font-size:13px;font-weight:600">'+t[1]+'</span>'+
  (t[2].length?'<label style="font-size:11px;color:#666;display:flex;align-items:center;gap:4px">Fondo<input type="color" data-k="'+t[0]+'" data-p="b" value="'+(v.b||t[4])+'" style="width:34px;height:26px;border:1px solid #ddd;border-radius:6px;padding:0;background:none"></label>':'')+
  '<label style="font-size:11px;color:#666;display:flex;align-items:center;gap:4px">Letra<input type="color" data-k="'+t[0]+'" data-p="f" value="'+(v.f||t[5])+'" style="width:34px;height:26px;border:1px solid #ddd;border-radius:6px;padding:0;background:none"></label>'+
@@ -2628,6 +2633,7 @@ btn.addEventListener('click',function(){build();pn.style.display='block'});
 pn.addEventListener('input',function(e){var i=e.target;if(!i.dataset.k)return;(V[i.dataset.k]=V[i.dataset.k]||{})[i.dataset.p]=i.value;save();apply()});
 pn.addEventListener('click',function(e){var b=e.target.closest('button');if(!b||!b.dataset.z)return;var z=b.dataset.z;
  if(z=='x'){pn.style.display='none';return}
+ if(z=='cp'){var j=JSON.stringify(V);try{navigator.clipboard.writeText(j);b.textContent='¡Copiado!'}catch(er){prompt('Copia esto',j)}return}
  if(z=='all')V={};else delete V[z];save();apply();build()});
 setInterval(function(){var a=document.getElementById('alc'),on=a&&a.offsetParent!==null;btn.style.display=on?'flex':'none';if(!on)pn.style.display='none'},400);
 })();
