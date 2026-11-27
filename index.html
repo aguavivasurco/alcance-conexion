@@ -1660,9 +1660,9 @@ body.vr #fxb,body.vr #fxp{display:none!important}
 #alc .xgn{flex:0 1 auto!important}
 #alc .xgxp{width:22px!important;height:22px!important;border-radius:7px!important;background:transparent;color:#ed0102;padding:0!important}
 #alc .xgxp.open svg{transform:rotate(180deg)}
-#alc .xgh .xge{margin-left:auto}
+#alc .xgh .xge{margin-left:0}
 #alc .xgsh{margin:0;padding:3px 8px;border-radius:8px}
-#alc .xgs.own{margin-left:12px}
+#alc .xgs.oth{margin-left:12px}
 </style></head><body class="gate">
 <div id="gate"><img id="gimg" alt="Logo"><h1>Alcance y Conexión</h1><p class="gs">Red García Montoya</p>
 <div class="gq">Ingresar como</div>
@@ -2179,7 +2179,7 @@ function render(){var host=document.getElementById('alc');if(!host||typeof D=='u
  h+=L.length?L.map(function(o,i){if(ST.lid){var LC=String(o.c).toUpperCase(),G={},go=[],ix=0;o.r.forEach(function(r){var k=String(r.cod).toUpperCase();if(!G[k]){G[k]={c:r.cod,n:r.lid,r:[],own:k==LC};go.push(G[k])}G[k].r.push(r)});
   go.sort(function(a,b){return (b.own?1:0)-(a.own?1:0)||(String(a.c)<String(b.c)?-1:1)});
   var rowH=function(r){var e=(ES_.filter(function(q){return q[0]==r.est})[0])||['','#e4e4e4','#000'],k=ix++,on=!!(ST.gd&&ST.gd[k]);
-    return '<div class="xgi"><div class="xgh"><span class="xgn">'+r.inv+'</span><button class="xgxp'+(on?' open':'')+'" data-gd="'+k+'" aria-label="'+(on?'Ocultar':'Ver detalle')+'"><svg viewBox="0 0 10 10" width="9" height="9"><path d="M1 2.5l4 5 4-5z" fill="currentColor"/></svg></button><x-e class="xge" data-e="'+(r.est||'')+'" style="background:'+e[1]+';color:'+e[2]+'">'+(r.est||'\u2014')+'</x-e></div>'+(on?'<div class="xgdt">'+[['Fecha',r.f],['Tipo',r.tp],['Distrito',r.dist],['Edad',r.edad?r.edad+' años':''],['Celular',r.cel],['Invitado por',r.cod+' - '+r.lid]].map(function(x){return '<div class="xgdl"><x-l>'+x[0]+':</x-l><x-v>'+(x[1]||'\u2014')+'</x-v></div>'}).join('')+'</div>':'')+'</div>'};
+    return '<div class="xgi"><div class="xgh"><button class="xgxp'+(on?' open':'')+'" data-gd="'+k+'" aria-label="'+(on?'Ocultar':'Ver detalle')+'"><svg viewBox="0 0 10 10" width="9" height="9"><path d="M1 2.5l4 5 4-5z" fill="currentColor"/></svg></button><span class="xgn">'+r.inv+'</span><x-e class="xge" data-e="'+(r.est||'')+'" style="background:'+e[1]+';color:'+e[2]+'">'+(r.est||'\u2014')+'</x-e></div>'+(on?'<div class="xgdt">'+[['Fecha',r.f],['Tipo',r.tp],['Distrito',r.dist],['Edad',r.edad?r.edad+' años':''],['Celular',r.cel],['Invitado por',r.cod+' - '+r.lid]].map(function(x){return '<div class="xgdl"><x-l>'+x[0]+':</x-l><x-v>'+(x[1]||'\u2014')+'</x-v></div>'}).join('')+'</div>':'')+'</div>'};
   var body=go.map(function(g){g.r.sort(function(a,b){return b.dk-a.dk||(a.inv<b.inv?-1:1)});
    var cl=!(ST.gs&&ST.gs[g.c]);
    return '<div class="xgs '+(g.own?'own':'oth')+'"><div class="xgsh '+(g.own?'own':'oth')+'"><span><x-p class="gsp">'+g.c+' - '+g.n+'</x-p></span><div class="ct2"><b>'+g.r.length+'</b><button class="xgxb sm" data-gs="'+g.c+'" aria-label="'+(cl?'Mostrar':'Ocultar')+'">'+(cl?'+':'\u2212')+'</button></div></div>'+(cl?'':'<div class="xgl2">'+g.r.map(rowH).join('')+'</div>')+'</div>'}).join('');
