@@ -1666,6 +1666,13 @@ body.vr #fxb,body.vr #fxp{display:none!important}
 #alc .ai .rgm{left:0!important;right:0!important;min-width:0!important;width:auto!important}
 #alc .yw,#alc .yw.on{background:#8e8e8e!important;border-color:#8e8e8e!important;color:#fff!important;display:inline-flex!important;align-items:center;gap:6px}
 #alc .ywt{width:0;height:0;border-left:4px solid transparent;border-right:4px solid transparent;border-top:5px solid #fff;display:inline-block}
+#alc .ai .rgb{background:#f3f3f3!important;color:#000!important;border:1px solid #e4e4e4!important}
+#alc .ai .rgb .rgt{border-top-color:#000!important}
+#alc .yw,#alc .yw.on{background:#f3f3f3!important;border-color:#e4e4e4!important;color:#000!important}
+#alc .ywt{border-top-color:#000!important}
+#alc .plb{background:#ed0102!important;color:#fff!important}
+#alc .xgsh.own{background:#dff4fb}
+#alc .xgsh.oth{background:#eef9fd}
 </style></head><body class="gate">
 <div id="gate"><img id="gimg" alt="Logo"><h1>Alcance y Conexión</h1><p class="gs">Red García Montoya</p>
 <div class="gq">Ingresar como</div>
@@ -2195,8 +2202,10 @@ window.__rpA=function(){NORG=true;try{__rpA0()}finally{NORG=false}};
 function __rpA0(){var rs=rows(),tg=['Del '+label()];var T=['8AM','10AM','12PM','6PM','NEXT'],n={},a1=0,am=0;rs.forEach(function(r){n[r.tl]=(n[r.tl]||0)+1;if(/^A1/i.test(r.tp||''))a1++;else if(/^AMG/i.test(r.tp||''))am++});
  var chips=T.filter(function(t){return n[t]}).map(function(t){return [window.RPTlbl(t),n[t]]});if(a1)chips.push(['A1',a1,'#000','#fff']);if(am)chips.push(['AMG',am,'#000','#fff']);
  var tags=[];if(ST.lid)tags.push('Líder: '+ST.lid+' - '+(ST.lname||''));
- var n2={};rows(true).forEach(function(r){n2[r.tl]=(n2[r.tl]||0)+1});var sl=function(t){return !ST.tur.size||ST.tur.has(t)};var tn=['8AM','10AM','12PM','6PM'].map(function(t){return [window.RPTlbl(t),n2[t]||0,sl(t),t]});if(n2['NEXT'])tn.push(['Next',n2['NEXT'],sl('NEXT'),'NEXT']);
- window.RPT({kind:'alc',turns:tn,onBar:ST.lid?null:function(t){var was=ST.tur.has(t);ST.tur.clear();if(!was)ST.tur.add(t);render();window.__rpA()},title:'Reporte de alcance',period:label(),lc:ST.lid||'',tags:tags,total:rs.length,totalLabel:'alcanzados',chips:chips,rows:rs,file:'reporte-alcance',
+ var tn;if(ST.lid){var ml={};rows(true,true).forEach(function(r){ml[Math.floor(r.dk/100)%100]=1});ml=Object.keys(ml).map(Number).sort(function(a,b){return a-b});
+  tn=xs(rows(true),tlist(),ml).map(function(o){var l=(ST.mode=='year'&&ST.yw)?pad2(o.key%100)+'/'+pad2(Math.floor(o.key/100)):String(o.l).replace('|',' ');return [l,o.r.length,ST.wk==o.key,o.key]})}
+ else{var n2={};rows(true).forEach(function(r){n2[r.tl]=(n2[r.tl]||0)+1});var sl=function(t){return !ST.tur.size||ST.tur.has(t)};tn=['8AM','10AM','12PM','6PM'].map(function(t){return [window.RPTlbl(t),n2[t]||0,sl(t),t]});if(n2['NEXT'])tn.push(['Next',n2['NEXT'],sl('NEXT'),'NEXT'])}
+ window.RPT({kind:'alc',turns:tn,onBar:ST.lid?function(k){ST.wk=ST.wk==+k?-1:+k;render();window.__rpA()}:function(t){var was=ST.tur.has(t);ST.tur.clear();if(!was)ST.tur.add(t);render();window.__rpA()},title:'Reporte de alcance',period:label(),lc:ST.lid||'',tags:tags,total:rs.length,totalLabel:'alcanzados',chips:chips,rows:rs,file:'reporte-alcance',
   detail:function(r){return [r.f,window.RPTlbl(r.tl),r.tp||'',r.dist||'','Líder: '+r.lid].filter(Boolean).join(' · ')}})};
 function wire(){var host=document.getElementById('alc');
  host.addEventListener('click',function(e){e.stopPropagation();
@@ -2517,13 +2526,14 @@ function drawAlc(cfg){
  c.fillStyle='#000';c.font='700 11px Manrope,Inter,sans-serif';c.fillText('Total de registros',PD+14,ky+19);
  c.font='800 45px Inter,sans-serif';c.fillText(String(cfg.total),PD+14,ky+63);
  c.font='800 45px Inter,sans-serif';var nx=PD+14+c.measureText(String(cfg.total)).width+12;
- [[gr[0],'#fbd5e1'],[gr[1],'#cfe2fb']].forEach(function(q,i){var cy=ky+30+i*18;c.fillStyle=q[1];rr(c,nx,cy,34,15,7.5);c.fill();c.fillStyle='#000';c.font='800 11px Inter,sans-serif';c.textAlign='center';c.fillText(String(q[0].s),nx+17,cy+11.5);c.textAlign='left'});
- var T=cfg.turns||[],n=T.length,mx=Math.max.apply(null,T.map(function(t){return t[1]}).concat([1])),bx0=PD+142,bw=30,gap=n>1?Math.min(18,(W-PD-12-bx0-n*bw)/(n-1)):0,base=ky+63,mh=33;
+ (cfg.lc?[]:[[gr[0],'#fbd5e1'],[gr[1],'#cfe2fb']]).forEach(function(q,i){var cy=ky+30+i*18;c.fillStyle=q[1];rr(c,nx,cy,34,15,7.5);c.fill();c.fillStyle='#000';c.font='800 11px Inter,sans-serif';c.textAlign='center';c.fillText(String(q[0].s),nx+17,cy+11.5);c.textAlign='left'});
+ var T=cfg.turns||[],n=T.length,mx=Math.max.apply(null,T.map(function(t){return t[1]}).concat([1])),bx0=cfg.lc?nx:PD+142,bw=30,av=W-PD-12-bx0,gap=n>1?Math.min(18,(av-n*bw)/(n-1)):0,base=ky+63,mh=33;
+ if(n>1&&gap<6){gap=n>12?2:4;bw=Math.max(5,Math.floor((av-(n-1)*gap)/n))}
  var anySel=T.some(function(t){return t[2]});cfg._hit=[];
  T.forEach(function(t,i){var x=bx0+i*(bw+gap),h=Math.max(4,Math.round(t[1]/mx*mh)),on=!anySel||t[2];
   c.fillStyle=on?'#ed0102':'#fff';rr(c,x,base-h,bw,h,Math.min(6,h/2));c.fill();
-  c.textAlign='center';c.fillStyle='#000';c.font='800 11px Inter,sans-serif';c.fillText(String(t[1]),x+bw/2,base-h-4);
-  c.font=(on?'800 ':'600 ')+'10px Manrope,Inter,sans-serif';c.fillStyle=on?'#000':'#555';c.fillText(t[0],x+bw/2,base+14);c.textAlign='left';
+  c.textAlign='center';c.fillStyle='#000';c.font='800 '+(bw<14?8:11)+'px Inter,sans-serif';if(bw>=8)c.fillText(String(t[1]),x+bw/2,base-h-4);
+  c.font=(on?'800 ':'600 ')+(bw<22?8:10)+'px Manrope,Inter,sans-serif';c.fillStyle=on?'#000':'#555';if(bw>=22||i%Math.ceil(26/(bw+gap))==0)c.fillText(t[0],x+bw/2,base+14);c.textAlign='left';
   cfg._hit.push({x:x-gap/2,y:ky,w:bw+gap,h:KC,t:t[3]})});
  cfg._W=W;cfg._H=H;
  // columnas
@@ -2614,10 +2624,11 @@ hook('alc',function(){if(window.__rpA)window.__rpA()});hook('cnx',function(){if(
 (function(){
 var KEY='alcClr',IT=[
 ['fecha','Filtro de fecha',['#alc .at'],['#alc .at','#alc .at span'],'#ed0102','#ffffff','#alc .at i{border-top-color:C!important}'],
-['yw','Botón Mes / Sem (vista líder)',['#alc .yw','#alc .yw.on'],['#alc .yw','#alc .yw.on'],'#8e8e8e','#ffffff','#alc .yw .ywt{border-top-color:C!important}'],
-['red','Botón Red',['#alc .ai .rgb'],['#alc .ai .rgb'],'#ed0102','#39e075','#alc .ai .rgb .rgt{border-top-color:C!important}'],
+['yw','Botón Mes / Sem (vista líder)',['#alc .yw','#alc .yw.on'],['#alc .yw','#alc .yw.on'],'#f3f3f3','#000000','#alc .yw .ywt{border-top-color:C!important}'],
+['red','Botón Red',['#alc .ai .rgb'],['#alc .ai .rgb'],'#f3f3f3','#000000','#alc .ai .rgb .rgt{border-top-color:C!important}'],
 ['rep','Botón reporte',['#alc .ai .ab'],['#alc .ai .ab','#alc .ai .ab svg'],'#f3f3f3','#000000'],
 ['menu','Menú de Red',['#alc .rgm'],['#alc .rgm button'],'#ffffff','#000000'],
+['vol','Botón Volver (buscador)',['#alc .plb'],['#alc .plb'],'#ed0102','#ffffff'],
 ['bus','Buscador de líder',['#alc .pp'],['#alc .pp .pl button','#alc .pp .pl button *','#alc .pp label'],'#ffffff','#000000'],
 ['tm','Título líder mujer (C28)',['#alc .ad button.g28[data-k]'],['#alc .ad button.g28[data-k]','#alc .ad button.g28[data-k] *'],'#ffffff','#000000'],
 ['th','Título líder hombre (C18)',['#alc .ad button.g18[data-k]'],['#alc .ad button.g18[data-k]','#alc .ad button.g18[data-k] *'],'#ffffff','#000000'],
@@ -2626,8 +2637,8 @@ var KEY='alcClr',IT=[
 ['nom','Nombres de la lista',['#alc .lr:not(.lead)'],['#alc .lr:not(.lead) .lw>span'],'#ffffff','#000000'],
 ['num','Número de invitados',[],['#alc .ct b','#alc .ct b *'],'#ffffff','#000000'],
 ['ver','Botón Ver',['#alc .ct .ar'],['#alc .ct .ar'],'#f3f3f3','#000000'],
-['grp','Líder 12 (grupo propio)',['#alc .xgsh.own'],['#alc .xgsh.own .gsp','#alc .xgsh.own .gsp *','#alc .xgsh.own .ct2 b'],'#ffffff','#000000'],
-['gld','Líderes del equipo',['#alc .xgsh.oth'],['#alc .xgsh.oth .gsp','#alc .xgsh.oth .gsp *','#alc .xgsh.oth .ct2 b'],'#ffffff','#000000'],
+['grp','Líder 12 (grupo propio)',['#alc .xgsh.own'],['#alc .xgsh.own .gsp','#alc .xgsh.own .gsp *','#alc .xgsh.own .ct2 b'],'#dff4fb','#000000'],
+['gld','Líderes del equipo',['#alc .xgsh.oth'],['#alc .xgsh.oth .gsp','#alc .xgsh.oth .gsp *','#alc .xgsh.oth .ct2 b'],'#eef9fd','#000000'],
 ['inv','Nombre del invitado',[],['#alc .xgn','#alc .xgn *'],'#ffffff','#000000'],
 ['mas','Botón + / − del grupo',['#alc .xgxb'],['#alc .xgxb'],'#ed0102','#ffffff'],
 ['tri','Triángulo del invitado',['#alc .xgxp'],['#alc .xgxp'],'#ffffff','#ed0102'],
@@ -2640,7 +2651,7 @@ var KEY='alcClr',IT=[
 var V={};try{V=JSON.parse(localStorage.getItem(KEY)||'{}')||{}}catch(e){}
 function save(){try{localStorage.setItem(KEY,JSON.stringify(V))}catch(e){}}
 var st=document.createElement('style');st.id='alcClrS';document.head.appendChild(st);
-function apply(){var o='';IT.forEach(function(t){var v=V[t[0]]||{};if(t[0]=='yw'&&!V.yw)v=V.fecha||{};
+function apply(){var o='';IT.forEach(function(t){var v=V[t[0]]||{};if((t[0]=='yw'&&!V.yw)||(t[0]=='red'&&!V.red))v=V.rep||{};
  if(v.b&&t[2].length)o+=t[2].join(',')+'{background:'+v.b+'!important}\n';
  if(v.f){o+=t[3].join(',')+'{color:'+v.f+'!important}\n';if(t[6])o+=t[6].replace(/C/,v.f)+'\n'}});
  st.textContent=o}
