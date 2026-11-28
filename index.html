@@ -2075,6 +2075,11 @@ body.va
 #cnx .ad button.ltri{background:none!important;height:34px!important;width:22px!important;border-radius:0!important;margin:0!important}
 #cnx .ad button.ltri i{border-top-color:#000;border-left-width:6px;border-right-width:6px;border-top-width:8px}
 #cnx .ldt .ad.nvt button:not(.lbk):not(.ltri),#cnx .ldt .ad.nvt button:not(.lbk):not(.ltri) .dg{font-family:Montserrat,sans-serif!important;font-weight:500!important}
+#cnx .ldt .ad.nvt{padding-left:52px!important;gap:4px!important}
+#cnx .ad button.ltri{width:14px!important;min-width:0!important;padding:0!important}
+#cnx .ad button.ltri i{border-left:5px solid transparent!important;border-right:5px solid transparent!important;border-top:6px solid #666!important}
+#cnx .ldt .ad.nvt button:not(.lbk):not(.ltri),#cnx .ldt .ad.nvt button:not(.lbk):not(.ltri) .dg{font-size:15px!important;font-weight:700!important}
+#cnx .ldt .ad.nvt button:not(.lbk):not(.ltri){padding-left:0!important;margin-left:0!important}
 </style></head><body class="gate">
 <div id="gate"><img id="gimg" alt="Logo"><h1>Alcance y Conexión</h1><p class="gs">Red García Montoya</p>
 <div class="gq">Ingresar como</div>
@@ -2747,7 +2752,7 @@ function dX(rs,vs){var o=[],has={},hs=ST.sx.size>0;function add(key,l){if(!has[k
  rs.forEach(function(r){var k=hs?r.dk:bkc(r.dk);for(var i=0;i<o.length;i++)if(o[i].key==k){o[i].r.push(r);break}});
  return o.map(function(b){var f=b.r.filter(function(x){return vs.some(function(e){return e[0]==x.est})});return {k:'',key:b.key,l:b.l,m:false,n:f.length,c:ESc.map(function(e){return f.filter(function(x){return x.est==e[0]}).length}),ef:b.r.length?Math.round(b.r.filter(function(x){return x.est=='Conectado'}).length/b.r.length*100):0}})}
 function mgl(host){var gr=host.querySelector('.gr.w2');if(!gr||ST.bs)return;var bs=[].slice.call(gr.querySelectorAll('.cb[data-mo]'));if(bs.length<2)return;var gs=[];bs.forEach(function(b){var m=b.dataset.mo,g=gs[gs.length-1];if(g&&g.m==m)g.e=b;else gs.push({m:m,s:b,e:b})});gs.forEach(function(g){var d=document.createElement('div');d.className='mgl';d.style.left=(g.s.offsetLeft-3)+'px';d.style.width=(g.e.offsetLeft+g.e.offsetWidth-g.s.offsetLeft+6)+'px';d.innerHTML='<em>'+g.m+'</em>';gr.appendChild(d)})}
-function enterL(){ST.tx=false;ST.qn='';if(!(ST._pre&&ST.lid))ST._pre={mode:ST.mode,a:ST.a,b:ST.b,cy:ST.cy,cm:ST.cm};setYear(new Date().getFullYear());ST._sc=1;ST.yw=false;ST.gl='w';ST.vs=new Set();ST.wk=-1;ST.gd={};ST.gs={}}
+function enterL(){ST.tx=false;ST.qn='';if(!(ST._pre&&ST.lid))ST._pre={mode:ST.mode,a:ST.a,b:ST.b,cy:ST.cy,cm:ST.cm};setYear(new Date().getFullYear());ST._sd=ST.mode+'|'+ST.a+'|'+ST.b;ST._sc=1;ST.yw=false;ST.gl='w';ST.vs=new Set();ST.wk=-1;ST.gd={};ST.gs={}}
 function backL(){ST.tx=false;ST.qn='';if(ST._pre){var p=ST._pre;ST.mode=p.mode;ST.a=p.a;ST.b=p.b;ST.cy=p.cy;ST.cm=p.cm;ST._pre=null}ST.yw=false;ST.gl='';ST.vs=new Set();ST.wk=-1;ST.gd={};ST.gs={}}
 window.__sbi=function(host){if(!host)return;var o=host.querySelector('.sbt');if(o)o.remove();var ls=host.querySelector('.ls');if(!ls)return;var ch=ls.clientHeight,sh=ls.scrollHeight;if(sh<=ch+3||ls.style.overflowY!='auto')return;var t=document.createElement('div');t.className='sbt';var th=document.createElement('i');t.appendChild(th);host.appendChild(t);var up=function(){var h=Math.max(28,ch*ch/sh);th.style.height=h+'px';th.style.top=(ls.scrollTop/(sh-ch))*(ch-h)+'px'};t.style.top=ls.offsetTop+'px';t.style.height=ch+'px';up();ls.onscroll=up};
 function render(partial){var host=document.getElementById('cnx');if(!host||typeof D=='undefined'||!D)return;if(!ST._di&&D.length){ST._di=1;init()}
