@@ -1843,21 +1843,9 @@ body.hm #isb.on{display:block}
 #vin .pt9h .ttx{flex:1;display:inline-block}
 #vin .tcc{margin-right:0!important}
 #vin .inf{width:26px;height:26px;border-radius:50%;border:1.5px solid #ed0102;background:#fff;color:#ed0102;font:italic 700 14px Georgia,serif;padding:0;cursor:pointer;flex:none;margin-right:0}
-#vin .ipop{background:#dff4fb;border-radius:12px;padding:12px 14px;font-size:12.5px;line-height:1.5;color:#111;margin:8px 0 2px;box-shadow:0 2px 10px rgba(0,0,0,.08)}
+#vin .ipop{background:#f3f3f3;border-radius:12px;padding:12px 14px;font-size:12.5px;line-height:1.5;color:#111;margin:8px 0 2px;box-shadow:0 2px 10px rgba(0,0,0,.08)}
 #vin .ipop[hidden]{display:none}
-#pal{position:fixed;right:10px;bottom:92px;z-index:60;display:none}
-body.hm #pal{display:block}
-#pal>button{width:40px;height:40px;border-radius:50%;border:0;background:#ed0102;color:#fff;font-size:18px;box-shadow:0 2px 8px rgba(0,0,0,.25)}
-#pal .pp{position:absolute;right:0;bottom:48px;width:250px;background:#fff;border-radius:14px;box-shadow:0 4px 18px rgba(0,0,0,.25);padding:12px;font:12px Inter,Arial,sans-serif;color:#111}
-#pal .pp[hidden]{display:none}
-#pal label{display:flex;justify-content:space-between;align-items:center;margin:6px 0;gap:8px}
-#pal select,#pal input[type=text]{width:130px;font-size:12px;padding:3px}
-#pal input[type=color]{width:44px;height:26px;padding:0;border:1px solid #ccc}
-#pal input[type=range]{width:110px}
-#pal .pb{display:flex;gap:6px;margin-top:10px}
-#pal .pb button{flex:1;border:0;border-radius:8px;padding:7px 4px;font-weight:700;background:#f3f3f3;color:#111}
-#pal .pb button.pr{background:#ed0102;color:#fff}
-
+body.hm 
 #vin .mpy button.on,#vin .qb button.on,#vin .ch button.on,#vin [data-mp].on{background:#ed0102!important;color:#fff!important;border-color:#ed0102!important}
 #vin .pt9h{padding-right:34px;gap:6px}
 #vin .pt9h .ttx{flex:none!important;margin-right:auto}
@@ -1869,14 +1857,10 @@ body.hm #pal{display:block}
 #vin .srt2 em{font:600 10px Inter,Arial,sans-serif;font-style:normal;color:#ed0102}
 #vin #bx9 .ar2,#vin #bx9 .legend .ar2{display:none!important}
 
-body.bm1 #vin #bx9,body.bm1 #vin #bx10,body.bm1 #vin #bx11{border:1.5px solid #dff4fb!important;border-radius:16px;padding:10px 12px 8px!important;margin-top:14px!important;margin-bottom:6px!important}
-body.bm2 #vin #bx9,body.bm2 #vin #bx10,body.bm2 #vin #bx11{border:0!important;background:#dff4fb;border-radius:16px;padding:10px 12px 8px!important;margin-top:14px!important;margin-bottom:6px!important}
-body.bm2 #vin .ib2{background:#fff!important}
-#blk{position:fixed;right:10px;bottom:140px;z-index:60;display:none;flex-direction:column;align-items:flex-end;gap:4px}
-body.hm #blk{display:flex}
-#blk button{width:40px;height:40px;border-radius:50%;border:0;background:#fff;color:#ed0102;font:700 18px Inter,Arial,sans-serif;box-shadow:0 2px 8px rgba(0,0,0,.25)}
-#blk span{background:#111;color:#fff;font:600 11px Inter,Arial,sans-serif;padding:3px 8px;border-radius:8px;display:none}
-</style></head><body class="gate">
+#vin #bx9,#vin #bx10,#vin #bx11{border:0!important;background:#dff4fb;border-radius:16px;padding:10px 12px 8px!important;margin-top:14px!important;margin-bottom:6px!important}
+#vin #bx9 .ib2,#vin #bx10 .ib2,#vin #bx11 .ib2{background:#fff!important}
+#vin .pt9h .ttx{font-family:Manrope,sans-serif!important;font-weight:400!important;font-size:13px!important;color:#000!important;background:none!important;padding:0!important;border-radius:0!important}
+body.hm </style></head><body class="gate">
 <div id="gate"><img id="gimg" alt="Logo"><h1>Alcance y Conexión</h1><p class="gs">Red García Montoya</p>
 <div class="gq">Ingresar como</div>
 <div class="gb"><button type="button" data-g="lider">Líder</button><button type="button" class="o" data-g="resp">Responsable</button></div>
@@ -2014,7 +1998,7 @@ function VI(){const mm=m=>m.slice(0,3),CL=['#16a34a','#ff8a00','#f2c200','#ed010
   L.forEach((o,i)=>{const h=K>=9&&o.g?Math.max(o.g/mx*BM,16):o.g/mx*BM,x=i*sw+sw/2,r=o.r,rr=Math.min(5,h),x0=x-bw/2,y0=PH-h,yy=(ps.length>1||K==9)?y(o.p):42;
    if(g=='se'&&S.ord=='f'&&i>0&&(L[i-1].r.mes!=r.mes||L[i-1].r.anio!=r.anio))sep+=`<line x1="${i*sw}" x2="${i*sw}" y1="${PH-8}" y2="${PH+36}" stroke="#bdbdbd" stroke-dasharray="3 3"/>`;
    if(V===true){let yy2=PH;const cid=`cp${K}_${i}`;bars+=`<clipPath id="${cid}"><path d="M${x0},${PH}V${PH-BM+5}Q${x0},${PH-BM} ${x0+5},${PH-BM}H${x0+bw-5}Q${x0+bw},${PH-BM} ${x0+bw},${PH-BM+5}V${PH}Z"/></clipPath><g clip-path="url(#${cid})">`;{const sv=o.s||[0,0,0,0],MN=14,raw=sv.map(c=>c/o.g*BM),sm=raw.filter((h,j)=>sv[j]&&h<MN).length,bg=raw.reduce((a,h)=>a+(h>=MN?h:0),0),kf=bg?(BM-MN*sm)/bg:1;sv.forEach((c,j)=>{if(!c)return;const hh=raw[j]<MN?MN:raw[j]*kf;yy2-=hh;bars+=`<rect x="${x0}" y="${yy2}" width="${bw}" height="${hh}" fill="${EC[j]}"/><text x="${x}" y="${yy2+hh/2+3.8}" text-anchor="middle" font-size="10" font-weight="700" fill="${j==2?'#111':'#fff'}">${Math.round(c/o.g*100)}%</text>`})}bars+='</g>'}else if(V==='n'){const cv=o.c,mc=Math.max(1,...L.map(z=>z.c)),hn=cv?Math.max(cv/mc*BM,16):0,rn=Math.min(5,hn),yn=PH-hn;bars+=cv?`<path d="M${x0},${PH}V${yn+rn}Q${x0},${yn} ${x0+rn},${yn}H${x0+bw-rn}Q${x0+bw},${yn} ${x0+bw},${yn+rn}V${PH}Z" fill="#16a34a"/>`+(hn>=14?`<text x="${x}" y="${PH-hn/2+4}" text-anchor="middle" font-size="11" font-weight="700" fill="#fff">${cv}</text>`:''):`<text x="${x}" y="${PH-5}" text-anchor="middle" font-size="11" font-weight="700" fill="#16a34a">0</text>`}else bars+=`<path d="M${x0},${PH}V${y0+rr}Q${x0},${y0} ${x0+rr},${y0}H${x0+bw-rr}Q${x0+bw},${y0} ${x0+bw},${y0+rr}V${PH}Z" fill="#ed0102"/>`+(h>=14?`<text x="${x}" y="${PH-h/2+4}" text-anchor="middle" font-size="11" font-weight="700" fill="#fff">${o.g}</text>`:'');
-   pts+=`${x},${yy} `;dots+=`<circle cx="${x}" cy="${yy}" r="4" fill="#8d8d8d"/>`;lab+=`<rect x="${x-23}" y="${yy-27}" width="46" height="18" rx="5" fill="#ececec"/><text x="${x}" y="${yy-14}" text-anchor="middle" font-size="10.5" font-weight="700" fill="#6e6e6e">${Math.round(o.p)}%</text>`;
+   pts+=`${x},${yy} `;dots+=`<circle cx="${x}" cy="${yy}" r="4" fill="#8d8d8d"/>`;lab+=`<rect x="${x-23}" y="${yy-27}" width="46" height="18" rx="5" fill="${K>=9?'#fff':'#ececec'}"/><text x="${x}" y="${yy-14}" text-anchor="middle" font-size="10.5" font-weight="700" fill="#6e6e6e">${Math.round(o.p)}%</text>`;
    const t1=cmp?TL2[o.k][0]:g=='an'?r.anio:g=='me'?mm(r.mes):String(r.dk%100).padStart(2,'0'),p=L[i-1],t2=cmp||(K>=9&&S.se.size<2)?'':g=='me'?(yrs?r.anio:''):g=='se'?(S.ord!='f'||!p||p.r.mes!=r.mes||p.r.anio!=r.anio?mm(r.mes)+(yrs?' '+String(r.anio).slice(2):''):''):'';
    xl+=`<text x="${x}" y="${PH+17}" text-anchor="middle" font-size="12" fill="#111">${t1}</text>`+(t2?`<text x="${x}" y="${PH+32}" text-anchor="middle" font-size="11" fill="#111">${t2}</text>`:'')});
   return (false?'<p class="note">Comparativo por turno: elige un mes en Fecha y agrupa por Mes.</p>':'')+`<div class="rbx" style="overflow-x:${n*sw>W+1?'auto':'hidden'}"><svg width="${n*sw}" height="${PH+38}"><line x1="0" x2="${n*sw}" y1="${PH}" y2="${PH}" stroke="#6e6e6e" stroke-width="1.3"/>${sep}${bars}${V?'':`<polyline points="${pts}" fill="none" stroke="#f4a6a6" stroke-width="2.5" stroke-dasharray="6 5" stroke-linecap="round"/>${dots}${lab}`}${xl}</svg></div>`},
@@ -2855,25 +2839,4 @@ hook('alc',function(){if(window.__rpA)window.__rpA()});hook('cnx',function(){if(
 })();
 
 </script>
-<div id="pal"><button type="button" aria-label="Paleta de títulos">🎨</button><div class="pp" hidden><b>Títulos de gráficos</b>
-<label>Letra<select id="pf"><option>Manrope</option><option>Inter</option><option>Arial</option><option>Georgia</option><option>Verdana</option><option>Courier New</option></select></label>
-<label>Peso<select id="pw"><option>400</option><option>600</option><option>700</option><option>800</option></select></label>
-<label>Tamaño <span id="pzv"></span><input id="pz" type="range" min="10" max="26"></label>
-<label>Color letra<input id="pc" type="color"></label>
-<label>Fondo<input id="pbg" type="color"><input id="pbn" type="checkbox" title="Sin fondo"></label>
-<label>Esquinas <span id="prv"></span><input id="pr" type="range" min="0" max="20"></label>
-<label>Relleno <span id="ppv"></span><input id="pp" type="range" min="0" max="16"></label>
-<div class="pb"><button type="button" id="pcp" class="pr">Copiar</button><button type="button" id="prs">Restablecer</button></div><div id="pmsg" style="margin-top:6px;color:#16a34a"></div></div></div><script>(function(){var D={f:'Manrope',w:'400',z:13,c:'#000000',bg:'#f3f3f3',nb:false,r:10,p:5},K='ttxPal2',v=Object.assign({},D),st=document.createElement('style');document.head.appendChild(st);
-try{Object.assign(v,JSON.parse(localStorage.getItem(K)||'{}'))}catch(e){}
-function css(){return "font-family:'"+v.f+"',sans-serif;font-weight:"+v.w+";font-size:"+v.z+"px;color:"+v.c+";background:"+(v.nb?'transparent':v.bg)+";border-radius:"+v.r+"px;padding:"+v.p+"px "+(v.p?v.p+4:0)+"px"}
-function ap(){st.textContent='#vin .pt9h .ttx{'+css().replace(/;/g,' !important;')+' !important}';try{localStorage.setItem(K,JSON.stringify(v))}catch(e){}}
-var q=function(i){return document.getElementById(i)};
-function ui(){q('pf').value=v.f;q('pw').value=v.w;q('pz').value=v.z;q('pc').value=v.c;q('pbg').value=v.bg;q('pbn').checked=v.nb;q('pr').value=v.r;q('pp').value=v.p;q('pzv').textContent=v.z+'px';q('prv').textContent=v.r+'px';q('ppv').textContent=v.p+'px'}
-function rd(){v.f=q('pf').value;v.w=q('pw').value;v.z=+q('pz').value;v.c=q('pc').value;v.bg=q('pbg').value;v.nb=q('pbn').checked;v.r=+q('pr').value;v.p=+q('pp').value;ui();ap()}
-['pf','pw','pz','pc','pbg','pbn','pr','pp'].forEach(function(i){q(i).addEventListener('input',rd);q(i).addEventListener('change',rd)});
-q('pal').firstChild.addEventListener('click',function(){var p=q('pal').querySelector('.pp');p.hidden=!p.hidden});
-q('prs').addEventListener('click',function(){v=Object.assign({},D);ui();ap()});
-q('pcp').addEventListener('click',function(){var t=css()+'\n'+JSON.stringify(v)+'\nBloques: '+(window.__blk||''),m=q('pmsg');function ok(){m.textContent='¡Copiado! Pégamelo en el chat.'}try{navigator.clipboard.writeText(t).then(ok,fb)}catch(e){fb()}function fb(){var a=document.createElement('textarea');a.value=t;document.body.appendChild(a);a.select();try{document.execCommand('copy');ok()}catch(e){m.textContent=t}a.remove()}});
-ui();ap()})()</script><div id="blk"><span></span><button type="button" aria-label="Diseño de bloques">▢</button></div><script>(function(){var N=['Línea gris (actual)','Marco celeste','Fondo celeste'],K='blkMode',m=0,b=document.getElementById('blk'),t=b.firstChild,tm;try{m=+localStorage.getItem(K)||0}catch(e){}
-function ap(show){document.body.classList.remove('bm1','bm2');if(m)document.body.classList.add('bm'+m);window.__blk=N[m];try{localStorage.setItem(K,m)}catch(e){}setTimeout(function(){window.RC&&window.RC()},50);if(show){t.textContent=N[m];t.style.display='block';clearTimeout(tm);tm=setTimeout(function(){t.style.display='none'},2200)}}
-b.lastChild.addEventListener('click',function(){m=(m+1)%3;ap(true)});ap(false)})()</script><div id="isb"><i></i></div><script>(function(){var e=document.getElementById('isb'),t=e.firstChild;function u(){var h=document.documentElement,sh=h.scrollHeight,ch=innerHeight,on=document.body.classList.contains('hm')&&sh>ch+20;e.classList.toggle('on',on);if(!on)return;var tr=e.clientHeight||1,th=Math.max(28,tr*ch/sh),y=(pageYOffset/(sh-ch))*(tr-th);t.style.height=th+'px';t.style.top=y+'px'}addEventListener('scroll',u,{passive:true});addEventListener('resize',u);setInterval(u,500)})()</script></body></html>
+<div id="isb"><i></i></div><script>(function(){var e=document.getElementById('isb'),t=e.firstChild;function u(){var h=document.documentElement,sh=h.scrollHeight,ch=innerHeight,on=document.body.classList.contains('hm')&&sh>ch+20;e.classList.toggle('on',on);if(!on)return;var tr=e.clientHeight||1,th=Math.max(28,tr*ch/sh),y=(pageYOffset/(sh-ch))*(tr-th);t.style.height=th+'px';t.style.top=y+'px'}addEventListener('scroll',u,{passive:true});addEventListener('resize',u);setInterval(u,500)})()</script></body></html>
